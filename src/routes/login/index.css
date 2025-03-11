@@ -1,0 +1,52 @@
+.login-page {
+  background-image: url(@/assets/images/login-bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sprinter svg {
+  --color-blue-1: oklch(20.33% 0.0977 262.47);
+  --color-blue-15: oklch(from var(--color-blue-1) calc(l/2 + .15) c h);
+  --color-blue-20: oklch(from var(--color-blue-1) calc(l/2 + .20) c h);
+  --color-red-1: oklch(62.31% 0.1761 21.39);
+  --color-red-15: oklch(from var(--color-red-1) calc(l/2 + 0.25) c h);
+
+  .t-shirt {
+    g:nth-child(1) > path {
+      fill: var(--color-blue-15);
+    }
+  
+    &.back-side {
+      path:nth-child(1) {
+        fill: var(--color-blue-1);
+      }
+    }
+  
+    &.front-side {
+      path:nth-child(1) {
+        fill: var(--color-blue-20);
+      }
+    }
+  }
+
+
+  .shorts {
+
+    path {
+      fill: var(--color-red-1);
+    }
+  
+    &.back-side {
+      path:nth-child(1) {
+        fill: var(--color-red-15);
+      }
+    }
+  
+    &.front-side {
+      path:nth-child(1) {
+        fill: var(--color-red-1);
+      }
+    }
+  }
+
+}
