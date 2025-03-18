@@ -2,7 +2,7 @@ import { Player } from '@/types/Player'
 import { create } from 'zustand'
 import useSprintStore from './sprintStore'
 
-const { setTrigger } = useSprintStore.getState()
+const { setTrigger, setPassed: setPassedSprint } = useSprintStore.getState()
 
 enum Difficulty {
   EASY = "EASY",
@@ -59,7 +59,10 @@ const useWhackaKeyStore = create<WhackAKeyStore>((set) => ({
     difficulty: difficulty,
     moleKeys: difficulty === Difficulty.EASY ? 4 : difficulty === Difficulty.MEDIUM ? 8 : 12
   }),
-  setPassed: (val:boolean) => set(() => ({ passed:val })),
+  setPassed: (val: boolean) => {
+    set({ passed: val });
+    setPassedSprint(val);
+  },
 }))
 
 export default useWhackaKeyStore

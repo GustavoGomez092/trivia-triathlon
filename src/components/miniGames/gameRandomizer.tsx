@@ -2,6 +2,7 @@ import useSprintStore from '@/stores/sprintStore';
 import { useEffect, useState } from 'react';
 import { games, GameType } from '@/types/Game';
 import { GameSlot } from './gameSlot';
+import { addScoreToGame } from '@/firebase/database/games';
 
 function StatusContainer({ message }: { message: string }) {
   return (
@@ -15,7 +16,14 @@ export default function GameRandomizer() {
   const [currentGame, setCurrentGame] = useState<GameType | undefined>();
   const [seed, setSeed] = useState<number>(0);
 
-  const { trigger, started, finished } = useSprintStore();
+  const {
+    trigger,
+    started,
+    finished,
+    finishTime,
+    distanceTraveled,
+    passed,
+  } = useSprintStore();
 
   const randomize = () => {
     const randomGame = games[Math.floor(Math.random() * games.length)];
@@ -31,6 +39,18 @@ export default function GameRandomizer() {
   useEffect(() => {
     randomize();
   }, []);
+
+  useEffect(() => {
+    if (currentGame && finished) {
+      addScoreToGame(currentGame, 'player@gmail.com', {
+        finishTime,
+        distanceTraveled,
+        passed,
+      });
+      // TODO We need to reset the game and randomize a new one
+      // I see that this can be done by resetting the game, ideas in how to reset the game from here?
+    }
+  }, [finished, currentGame, finishTime, distanceTraveled, passed]);
 
   if (!started) {
     return <StatusContainer message="Get Ready, Set..!" />;

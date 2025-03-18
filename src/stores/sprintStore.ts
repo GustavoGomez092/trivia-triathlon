@@ -4,6 +4,7 @@ import { create } from 'zustand'
 export interface SprintStore {
   started: boolean,
   time: number,
+  passed: boolean,
   player: Player | null,
   speed: number,
   finished: boolean,
@@ -16,6 +17,7 @@ export interface SprintStore {
   reset: () => void,
   speedIncrease: () => void,
   speedDecrease: () => void,
+  setPassed: (val: boolean) => void,
   setTime: (time: number) => void,
   setPlayer: (player: Player) => void,
   setDistanceTraveled: (distance: number) => void,
@@ -25,6 +27,7 @@ export interface SprintStore {
 const useSprintStore = create<SprintStore>((set) => ({
   started: false,
   time: 0,
+  passed: false,
   player: null,
   speed: 100,
   finished: false,
@@ -32,6 +35,7 @@ const useSprintStore = create<SprintStore>((set) => ({
   distanceTraveled: 0,
   totalDistance: 1000,
   trigger: Math.floor(Math.random() * 1000) + 1000,
+  setPassed: (val) => set({ passed: val }),
   start: () => set({ started: true }),
   finish: () => set((state) =>({ finished: true, finishTime: state.time })),
   reset: () => set({ started: false, finished: false, time: 0, finishTime: 0 }),
