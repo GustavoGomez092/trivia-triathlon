@@ -1,23 +1,28 @@
 import { GameType } from '@/types/Game';
 import WhackAKey from './whackAKey';
 
-interface GameSlotProps {
-  currentGame: GameType;
+export interface GameComponentProps {
   seed: number;
 }
 
-const gameComponentMap: Record<GameType, React.ComponentType | undefined> = {
+export interface GameSlotProps extends GameComponentProps {
+  currentGame: GameType;
+}
+
+const gameComponentMap: Record<
+  GameType,
+  React.ComponentType<GameComponentProps> | undefined
+> = {
   whackAKey: WhackAKey,
 };
 
 export function GameSlot({
   currentGame,
-  seed,
+  ...otherProps
 }: Readonly<GameSlotProps>): JSX.Element | null {
   const GameComponent = gameComponentMap[currentGame];
-
   if (GameComponent) {
-    return <GameComponent key={seed} />;
+    return <GameComponent key={otherProps.seed} {...otherProps} />;
   }
 
   console.error(`No component found for game: ${currentGame}`);
