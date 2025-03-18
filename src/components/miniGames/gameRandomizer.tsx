@@ -1,28 +1,27 @@
 import useSprintStore from '@/stores/sprintStore';
 import { useEffect, useState } from 'react';
-import WhackAKey from './whackAKey';
+import { games, GameType } from '@/types/Game';
+import { GameSlot } from './gameSlot';
+
+function StatusContainer({ message }: { message: string }) {
+  return (
+    <div className="ready-set nes-container max-w-96 w-full bg-white text-center">
+      <h1 className="text-3xl">{message}</h1>
+    </div>
+  );
+}
 
 export default function GameRandomizer() {
-  const [currentGame, setCurrentGame] = useState<string>('');
+  const [currentGame, setCurrentGame] = useState<GameType | undefined>();
   const [seed, setSeed] = useState<number>(0);
-  const gamesArray = ['whackAKey'];
+
   const { trigger, started, finished } = useSprintStore();
 
   const randomize = () => {
-    const randomGame =
-      gamesArray[Math.floor(Math.random() * gamesArray.length)];
+    const randomGame = games[Math.floor(Math.random() * games.length)];
     const randomSeed = Math.floor(Math.random() * 1000);
     setSeed(randomSeed);
     setCurrentGame(randomGame);
-  };
-
-  const gameSlot = () => {
-    switch (currentGame) {
-      case 'whackAKey':
-        return <WhackAKey key={seed} />;
-      default:
-        return <WhackAKey />;
-    }
   };
 
   useEffect(() => {
@@ -33,19 +32,17 @@ export default function GameRandomizer() {
     randomize();
   }, []);
 
-  return (
-    <>
-      {!started ? (
-        <div className="ready-set nes-container max-w-96 w-full bg-white text-center">
-          <h1 className="text-3xl">Get Ready, Set..!</h1>
-        </div>
-      ) : finished ? (
-        <div className="ready-set nes-container max-w-96 w-full bg-white text-center">
-          <h1 className="text-3xl">Finished!</h1>
-        </div>
-      ) : (
-        gameSlot()
-      )}
-    </>
-  );
+  if (!started) {
+    return <StatusContainer message="Get Ready, Set..!" />;
+  }
+
+  if (finished) {
+    return <StatusContainer message="Finished!" />;
+  }
+
+  if (!currentGame) {
+    return <StatusContainer message="Loading game..." />;
+  }
+
+  return <GameSlot currentGame={currentGame} seed={seed} />;
 }
