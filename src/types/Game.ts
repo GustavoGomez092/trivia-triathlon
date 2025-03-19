@@ -5,6 +5,6 @@ export interface Game {
   currentEvent: Event;
 }
 
-export const games = ['whackAKey'] as const;
+export const games = ['whackAKey', 'targetShooting'] as const;
 
 export type GameType = (typeof games)[number];

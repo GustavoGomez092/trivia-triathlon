@@ -60,5 +60,9 @@ export default function GameRandomizer() {
     return <StatusContainer message="Loading game..." />;
   }
 
-  return <GameSlot currentGame={currentGame} seed={seed} />;
+  return (
+    <div className="flex min-h-full w-[800px]">
+      <GameSlot currentGame={currentGame} seed={seed} />
+    </div>
+  );
 }

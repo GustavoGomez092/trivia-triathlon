@@ -99,7 +99,7 @@ function WhackAKey() {
   }, [finished, passed]);
 
   return (
-    <div className="nes-container is-rounded flex min-h-full w-[800px] flex-col items-center justify-center bg-gray-200 p-8">
+    <div className="nes-container is-rounded flex min-h-full w-full flex-col items-center justify-center bg-gray-200 p-8">
       <h1 className="mb-4 text-2xl font-bold">Whack-a-Key</h1>
       <div className="flex flex-col items-center justify-center bg-gray-200 lg:flex-row">
         {!finished && (
