@@ -1,0 +1,5 @@
+.waiting-room-page {
+  background-image: url(@/assets/images/spectators-bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
