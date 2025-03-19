@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+import { TOTAL_DISTANCE } from '@/lib/utils';
 
 gsap.registerPlugin(MotionPathPlugin);
 
@@ -80,12 +81,14 @@ export const RacingTrack: React.FC = () => {
       setPlayers((prevPlayers) => {
         const updated = prevPlayers.map((player) => {
           let newDistance = player.distance + Math.random() * 10;
-          if (newDistance > 1000) newDistance = 1000;
+          if (newDistance > TOTAL_DISTANCE) newDistance = TOTAL_DISTANCE;
           return { ...player, distance: newDistance };
         });
         updated.forEach((player) => {
           if (playerTweens.current[player.id] !== undefined) {
-            playerTweens.current[player.id].progress(player.distance / 1000);
+            playerTweens.current[player.id].progress(
+              player.distance / TOTAL_DISTANCE,
+            );
           }
         });
         return updated;
