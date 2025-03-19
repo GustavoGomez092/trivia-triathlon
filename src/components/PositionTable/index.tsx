@@ -1,8 +1,8 @@
 import { cn, getTime } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Table } from '@/components/ui/table';
-import { Label } from '@/components/ui/label';
-import { useTopUsersForGame } from '@/firebase/hooks/useTopUsersForGame';
+import { FC } from 'react';
+import { UserScore } from '@/firebase/hooks/useTopUsersForGame';
 
 const TABLE_HEADERS = Object.freeze([
   {
@@ -23,31 +23,30 @@ const TABLE_HEADERS = Object.freeze([
   },
 ]);
 
-export function PositionTable({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<'div'>) {
-  const { scores, loading } = useTopUsersForGame('whackAKey');
+interface PositionTableProps {
+  className?: string;
+  scores?: UserScore[];
+}
 
+export const PositionTable: FC<PositionTableProps> = ({
+  className,
+  scores,
+}) => {
   return (
-    <div className={cn('flex flex-col gap-6', className)} {...props}>
+    <div className={cn('flex flex-col gap-6', className)}>
       <Card className="nes-container">
         <CardContent>
-          {loading ? (
-            <Label htmlFor="loading">Loading...</Label>
-          ) : (
-            <Table
-              tableHeaders={TABLE_HEADERS}
-              tableData={scores.map((score, index) => ({
-                dist: `${score.score.distanceTraveled} m`,
-                player: score.email,
-                pos: index + 1,
-                time: getTime(score.score.finishTime),
-              }))}
-            />
-          )}
+          <Table
+            tableHeaders={TABLE_HEADERS}
+            tableData={scores?.map((score, index) => ({
+              dist: `${score.score.distanceTraveled} m`,
+              player: score.email,
+              pos: index + 1,
+              time: getTime(score.score.finishTime),
+            }))}
+          />
         </CardContent>
       </Card>
     </div>
   );
-}
+};
