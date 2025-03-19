@@ -11,22 +11,22 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as WaitingRoomImport } from './routes/waiting-room'
 import { Route as IndexImport } from './routes/index'
+import { Route as WaitingRoomIndexImport } from './routes/waiting-room/index'
 import { Route as PlayerSprintIndexImport } from './routes/player-sprint/index'
 import { Route as LoginIndexImport } from './routes/login/index'
 
 // Create/Update Routes
 
-const WaitingRoomRoute = WaitingRoomImport.update({
-  id: '/waiting-room',
-  path: '/waiting-room',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const WaitingRoomIndexRoute = WaitingRoomIndexImport.update({
+  id: '/waiting-room/',
+  path: '/waiting-room/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,13 +53,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/waiting-room': {
-      id: '/waiting-room'
-      path: '/waiting-room'
-      fullPath: '/waiting-room'
-      preLoaderRoute: typeof WaitingRoomImport
-      parentRoute: typeof rootRoute
-    }
     '/login/': {
       id: '/login/'
       path: '/login'
@@ -74,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlayerSprintIndexImport
       parentRoute: typeof rootRoute
     }
+    '/waiting-room/': {
+      id: '/waiting-room/'
+      path: '/waiting-room'
+      fullPath: '/waiting-room'
+      preLoaderRoute: typeof WaitingRoomIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -81,47 +81,47 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/waiting-room': typeof WaitingRoomRoute
   '/login': typeof LoginIndexRoute
   '/player-sprint': typeof PlayerSprintIndexRoute
+  '/waiting-room': typeof WaitingRoomIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/waiting-room': typeof WaitingRoomRoute
   '/login': typeof LoginIndexRoute
   '/player-sprint': typeof PlayerSprintIndexRoute
+  '/waiting-room': typeof WaitingRoomIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/waiting-room': typeof WaitingRoomRoute
   '/login/': typeof LoginIndexRoute
   '/player-sprint/': typeof PlayerSprintIndexRoute
+  '/waiting-room/': typeof WaitingRoomIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/waiting-room' | '/login' | '/player-sprint'
+  fullPaths: '/' | '/login' | '/player-sprint' | '/waiting-room'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/waiting-room' | '/login' | '/player-sprint'
-  id: '__root__' | '/' | '/waiting-room' | '/login/' | '/player-sprint/'
+  to: '/' | '/login' | '/player-sprint' | '/waiting-room'
+  id: '__root__' | '/' | '/login/' | '/player-sprint/' | '/waiting-room/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  WaitingRoomRoute: typeof WaitingRoomRoute
   LoginIndexRoute: typeof LoginIndexRoute
   PlayerSprintIndexRoute: typeof PlayerSprintIndexRoute
+  WaitingRoomIndexRoute: typeof WaitingRoomIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  WaitingRoomRoute: WaitingRoomRoute,
   LoginIndexRoute: LoginIndexRoute,
   PlayerSprintIndexRoute: PlayerSprintIndexRoute,
+  WaitingRoomIndexRoute: WaitingRoomIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -135,22 +135,22 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/waiting-room",
         "/login/",
-        "/player-sprint/"
+        "/player-sprint/",
+        "/waiting-room/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/waiting-room": {
-      "filePath": "waiting-room.tsx"
     },
     "/login/": {
       "filePath": "login/index.tsx"
     },
     "/player-sprint/": {
       "filePath": "player-sprint/index.tsx"
+    },
+    "/waiting-room/": {
+      "filePath": "waiting-room/index.tsx"
     }
   }
 }
