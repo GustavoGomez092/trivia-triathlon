@@ -67,7 +67,6 @@ export default function SprintScreen() {
   useEffect(() => {
     if (!started || finished || !user) return;
 
-    console.log(`Here is the user: ${user.email}`);
     throttleAddScoreToEvent('sprint', user.email, {
       finishTime: useSprintStore.getState().time,
       distanceTraveled: useSprintStore.getState().distanceTraveled,
