@@ -4,6 +4,7 @@ import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { TOTAL_DISTANCE } from '@/lib/utils';
 import { Tooltip, TooltipProps } from '@/components/ui/tooltip';
 import { UserScore } from '@/firebase/hooks/useTopUsersForGame';
+import racingTrack from '@/assets/images/racing-track.svg';
 
 gsap.registerPlugin(MotionPathPlugin);
 
@@ -169,11 +170,7 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
             viewBox="0 0 640 480"
             xmlSpace="preserve"
           >
-            <image
-              href="/src/assets/images/racing-track.svg"
-              width="640"
-              height="480"
-            />
+            <image href={racingTrack} width="640" height="480" />
             {/* Racetrack Paths (5 lanes) */}
             {[...Array(5)].map((_, index) => (
               <g

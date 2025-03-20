@@ -8,6 +8,7 @@ import { ref, get, set } from 'firebase/database';
 import { signInAnonymously } from 'firebase/auth';
 import { database, auth } from '@/firebase/database/firebase-config';
 import { useRouter } from '@tanstack/react-router';
+import nsLogo from '@/assets/images/NS-logo-cropped.png';
 
 export function LoginForm({
   className,
@@ -67,11 +68,7 @@ export function LoginForm({
       <Card className="nes-container">
         <CardHeader>
           <div className="flex flex-col items-center gap-2 text-center">
-            <img
-              src="/src/assets/images/NS-logo-cropped.png"
-              className="mb-4 h-12 w-auto"
-              alt=""
-            />
+            <img src={nsLogo} className="mb-4 h-12 w-auto" alt="" />
             <h1 className="text-chart-1 font-sans text-4xl font-bold">
               Trivia Triathlon
             </h1>
