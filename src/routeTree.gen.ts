@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as WaitingRoomIndexImport } from './routes/waiting-room/index'
+import { Route as SpectatorIndexImport } from './routes/spectator/index'
 import { Route as PlayerSprintIndexImport } from './routes/player-sprint/index'
 import { Route as LoginIndexImport } from './routes/login/index'
 
@@ -27,6 +28,12 @@ const IndexRoute = IndexImport.update({
 const WaitingRoomIndexRoute = WaitingRoomIndexImport.update({
   id: '/waiting-room/',
   path: '/waiting-room/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SpectatorIndexRoute = SpectatorIndexImport.update({
+  id: '/spectator/',
+  path: '/spectator/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -67,6 +74,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlayerSprintIndexImport
       parentRoute: typeof rootRoute
     }
+    '/spectator/': {
+      id: '/spectator/'
+      path: '/spectator'
+      fullPath: '/spectator'
+      preLoaderRoute: typeof SpectatorIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/waiting-room/': {
       id: '/waiting-room/'
       path: '/waiting-room'
@@ -83,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginIndexRoute
   '/player-sprint': typeof PlayerSprintIndexRoute
+  '/spectator': typeof SpectatorIndexRoute
   '/waiting-room': typeof WaitingRoomIndexRoute
 }
 
@@ -90,6 +105,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginIndexRoute
   '/player-sprint': typeof PlayerSprintIndexRoute
+  '/spectator': typeof SpectatorIndexRoute
   '/waiting-room': typeof WaitingRoomIndexRoute
 }
 
@@ -98,15 +114,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/login/': typeof LoginIndexRoute
   '/player-sprint/': typeof PlayerSprintIndexRoute
+  '/spectator/': typeof SpectatorIndexRoute
   '/waiting-room/': typeof WaitingRoomIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/player-sprint' | '/waiting-room'
+  fullPaths: '/' | '/login' | '/player-sprint' | '/spectator' | '/waiting-room'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/player-sprint' | '/waiting-room'
-  id: '__root__' | '/' | '/login/' | '/player-sprint/' | '/waiting-room/'
+  to: '/' | '/login' | '/player-sprint' | '/spectator' | '/waiting-room'
+  id:
+    | '__root__'
+    | '/'
+    | '/login/'
+    | '/player-sprint/'
+    | '/spectator/'
+    | '/waiting-room/'
   fileRoutesById: FileRoutesById
 }
 
@@ -114,6 +137,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
   PlayerSprintIndexRoute: typeof PlayerSprintIndexRoute
+  SpectatorIndexRoute: typeof SpectatorIndexRoute
   WaitingRoomIndexRoute: typeof WaitingRoomIndexRoute
 }
 
@@ -121,6 +145,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginIndexRoute: LoginIndexRoute,
   PlayerSprintIndexRoute: PlayerSprintIndexRoute,
+  SpectatorIndexRoute: SpectatorIndexRoute,
   WaitingRoomIndexRoute: WaitingRoomIndexRoute,
 }
 
@@ -137,6 +162,7 @@ export const routeTree = rootRoute
         "/",
         "/login/",
         "/player-sprint/",
+        "/spectator/",
         "/waiting-room/"
       ]
     },
@@ -148,6 +174,9 @@ export const routeTree = rootRoute
     },
     "/player-sprint/": {
       "filePath": "player-sprint/index.tsx"
+    },
+    "/spectator/": {
+      "filePath": "spectator/index.tsx"
     },
     "/waiting-room/": {
       "filePath": "waiting-room/index.tsx"
