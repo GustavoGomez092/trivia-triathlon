@@ -1,4 +1,4 @@
-import { useEffect, FC } from 'react';
+import { useEffect, useState, FC } from 'react';
 import useTriviaStore from '@/stores/triviaStore';
 import useSprintStore from '@/stores/sprintStore';
 
@@ -21,6 +21,10 @@ const TriviaGame: FC = () => {
 
   const { speedIncrease, speedDecrease } = useSprintStore();
 
+  // Timer state (in seconds)
+  const [timeLeft, setTimeLeft] = useState(10);
+
+  // Start game and load questions when component mounts
   useEffect(() => {
     setGameActive(true);
     selectRandomQuestions();
@@ -28,8 +32,9 @@ const TriviaGame: FC = () => {
     return () => {
       setGameActive(false);
     };
-  }, []);
+  }, [selectRandomQuestions, setGameActive]);
 
+  // When an answer is submitted, adjust speed accordingly.
   useEffect(() => {
     if (isCorrect === null) return;
 
@@ -40,8 +45,9 @@ const TriviaGame: FC = () => {
       speedDecrease();
       setPassed(false);
     }
-  }, [isCorrect]);
+  }, [isCorrect, speedIncrease, speedDecrease, setPassed]);
 
+  // When the game finishes, reset after 1 second.
   useEffect(() => {
     if (finished) {
       setTimeout(() => {
@@ -50,11 +56,35 @@ const TriviaGame: FC = () => {
     }
   }, [finished, reset]);
 
+  // Timer effect: reset timer on each new question.
+  useEffect(() => {
+    // Only run timer if game is active, a question exists, and game isn't finished.
+    if (!gameActive || finished || currentQuestion === null) return;
+
+    // Reset timer for this question.
+    setTimeLeft(10);
+
+    const timerId = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerId);
+          // Time expired: mark as incorrect, decrease speed, and finish the current question.
+          speedDecrease();
+          setPassed(false);
+          finish();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timerId);
+  }, [gameActive, finished, currentQuestion, setPassed, finish, speedDecrease]);
+
   const handleOptionSelect = (optionIndex: number) => {
     if (!gameActive) return;
 
     setSelectedOption(optionIndex);
-
     finish();
   };
 
@@ -107,8 +137,11 @@ const TriviaGame: FC = () => {
     <div className="nes-container is-rounded relative z-50 min-h-full w-full overflow-hidden bg-gray-200">
       {/* Vertical Layout */}
       <div className="relative flex min-h-full w-full flex-col justify-between gap-3 px-4 text-center">
-        {/* Name of the game */}
-        <div className="text-2xl font-bold">Trivia Challenge</div>
+        {/* Game title and timer */}
+        <div className="flex items-center justify-between">
+          <div className="text-2xl font-bold">Trivia Challenge</div>
+          <div className="font-mono text-xl">Time left: {timeLeft}s</div>
+        </div>
 
         {/* Question */}
         <div className="flex w-full items-center justify-center rounded-lg bg-white px-4 py-2 shadow-md">
