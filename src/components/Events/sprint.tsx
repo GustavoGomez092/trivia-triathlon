@@ -6,8 +6,10 @@ import { useLottie } from 'lottie-react';
 import sprinter from '@/assets/lottie/sprinter.json';
 import useSprintStore from '@/stores/sprintStore';
 import { Timer } from '@/components/ui/timer';
-import { cn, TOTAL_DISTANCE } from '@/lib/utils';
+import useThrottle, { cn, TOTAL_DISTANCE } from '@/lib/utils';
 import confetti from 'canvas-confetti';
+import { addScoreToEvent } from '@/firebase/database/games';
+import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
 
 export default function SprintScreen() {
   gsap.registerPlugin(useGSAP);
@@ -27,6 +29,8 @@ export default function SprintScreen() {
   const singleCrowd = useRef(null);
   const sprinterContainer = useRef(null);
   const timeline = useRef<gsap.core.Timeline | null>(null);
+  const throttleAddScoreToEvent = useThrottle(addScoreToEvent, 500);
+  const { user } = useCurrentUser();
 
   const sprinterOne = {
     animationData: sprinter,
@@ -59,6 +63,16 @@ export default function SprintScreen() {
       clearInterval(timer);
     };
   }, [started, finished]);
+
+  useEffect(() => {
+    if (!started || finished || !user) return;
+
+    console.log(`Here is the user: ${user.email}`);
+    throttleAddScoreToEvent('sprint', user.email, {
+      finishTime: useSprintStore.getState().time,
+      distanceTraveled: useSprintStore.getState().distanceTraveled,
+    });
+  }, [started, finished, distanceTraveled, user]);
 
   useEffect(() => {
     if (!started || finished) return;

@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { PositionTable } from '@/components/PositionTable';
 import { RacingTrack } from '@/components/RacingTrack';
-import { useTopUsersForGame } from '@/firebase/hooks/useTopUsersForGame';
+import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForGame';
 import './index.css';
 
 const Spectator = () => {
-  const { scores, loading } = useTopUsersForGame('whackAKey');
+  const { scores, loading } = useTopUsersForEvent('whackAKey');
   const router = useRouter();
   const [selectedEmail, setSelectedEmail] = useState<string | null>(null);
 

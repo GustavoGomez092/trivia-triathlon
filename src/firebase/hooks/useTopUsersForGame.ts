@@ -1,6 +1,6 @@
 import { useList } from 'react-firebase-hooks/database';
 import { ref } from 'firebase/database';
-import { GameType } from '@/types/Game';
+import { EventType } from '@/types/Game';
 import { database } from '../database/firebase-config';
 import { ScoreData } from '../database/games';
 
@@ -9,13 +9,12 @@ export interface UserScore {
   score: ScoreData;
 }
 
-export function useTopUsersForGame(game?: GameType) {
-  if (!game) {
+export function useTopUsersForEvent(event?: EventType) {
+  if (!event) {
     return { scores: [], loading: false, error: null };
   }
 
-  console.log(game);
-  const scoresRef = ref(database, `games/${game}/scores`);
+  const scoresRef = ref(database, `events/${event}/scores`);
   const [snapshots, loading, error] = useList(scoresRef);
 
   const scores: UserScore[] = (snapshots ?? [])

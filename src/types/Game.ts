@@ -8,3 +8,7 @@ export interface Game {
 export const games = ['whackAKey', 'targetShooting'] as const;
 
 export type GameType = (typeof games)[number];
+
+export const events = ['sprint', 'swimming', 'shooting'] as const;
+
+export type EventType = (typeof events)[number];
