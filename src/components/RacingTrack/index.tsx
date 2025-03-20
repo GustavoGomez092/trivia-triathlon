@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
-import { TOTAL_DISTANCE } from '@/lib/utils';
+import { getUsername, TOTAL_DISTANCE, getSanitizedEmail } from '@/lib/utils';
 import { Tooltip, TooltipProps } from '@/components/ui/tooltip';
 import { UserScore } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import racingTrack from '@/assets/images/racing-track.svg';
@@ -12,11 +12,12 @@ import { Label } from '@/components/ui/label';
 gsap.registerPlugin(MotionPathPlugin);
 
 interface Player {
+  color: string;
+  distance: number;
+  email: string;
   id: number;
   lane: number;
-  distance: number;
-  color: string;
-  email: string;
+  name: string;
 }
 
 interface RacingTrackProps {
@@ -52,6 +53,7 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
       // Compute a color based on index (you can adjust the divisor if needed)
       color: `hsl(${(index * 360) / (scores.length || 20)}, 100%, 50%)`,
       email: score.email,
+      name: score.userName,
     }));
     setPlayers(newPlayers);
   }, [scores]);
@@ -101,7 +103,7 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
         visible: true,
         x: circleRect.left - containerRect.left + circleRect.width / 2 - 50,
         y: circleRect.top - containerRect.top - 10,
-        name: player.email,
+        name: player.name || getUsername(player.email),
         distance: player.distance,
       });
     }
@@ -148,7 +150,9 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
       if (circle) {
         if (!selectedEmail) {
           gsap.to(circle, { opacity: 0.7, scale: 1, duration: 0.2 });
-        } else if (player.email === selectedEmail) {
+        } else if (
+          getSanitizedEmail(player.email) === getSanitizedEmail(selectedEmail)
+        ) {
           gsap.to(circle, { opacity: 1, scale: 1.4, duration: 0.2 });
         } else {
           gsap.to(circle, { opacity: 0.5, scale: 1, duration: 0.2 });

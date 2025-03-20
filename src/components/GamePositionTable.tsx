@@ -1,6 +1,6 @@
 import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import { Table } from './ui/table';
-import { cn, getTime, getUsername, getSanitizedEmail } from '@/lib/utils';
+import { cn, getTime, getSanitizedEmail, getUsername } from '@/lib/utils';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
 import { Label } from './ui/label';
 
@@ -35,7 +35,7 @@ const GamePositionTable = () => {
 
           <tbody>
             {scores?.map((score, index) => {
-              const email = score.email;
+              const email = getSanitizedEmail(score.email);
               const sanitizedEmail = getSanitizedEmail(user?.email);
               const isCurrentUser = email === sanitizedEmail;
               return (
@@ -49,7 +49,7 @@ const GamePositionTable = () => {
                   )}
                 >
                   <td>{index + 1}</td>
-                  <td>{score.userName}</td>
+                  <td>{score.userName || getUsername(score.email)}</td>
                   <td>{score.score.distanceTraveled} m</td>
                   <td>{getTime(score.score.finishTime)}</td>
                 </tr>

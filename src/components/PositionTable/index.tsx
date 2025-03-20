@@ -1,4 +1,4 @@
-import { cn, getDistance, getTime } from '@/lib/utils';
+import { cn, getDistance, getTime, getUsername } from '@/lib/utils';
 import { FC } from 'react';
 import { UserScore } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import { Table } from '@/components/ui/table';
@@ -59,7 +59,7 @@ const PositionTable: FC<PositionTableProps> = ({
                   style={{ color: rowColor }}
                 >
                   <td>{index + 1}</td>
-                  <td>{email}</td>
+                  <td>{score.userName || getUsername(score.email)}</td>
                   <td>{getDistance(score.score.distanceTraveled)}</td>
                   <td>{getTime(score.score.finishTime)}</td>
                 </tr>

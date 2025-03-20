@@ -18,7 +18,7 @@ const Spectator = () => {
 
   return (
     <div className="spectator-page h-svh w-svw flex p-4">
-      <div className="player-main pointer-events-none flex w-8/12 flex-col gap-6">
+      <div className="player-main flex w-8/12 flex-col gap-6">
         <RacingTrack
           loading={loading}
           scores={scores!}
