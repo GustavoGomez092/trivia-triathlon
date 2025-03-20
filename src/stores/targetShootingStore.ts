@@ -46,9 +46,9 @@ const useTargetShootingStore = create<TargetShootingStore>((set) => ({
   setShowTarget: (val: boolean) => set({ showTarget: val }),
   setGameActive: (val: boolean) => set({ gameActive: val }),
   increaseSpeed: () =>
-    set((state) => ({ speed: state.speed >= 5 ? 5 : state.speed + 0.5 })),
+    set((state) => ({ speed: state.speed >= 5 ? 5 : state.speed + 1 })),
   decreaseSpeed: () =>
-    set((state) => ({ speed: state.speed <= 1 ? 1 : state.speed - 0.5 })),
+    set((state) => ({ speed: state.speed <= 1 ? 1 : state.speed - 1 })),
 }));
 
 export default useTargetShootingStore;

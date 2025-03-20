@@ -7,7 +7,7 @@ type TargetCoordinates = {
   y: number;
 };
 
-const TOTAL_SCORE = 10;
+const TOTAL_SCORE = 5;
 
 const TargetShooting: FC = () => {
   const {
@@ -101,15 +101,15 @@ const TargetShooting: FC = () => {
           if (intervalIdRef.current !== null) {
             clearInterval(intervalIdRef.current);
             intervalIdRef.current = null;
-
-            speedDecrease();
-            decreaseSpeed();
           }
 
           if (gameActive) {
             const newCoords = positionTarget();
             pullTarget(newCoords, speed);
           }
+
+          speedDecrease();
+          decreaseSpeed();
         }
       }, 40);
     },
@@ -315,9 +315,9 @@ const TargetShooting: FC = () => {
         >
           <defs>
             <linearGradient id="gradient" x1="100%" y1="0" x2="0" y2="100%">
-              <stop offset="0%" stopColor="#55BEFA" />
-              <stop offset="50%" stopColor="#0e87cc" />
-              <stop offset="100%" stopColor="#55BEFA" />
+              <stop offset="0%" stopColor="#f03c46" />
+              <stop offset="50%" stopColor="#d16e72" />
+              <stop offset="100%" stopColor="#f03c46" />
             </linearGradient>
           </defs>
           <ellipse
@@ -332,12 +332,12 @@ const TargetShooting: FC = () => {
         </svg>
 
         {/* Name of the game */}
-        <div className="absolute left-1/2 top-0 -translate-x-1/2 transform text-2xl font-bold text-black">
+        <div className="absolute left-1/2 top-0 -translate-x-1/2 transform text-2xl font-bold">
           Target Shooting
         </div>
 
         {/* Score display */}
-        <div className="text-1xl absolute bottom-0 right-0 font-bold text-black">
+        <div className="text-1xl absolute bottom-0 right-0 font-bold">
           Score: {score}/{TOTAL_SCORE}
         </div>
       </div>
