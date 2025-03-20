@@ -35,15 +35,21 @@ function WhackAKey() {
 
   useEffect(() => {
     if (!started || finished) return;
-    // Randomly pick an active mole every 1 second
+
     const intervalId = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * moleKeys.length);
-      setActiveMoleIndex(randomIndex);
+      setActiveMoleIndex((prevActive) => {
+        // If there was a mole active (i.e. no key press occurred), mark it as incorrect.
+        if (prevActive !== null) {
+          incorrect();
+        }
+        // Select a new random mole.
+        const randomIndex = Math.floor(Math.random() * moleKeys.length);
+        return randomIndex;
+      });
     }, 900);
 
-    // Cleanup the interval on unmount
     return () => clearInterval(intervalId);
-  }, [moleKeys.length, started, finished]);
+  }, [started, finished, incorrect]);
 
   // Listen for keydown events
   useEffect(() => {

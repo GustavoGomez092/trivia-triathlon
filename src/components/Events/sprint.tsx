@@ -48,9 +48,9 @@ export default function SprintScreen() {
     if (!started) return;
     const timer = setInterval(() => {
       if (finished) {
-        const newTime = useSprintStore.getState().time + 1;
+        const newTime = useSprintStore.getState().time;
 
-        setTime(newTime > TOTAL_DISTANCE ? TOTAL_DISTANCE : newTime);
+        setTime(newTime);
         clearInterval(timer);
       } else {
         const newTime = useSprintStore.getState().time + 1;
