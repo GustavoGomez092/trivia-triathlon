@@ -27,17 +27,27 @@ export const getUsername = (email: string) => {
   return email.split('@')[0];
 };
 
-
 export const useThrottle = (callback: Function, limit: number) => {
   const lastCallRef = useRef(0);
-  const throttledCallback = useCallback((...args: any) => {
-    const now = Date.now();
-    if (now - lastCallRef.current >= limit) {
-      lastCallRef.current = now;
-      callback(...args);
-    }
-  }, [callback, limit]);
+  const throttledCallback = useCallback(
+    (...args: any) => {
+      const now = Date.now();
+      if (now - lastCallRef.current >= limit) {
+        lastCallRef.current = now;
+        callback(...args);
+      }
+    },
+    [callback, limit],
+  );
   return throttledCallback;
 };
 
-export default useThrottle;
+export const getDistance = (distanceTraveled: number) => {
+  return `${
+    distanceTraveled < TOTAL_DISTANCE ? distanceTraveled : TOTAL_DISTANCE
+  } mts`;
+};
+
+export const getSanitizedEmail = (email?: string) => {
+  return email ? email.replace(/\./g, '_') : '';
+};
