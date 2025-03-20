@@ -5,6 +5,7 @@ import controlPanel from '@/assets/images/knobs.png';
 import GameRandomizer from '@/components/miniGames/gameRandomizer';
 import { useEffect } from "react";
 import { isEventStarted } from "@/firebase/database/games.ts";
+import { useCurrentUser } from "@/firebase/hooks/useCurrentUser.ts";
 
 export const Route = createFileRoute('/player-sprint/')({
   component: RouteComponent,
@@ -12,11 +13,12 @@ export const Route = createFileRoute('/player-sprint/')({
 
 function RouteComponent() {
   const router = useRouter();
+  const  { user } = useCurrentUser();
 
   useEffect(() => {
     async function checkEventStatus() {
       const started = await isEventStarted('sprint');
-      if (!started) {
+      if (!started && user) {
         router.navigate({ to: '/waiting-room' });
       }
     }
