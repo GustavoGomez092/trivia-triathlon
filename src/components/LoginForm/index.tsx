@@ -68,7 +68,7 @@ const LoginForm = ({
             uid,
           }
 
-          await addScoreToEvent('sprint', scoreUserData , {
+          await addScoreToEvent('sprint', 'set', scoreUserData , {
             finishTime: 0,
             distanceTraveled: 0,
           });

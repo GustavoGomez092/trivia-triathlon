@@ -1,5 +1,5 @@
 import { EventType } from '@/types/Game';
-import { ref, set, get } from 'firebase/database';
+import { ref, set, get, update } from 'firebase/database';
 import { database } from './firebase-config';
 import { UserScore } from "@/firebase/hooks/useTopUsersForEvent.ts";
 
@@ -10,14 +10,15 @@ export interface ScoreData {
 
 export async function addScoreToEvent(
   event: EventType,
+  action: 'set'| 'update',
   user: Pick<UserScore, "email" | "userName" | "uid">,
   scoreData: ScoreData,
 ): Promise<void> {
   const scoreRef = ref(database, `events/${event}/scores/${user.uid}`);
-  await set(scoreRef, scoreData);
 
   try {
-    await set(scoreRef, {
+    const actionFn = action === 'set' ? set : update;
+    await actionFn(scoreRef, {
       ...scoreData,
       ...user
     });
