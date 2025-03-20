@@ -6,6 +6,7 @@ import { ref, get } from 'firebase/database';
 export interface User {
   email: string;
   name: string;
+  uid: string;
   inviteCode: string;
   loggedInAt: string;
 }

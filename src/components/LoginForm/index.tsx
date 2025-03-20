@@ -10,6 +10,7 @@ import { database, auth } from '@/firebase/database/firebase-config';
 import { useRouter } from '@tanstack/react-router';
 import nsLogo from '@/assets/images/NS-logo-cropped.png';
 import {addScoreToEvent, getEventScore} from "@/firebase/database/games.ts";
+import {getUserByEmail} from "@/firebase/database/user.ts";
 
 const LoginForm = ({
   className,
@@ -40,6 +41,13 @@ const LoginForm = ({
       const codeData = snapshot.val();
 
       if (codeData.active && codeData.code === inviteCode) {
+        const existentUser = await getUserByEmail(email);
+        if (existentUser) {
+            setError('User with this email already exists.');
+            setLoading(false);
+            return;
+        }
+
         const userCredential = await signInAnonymously(auth);
         const uid = userCredential.user.uid;
 
