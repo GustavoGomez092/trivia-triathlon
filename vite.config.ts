@@ -20,7 +20,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        assetFileNames: '[name][extname]', // Evita que renombre las imágenes
+        assetFileNames: 'assets/[name][extname]', // Evita que renombre las imágenes
       },
     },
   },
