@@ -1,12 +1,12 @@
-import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
-import { createFileRoute, useRouter } from '@tanstack/react-router';
-import { requireAuthLoader } from '@/firebase/database/requireAuthLoader.ts';
-import { FC, useEffect } from 'react';
-import { isEventStarted } from '@/firebase/database/games';
-import './index.css';
+import { FC } from 'react';
+import { createFileRoute } from '@tanstack/react-router';
 import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent';
-import { getSanitizedEmail, getUsername } from '@/lib/utils';
+import { requireAuthLoader } from '@/firebase/database/requireAuthLoader.ts';
+import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
+import useIsEventStarted from '@/firebase/hooks/useIsEventStarted.ts';
 import { Label } from '@/components/ui/label';
+import { getSanitizedEmail, getUsername } from '@/lib/utils';
+import './index.css';
 
 interface PlayerBadgeProps {
   currentUserEmail: string;
@@ -33,27 +33,11 @@ const PlayerBadge: FC<PlayerBadgeProps> = ({
 };
 
 const waitingRoom = () => {
+  useIsEventStarted('sprint');
+
   const { user } = useCurrentUser();
   const { email: currentUserEmail } = user || {};
   const { scores, loading } = useTopUsersForEvent('sprint');
-
-  const navigation = useRouter();
-
-  useEffect(() => {
-    if (!user) {
-      return;
-    }
-
-    const checkEventStatus = async () => {
-      const started = await isEventStarted('sprint');
-
-      if (started) {
-        navigation.navigate({ to: '/player-sprint' });
-      }
-    };
-
-    checkEventStatus();
-  }, [user]);
 
   return (
     <div className="waiting-room-page h-svh w-svw flex flex-col justify-end p-4 pb-6">

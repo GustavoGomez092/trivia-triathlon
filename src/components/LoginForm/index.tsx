@@ -9,6 +9,7 @@ import { signInAnonymously } from 'firebase/auth';
 import { database, auth } from '@/firebase/database/firebase-config';
 import { useRouter } from '@tanstack/react-router';
 import nsLogo from '@/assets/images/NS-logo-cropped.png';
+import { addScoreToEvent } from "@/firebase/database/games.ts";
 
 const LoginForm = ({
   className,
@@ -47,6 +48,11 @@ const LoginForm = ({
           inviteCode,
           name,
           loggedInAt: new Date().toISOString(),
+        });
+
+        await addScoreToEvent('sprint', email, {
+            finishTime: 0,
+            distanceTraveled: 0,
         });
 
         router.navigate({ to: '/waiting-room' });

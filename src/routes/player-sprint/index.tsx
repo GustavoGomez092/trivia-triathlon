@@ -1,14 +1,12 @@
 import './index.css';
-import { createFileRoute, useRouter } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import SprintScreen from '@/components/Events/sprint';
 import controlPanel from '@/assets/images/controlPanel.png';
 import GameRandomizer from '@/components/miniGames/gameRandomizer';
-import { useEffect } from 'react';
-import { isEventStarted } from '@/firebase/database/games.ts';
-import { useCurrentUser } from '@/firebase/hooks/useCurrentUser.ts';
 import { requireAuthLoader } from '@/firebase/database/requireAuthLoader.ts';
 import { GamePositionTable } from '@/components/GamePositionTable';
 import nsLogo from '@/assets/images/NS-logo-cropped.png';
+import useIsEventStarted from "@/firebase/hooks/useIsEventStarted.ts";
 
 export const Route = createFileRoute('/player-sprint/')({
   component: RouteComponent,
@@ -16,19 +14,7 @@ export const Route = createFileRoute('/player-sprint/')({
 });
 
 function RouteComponent() {
-  const router = useRouter();
-  const { user } = useCurrentUser();
-
-  useEffect(() => {
-    async function checkEventStatus() {
-      const started = await isEventStarted('sprint');
-      if (!started && user) {
-        router.navigate({ to: '/waiting-room' });
-      }
-    }
-
-    checkEventStatus();
-  }, []);
+  useIsEventStarted('sprint');
 
   return (
     <div className="sprint-event h-svh w-svw flex bg-sky-400 p-4">
