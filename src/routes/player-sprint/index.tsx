@@ -48,7 +48,7 @@ function RouteComponent() {
           <GameRandomizer />
         </div>
       </div>
-      <div className="event-stats flex w-4/12">
+      <div className="event-stats flex max-w-3xl">
         <GamePositionTable />
       </div>
     </div>

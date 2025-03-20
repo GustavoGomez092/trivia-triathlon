@@ -9,7 +9,12 @@ interface TableProps {
 
 const Table: FC<TableProps> = ({ className, children }) => {
   return (
-    <div className={cn('nes-table-responsive nes-scrollbar', className)}>
+    <div
+      className={cn(
+        'nes-table-responsive max-h-[480px] !overflow-y-auto',
+        className,
+      )}
+    >
       <table className="nes-table is-bordered is-centered">{children}</table>
     </div>
   );
