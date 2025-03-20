@@ -23,7 +23,7 @@ function WhackAKey() {
   const { speedIncrease, speedDecrease } = useSprintStore();
 
   // The keyboard keys we'll monitor
-  const moleKeys = ['Q'];
+  const moleKeys = ['Q', 'W', 'E', 'R', 'A', 'S', 'D', 'F', 'Z', 'X', 'C', 'V'];
 
   // Which mole (by index) is currently active
   const [activeMoleIndex, setActiveMoleIndex] = useState<number | null>(null);
