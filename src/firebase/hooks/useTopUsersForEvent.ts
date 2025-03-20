@@ -4,9 +4,18 @@ import { EventType } from '@/types/Game';
 import { database } from '../database/firebase-config';
 import { ScoreData } from '../database/games';
 
+interface RawScore {
+    email: string;
+    userName: string;
+    uid: string;
+    finishTime: number;
+    distanceTraveled: number;
+}
+
 export interface UserScore {
   email: string;
   userName: string;
+  uid: string;
   score: ScoreData;
 }
 
@@ -20,16 +29,22 @@ export function useTopUsersForEvent(event?: EventType) {
 
   const scores: UserScore[] = (snapshots ?? [])
       .map((snap) => {
-        const data = snap.val();
-        const { userName, ...scoreData } = data;
+        const data: RawScore = snap.val();
+        const { userName, email, finishTime, distanceTraveled } = data;
         return {
-          email: snap.key ?? '',
-          userName,
-          score: scoreData as ScoreData,
+            uid: snap.key ?? '',
+            email: email ?? '',
+            userName,
+            score: {
+                finishTime,
+                distanceTraveled,
+            },
         };
       })
-    .sort((a, b) => a.score.finishTime - b.score.finishTime)
-    .sort((a, b) => b.score.distanceTraveled - a.score.distanceTraveled);
+      .sort((a, b) => a.score.finishTime - b.score.finishTime)
+      .sort((a, b) => b.score.distanceTraveled - a.score.distanceTraveled);
+
+  console.log(scores.length);
 
   return { scores, loading, error };
 }

@@ -9,7 +9,7 @@ import { signInAnonymously } from 'firebase/auth';
 import { database, auth } from '@/firebase/database/firebase-config';
 import { useRouter } from '@tanstack/react-router';
 import nsLogo from '@/assets/images/NS-logo-cropped.png';
-import { addScoreToEvent } from "@/firebase/database/games.ts";
+import {addScoreToEvent, getEventScore} from "@/firebase/database/games.ts";
 
 const LoginForm = ({
   className,
@@ -43,17 +43,28 @@ const LoginForm = ({
         const userCredential = await signInAnonymously(auth);
         const uid = userCredential.user.uid;
 
-        await set(ref(database, `users/${uid}`), {
+        const userData = {
           email,
           inviteCode,
           name,
+          uid,
           loggedInAt: new Date().toISOString(),
-        });
+        };
+        await set(ref(database, `users/${uid}`), userData);
 
-        await addScoreToEvent('sprint', email, {
+        const eventScore = await getEventScore('sprint', uid);
+        if (!eventScore?.distanceTraveled) {
+          const scoreUserData = {
+            email,
+            userName: name,
+            uid,
+          }
+
+          await addScoreToEvent('sprint', scoreUserData , {
             finishTime: 0,
             distanceTraveled: 0,
-        });
+          });
+        }
 
         router.navigate({ to: '/waiting-room' });
       } else {
