@@ -1,4 +1,4 @@
-import crowdGif from 'images/sprint/crowd.gif';
+import crowdGif from '@/assets/images/sprint/crowd.gif';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRef, useEffect } from 'react';

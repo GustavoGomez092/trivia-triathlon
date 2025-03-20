@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 
 export default defineConfig({
+  publicDir: 'public',
   plugins: [
     tailwindcss(),
     TanStackRouterVite({ target: 'react', autoCodeSplitting: true }),
@@ -15,7 +16,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      images: path.resolve(__dirname, './public/images'),
     },
   },
 });

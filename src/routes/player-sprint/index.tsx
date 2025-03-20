@@ -1,12 +1,12 @@
 import './index.css';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import SprintScreen from '@/components/Events/sprint';
-import controlPanel from 'images/knobs.png';
+import controlPanel from '@/assets/images/knobs.png';
 import GameRandomizer from '@/components/miniGames/gameRandomizer';
-import { useEffect } from "react";
-import { isEventStarted } from "@/firebase/database/games.ts";
-import { useCurrentUser } from "@/firebase/hooks/useCurrentUser.ts";
-import { requireAuthLoader } from "@/firebase/database/requireAuthLoader.ts";
+import { useEffect } from 'react';
+import { isEventStarted } from '@/firebase/database/games.ts';
+import { useCurrentUser } from '@/firebase/hooks/useCurrentUser.ts';
+import { requireAuthLoader } from '@/firebase/database/requireAuthLoader.ts';
 
 export const Route = createFileRoute('/player-sprint/')({
   component: RouteComponent,
@@ -15,7 +15,7 @@ export const Route = createFileRoute('/player-sprint/')({
 
 function RouteComponent() {
   const router = useRouter();
-  const  { user } = useCurrentUser();
+  const { user } = useCurrentUser();
 
   useEffect(() => {
     async function checkEventStatus() {
