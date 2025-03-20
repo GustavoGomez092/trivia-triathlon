@@ -14,15 +14,20 @@ function StatusContainer({ message }: { message: string }) {
 export default function GameRandomizer() {
   const [currentGame, setCurrentGame] = useState<GameType | undefined>();
   const [seed, setSeed] = useState<number>(0);
+  const [lastGame, setLastGame] = useState<GameType | undefined>();
 
-  const { trigger, started, finished } =
-    useSprintStore();
+  const { trigger, started, finished } = useSprintStore();
 
   const randomize = () => {
-    const randomGame = games[Math.floor(Math.random() * games.length)];
+    let randomGame;
+    do {
+      randomGame = games[Math.floor(Math.random() * games.length)];
+    } while (randomGame === lastGame);
+
     const randomSeed = Math.floor(Math.random() * 1000);
     setSeed(randomSeed);
     setCurrentGame(randomGame);
+    setLastGame(randomGame);
   };
 
   useEffect(() => {

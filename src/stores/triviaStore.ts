@@ -10,7 +10,6 @@ type TriviaQuestion = {
 };
 
 interface TriviaState {
-  allQuestions: TriviaQuestion[];
   currentQuestions: TriviaQuestion[];
   currentQuestionIndex: number;
   score: number;
@@ -30,12 +29,9 @@ interface TriviaState {
   setSelectedOption: (optionIndex: number) => void;
 }
 
-const TOTAL_QUESTIONS = 1;
-
 const { setTrigger, setPassed: setPassedSprint } = useSprintStore.getState();
 
 const useTriviaStore = create<TriviaState>((set, get) => ({
-  allQuestions: triviaQuestions,
   currentQuestions: [],
   currentQuestionIndex: 0,
   score: 0,
@@ -44,7 +40,7 @@ const useTriviaStore = create<TriviaState>((set, get) => ({
   finished: false,
   selectedOption: null,
   showFeedback: false,
-  isCorrect: false,
+  isCorrect: null,
   finish: () => set({ finished: true }),
   setGameActive: (active) => set({ gameActive: active }),
   setPassed: (passed) => {
@@ -66,15 +62,11 @@ const useTriviaStore = create<TriviaState>((set, get) => ({
     });
   },
   selectRandomQuestions: () => {
-    const allQuestions = [...get().allQuestions];
     const randomQuestions: TriviaQuestion[] = [];
 
-    // Select 5 random questions
-    for (let i = 0; i < TOTAL_QUESTIONS; i++) {
-      const randomIndex = Math.floor(Math.random() * allQuestions.length);
-      randomQuestions.push(allQuestions[randomIndex]);
-      allQuestions.splice(randomIndex, 1);
-    }
+    const randomIndex = Math.floor(Math.random() * triviaQuestions.length);
+    randomQuestions.push(triviaQuestions[randomIndex]);
+    triviaQuestions.splice(randomIndex, 1);
 
     set({ currentQuestions: randomQuestions });
   },
@@ -84,9 +76,7 @@ const useTriviaStore = create<TriviaState>((set, get) => ({
     set({ currentQuestionIndex: nextIndex });
   },
   setSelectedOption: (optionIndex: number) => {
-    console.log('🚀 ~ optionIndex:', optionIndex);
     const currentQuestion = triviaQuestions[optionIndex];
-    console.log('🚀 ~ currentQuestion:', currentQuestion);
 
     set({
       selectedOption: optionIndex,
