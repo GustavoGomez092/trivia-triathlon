@@ -139,27 +139,25 @@
   height: 40px;
 }
 
-@layer utilities {
-  .nes-scrollbar::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-  }
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
 
-  .nes-scrollbar::-webkit-scrollbar-track {
-    background: #212529;
-    border: 2px solid #fff;
-    border-radius: 0px;
-  }
+::-webkit-scrollbar-track {
+  background: #212529;
+  border: 2px solid #fff;
+  border-radius: 0px;
+}
 
-  .nes-scrollbar::-webkit-scrollbar-thumb {
-    background: #ffffff;
-    border: 2px solid #212529;
-    box-shadow:
-      inset -2px -2px #ffffff,
-      inset 2px 2px #000;
-  }
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border: 2px solid #212529;
+  box-shadow:
+    inset -2px -2px #ffffff,
+    inset 2px 2px #000;
+}
 
-  .nes-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #d3d3d3;
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: #d3d3d3;
 }
