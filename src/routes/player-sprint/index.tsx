@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { isEventStarted } from '@/firebase/database/games.ts';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser.ts';
 import { requireAuthLoader } from '@/firebase/database/requireAuthLoader.ts';
-import GamePositionTable from '@/components/GamePositionTable';
+import { GamePositionTable } from '@/components/GamePositionTable';
 import nsLogo from '@/assets/images/NS-logo-cropped.png';
 
 export const Route = createFileRoute('/player-sprint/')({

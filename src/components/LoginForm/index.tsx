@@ -10,10 +10,10 @@ import { database, auth } from '@/firebase/database/firebase-config';
 import { useRouter } from '@tanstack/react-router';
 import nsLogo from '@/assets/images/NS-logo-cropped.png';
 
-export function LoginForm({
+const LoginForm = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+}: React.ComponentPropsWithoutRef<'div'>) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [inviteCode, setInviteCode] = useState('');
@@ -125,4 +125,6 @@ export function LoginForm({
       </Card>
     </div>
   );
-}
+};
+
+export { LoginForm };

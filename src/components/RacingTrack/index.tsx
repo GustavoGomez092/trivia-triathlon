@@ -26,7 +26,7 @@ interface RacingTrackProps {
   selectedEmail: string | null;
 }
 
-export const RacingTrack: React.FC<RacingTrackProps> = ({
+const RacingTrack: React.FC<RacingTrackProps> = ({
   loading,
   scores,
   selectedEmail,
@@ -234,3 +234,5 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
     </div>
   );
 };
+
+export { RacingTrack };

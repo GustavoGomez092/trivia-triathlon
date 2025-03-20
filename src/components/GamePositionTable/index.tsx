@@ -1,8 +1,8 @@
 import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent.ts';
-import { Table } from './ui/table';
+import { Table } from '../ui/table';
 import { cn, getTime, getSanitizedEmail, getUsername } from '@/lib/utils';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
-import { Label } from './ui/label';
+import { Label } from '../ui/label';
 
 const TABLE_HEADERS = Object.freeze([
   { title: 'Pos', key: 'pos' },
@@ -62,4 +62,4 @@ const GamePositionTable = () => {
   );
 };
 
-export default GamePositionTable;
+export { GamePositionTable };
