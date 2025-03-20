@@ -1,6 +1,6 @@
 import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import { Table } from './ui/table';
-import { cn, getTime, getUsername } from '@/lib/utils';
+import { cn, getTime } from '@/lib/utils';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
 
 const TABLE_HEADERS = Object.freeze([
