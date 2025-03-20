@@ -7,9 +7,11 @@ import sprinter from '@/assets/lottie/sprinter.json';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { loginLoader } from '@/firebase/database/loginLoader';
 
 export const Route = createFileRoute('/login/')({
   component: LoginPage,
+  loader: loginLoader,
 });
 
 export default function LoginPage() {
