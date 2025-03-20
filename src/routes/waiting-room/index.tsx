@@ -3,9 +3,9 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent';
 import { requireAuthLoader } from '@/firebase/database/requireAuthLoader.ts';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
-import useIsEventStarted from '@/firebase/hooks/useIsEventStarted.ts';
 import { Label } from '@/components/ui/label';
 import { getSanitizedEmail, getUsername } from '@/lib/utils';
+import useEventCountdownNavigation from '@/firebase/hooks/useEventCountdownNavigation';
 import './index.css';
 
 interface PlayerBadgeProps {
@@ -33,17 +33,26 @@ const PlayerBadge: FC<PlayerBadgeProps> = ({
 };
 
 const waitingRoom = () => {
-  useIsEventStarted('sprint');
-
   const { user } = useCurrentUser();
   const { email: currentUserEmail } = user || {};
   const { scores, loading } = useTopUsersForEvent('sprint');
 
+  const countdown = useEventCountdownNavigation({
+    event: 'sprint',
+    startCount: 5,
+    redirectTo: '/player-sprint',
+  });
+
   return (
     <div className="waiting-room-page h-svh w-svw flex flex-col justify-end p-4 pb-6">
+      {countdown !== null && (
+        <div className="countdown-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+          <h1 className="text-9xl font-bold text-white">{countdown}</h1>
+        </div>
+      )}
+
       <div className="nes-container is-rounded bg-gray-200/85 flex h-fit w-full flex-col items-center gap-4 p-8">
         <h1 className="text-2xl font-bold">Participants</h1>
-
         {loading ? (
           <Label htmlFor="loading">Loading...</Label>
         ) : (
@@ -54,23 +63,20 @@ const waitingRoom = () => {
               key={user?.email}
               userName={user?.name || ''}
             />
-
             {scores
               ?.filter(
                 ({ email }) =>
                   getSanitizedEmail(currentUserEmail) !==
                   getSanitizedEmail(email),
               )
-              ?.map(({ userName, email }) => {
-                return (
-                  <PlayerBadge
-                    currentUserEmail={currentUserEmail || ''}
-                    email={email}
-                    key={email}
-                    userName={userName}
-                  />
-                );
-              })}
+              ?.map(({ userName, email }) => (
+                <PlayerBadge
+                  currentUserEmail={currentUserEmail || ''}
+                  email={email}
+                  key={email}
+                  userName={userName}
+                />
+              ))}
           </div>
         )}
       </div>

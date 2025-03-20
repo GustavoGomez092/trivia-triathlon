@@ -70,7 +70,7 @@ const RacingTrack: React.FC<RacingTrackProps> = ({
             align: lane,
             autoRotate: true,
             alignOrigin: [0.5, 0.5],
-            start: -0.48,
+            start: -0.403,
             end: 0.355,
           },
           duration: 5,
@@ -162,7 +162,7 @@ const RacingTrack: React.FC<RacingTrackProps> = ({
   }, [selectedEmail, players]);
 
   return (
-    <div className="player-game h-8/12 nes-container is-rounded flex max-h-[576px] max-w-[1024px] items-center justify-start gap-8 self-start overflow-auto bg-[#61696B] lg:self-center">
+    <div className="player-game h-8/12 nes-container is-rounded flex max-h-[576px] max-w-[1024px] items-center justify-start gap-8 self-start overflow-hidden bg-[#61696B] lg:self-center">
       <div className="interface nes-container is-rounded relative top-2 h-[520px] max-h-[520px] min-h-[520px] w-[800px] min-w-[800px] max-w-[800px] overflow-hidden bg-green-900">
         {loading ? (
           <Label className="text-white" htmlFor="loading">
