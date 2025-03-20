@@ -34,10 +34,6 @@ const TargetShooting: FC = () => {
   const { speedIncrease, speedDecrease } = useSprintStore();
 
   useEffect(() => {
-    setPassed(false);
-  }, []);
-
-  useEffect(() => {
     if (score === TOTAL_SCORE) {
       setPassed(true);
     }

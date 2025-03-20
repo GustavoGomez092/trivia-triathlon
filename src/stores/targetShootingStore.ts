@@ -35,12 +35,11 @@ const useTargetShootingStore = create<TargetShootingStore>((set) => ({
     set(() => {
       setTrigger(Math.floor(Math.random() * 1000) + 1000);
       return {
-        started: false,
-        finished: false,
-        time: 0,
-        correctKeys: 0,
-        incorrectKeys: 0,
+        score: 0,
         passed: false,
+        speed: 1,
+        showTarget: true,
+        gameActive: true,
       };
     }),
   setShowTarget: (val: boolean) => set({ showTarget: val }),
