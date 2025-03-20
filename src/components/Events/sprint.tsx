@@ -6,7 +6,7 @@ import { useLottie } from 'lottie-react';
 import sprinter from '@/assets/lottie/sprinter.json';
 import useSprintStore from '@/stores/sprintStore';
 import { Timer } from '@/components/ui/timer';
-import { cn } from '@/lib/utils';
+import { cn, TOTAL_DISTANCE } from '@/lib/utils';
 import confetti from 'canvas-confetti';
 
 export default function SprintScreen() {
@@ -46,7 +46,8 @@ export default function SprintScreen() {
     const timer = setInterval(() => {
       if (finished) {
         const newTime = useSprintStore.getState().time + 1;
-        setTime(newTime);
+
+        setTime(newTime > TOTAL_DISTANCE ? TOTAL_DISTANCE : newTime);
         clearInterval(timer);
       } else {
         const newTime = useSprintStore.getState().time + 1;
@@ -80,7 +81,7 @@ export default function SprintScreen() {
       }
     }, 500);
 
-    if (distanceTraveled >= 1000) {
+    if (distanceTraveled >= TOTAL_DISTANCE) {
       finish();
       clearInterval(distanceTimer);
     }
@@ -168,7 +169,7 @@ export default function SprintScreen() {
         duration: 3,
         ease: 'linear',
         onComplete: () => {
-          var duration = 15 * 1000;
+          var duration = 15 * TOTAL_DISTANCE;
           var animationEnd = Date.now() + duration;
           var defaults = {
             startVelocity: 30,
@@ -260,7 +261,10 @@ export default function SprintScreen() {
           <div className="distance-traveled absolute bottom-3 left-3 z-30">
             <span className="text-white">DISTANCE </span>
             <span className="text-white">
-              {distanceTraveled < 1000 ? distanceTraveled : 1000}mts
+              {distanceTraveled < TOTAL_DISTANCE
+                ? distanceTraveled
+                : TOTAL_DISTANCE}
+              mts
             </span>
           </div>
         </div>
