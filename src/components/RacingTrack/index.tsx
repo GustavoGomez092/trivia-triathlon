@@ -70,7 +70,7 @@ const RacingTrack: React.FC<RacingTrackProps> = ({
             align: lane,
             autoRotate: true,
             alignOrigin: [0.5, 0.5],
-            start: -0.48,
+            start: -0.403,
             end: 0.355,
           },
           duration: 5,
