@@ -8,8 +8,11 @@ import useSprintStore from '@/stores/sprintStore';
 import { Timer } from '@/components/ui/timer';
 import useThrottle, { cn, TOTAL_DISTANCE } from '@/lib/utils';
 import confetti from 'canvas-confetti';
-import { addScoreToEvent } from '@/firebase/database/games';
+import {addScoreToEvent, isEventStarted} from '@/firebase/database/games';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
+import {get, ref} from "firebase/database";
+import {database} from "@/firebase/database/firebase-config.ts";
+import {useRouter} from "@tanstack/react-router";
 
 export default function SprintScreen() {
   gsap.registerPlugin(useGSAP);
@@ -44,7 +47,6 @@ export default function SprintScreen() {
     playSegments,
     setSpeed,
   } = useLottie(sprinterOne);
-
   useEffect(() => {
     if (!started) return;
     const timer = setInterval(() => {
