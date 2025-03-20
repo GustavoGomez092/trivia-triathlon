@@ -1,43 +1,16 @@
-import * as React from 'react';
-
 import { cn } from '@/lib/utils';
+import { ReactNode } from '@tanstack/react-router';
+import { FC } from 'react';
 
-interface ITableHeaders {
-  title: string;
-  key: string;
-}
-
-interface TableProps<T = Record<string, any>> {
+interface TableProps {
   className?: string;
-  tableHeaders?: readonly ITableHeaders[];
-  tableData?: T[];
+  children?: ReactNode;
 }
 
-const Table: React.FC<TableProps> = ({
-  className,
-  tableHeaders,
-  tableData,
-}) => {
+const Table: FC<TableProps> = ({ className, children }) => {
   return (
     <div className={cn('nes-table-responsive nes-scrollbar', className)}>
-      <table className="nes-table is-bordered is-centered">
-        <thead>
-          <tr>
-            {tableHeaders?.map(({ key, title }) => <th key={key}>{title}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {tableData?.map((data, index) => (
-            <tr key={index}>
-              {tableHeaders?.map(({ key: property }) => (
-                <td className="whitespace-nowrap" key={`${property}-${index}`}>
-                  {data?.[property as keyof typeof data]}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <table className="nes-table is-bordered is-centered">{children}</table>
     </div>
   );
 };

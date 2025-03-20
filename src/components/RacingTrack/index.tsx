@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { TOTAL_DISTANCE } from '@/lib/utils';
+import { Tooltip, TooltipProps } from '@/components/ui/tooltip';
+import { UserScore } from '@/firebase/hooks/useTopUsersForGame';
 
 gsap.registerPlugin(MotionPathPlugin);
 
@@ -13,25 +15,21 @@ interface Player {
   email: string;
 }
 
-interface TooltipState {
-  visible: boolean;
-  x: number;
-  y: number;
-  email: string;
-  distance: string;
+interface RacingTrackProps {
+  scores: UserScore[];
+  selectedEmail: string | null;
 }
 
-export const RacingTrack: React.FC = () => {
-  // Container ref for relative positioning.
+export const RacingTrack: React.FC<RacingTrackProps> = ({
+  scores,
+  selectedEmail,
+}) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  // Refs for the SVG circles.
   const circleRefs = useRef<(SVGCircleElement | null)[]>([]);
-  // Tween refs.
   const playerTweens = useRef<gsap.core.Tween[]>([]);
 
   const [players, setPlayers] = useState<Player[]>([]);
-  const [selectedPlayerId, setSelectedPlayerId] = useState<number | null>(null);
-  const [tooltip, setTooltip] = useState<TooltipState>({
+  const [tooltip, setTooltip] = useState<TooltipProps>({
     visible: false,
     x: 0,
     y: 0,
@@ -39,19 +37,20 @@ export const RacingTrack: React.FC = () => {
     distance: '0',
   });
 
-  // Create 20 players with unique emails and colors.
+  // Convert real score data to players.
   useEffect(() => {
-    const initialPlayers: Player[] = Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      lane: i % 5,
-      distance: 0,
-      color: `hsl(${(i * 360) / 20}, 100%, 50%)`,
-      email: `player${i}@example.com`,
+    const newPlayers: Player[] = scores.map((score, index) => ({
+      id: index,
+      lane: index % 5,
+      distance: score.score.distanceTraveled || 0,
+      // Compute a color based on index (you can adjust the divisor if needed)
+      color: `hsl(${(index * 360) / (scores.length || 20)}, 100%, 50%)`,
+      email: score.email,
     }));
-    setPlayers(initialPlayers);
-  }, []);
+    setPlayers(newPlayers);
+  }, [scores]);
 
-  // Set up GSAP tweens for each circle once players exist.
+  // Set up GSAP tweens for each circle once players are set.
   useEffect(() => {
     const lanes = Array.from(document.querySelectorAll('.lane'));
     players.forEach((player) => {
@@ -63,39 +62,27 @@ export const RacingTrack: React.FC = () => {
             align: lane,
             autoRotate: true,
             alignOrigin: [0.5, 0.5],
-            start: -0.48, // maps to 0% progress
-            end: 0.345, // maps to 100% progress
+            start: -0.48,
+            end: 0.355,
           },
-          duration: 5, // Dummy duration; progress is controlled manually.
+          duration: 5,
           paused: true,
           ease: 'none',
         });
         playerTweens.current[player.id] = tween;
+        tween.progress(player.distance / TOTAL_DISTANCE);
       }
     });
   }, [players]);
 
-  // Simulate realtime updates.
+  // When players change, update tween progress.
   useEffect(() => {
-    const interval = setInterval(() => {
-      setPlayers((prevPlayers) => {
-        const updated = prevPlayers.map((player) => {
-          let newDistance = player.distance + Math.random() * 10;
-          if (newDistance > TOTAL_DISTANCE) newDistance = TOTAL_DISTANCE;
-          return { ...player, distance: newDistance };
-        });
-        updated.forEach((player) => {
-          if (playerTweens.current[player.id] !== undefined) {
-            playerTweens.current[player.id].progress(
-              player.distance / TOTAL_DISTANCE,
-            );
-          }
-        });
-        return updated;
-      });
-    }, 100);
-    return () => clearInterval(interval);
-  }, []);
+    players.forEach((player) => {
+      playerTweens.current[player.id].progress(
+        player.distance / TOTAL_DISTANCE,
+      );
+    });
+  }, [players]);
 
   // Update tooltip position based on the circle's bounding box.
   const updateTooltipFromCircle = (player: Player) => {
@@ -106,7 +93,7 @@ export const RacingTrack: React.FC = () => {
       const containerRect = container.getBoundingClientRect();
       setTooltip({
         visible: true,
-        x: circleRect.left - containerRect.left + circleRect.width / 2,
+        x: circleRect.left - containerRect.left + circleRect.width / 2 - 50,
         y: circleRect.top - containerRect.top - 10,
         email: player.email,
         distance: player.distance.toFixed(0),
@@ -116,52 +103,57 @@ export const RacingTrack: React.FC = () => {
 
   // Circle hover events.
   const handleCircleMouseEnter = (
-    e: React.MouseEvent<SVGCircleElement, MouseEvent>,
+    _e: React.MouseEvent<SVGCircleElement, MouseEvent>,
     player: Player,
   ) => {
-    if (!selectedPlayerId) {
+    if (!selectedEmail) {
       const circle = circleRefs.current[player.id];
       if (circle) {
-        gsap.to(circle, { scale: 1.2, duration: 0.2 });
-        gsap.to(circle, {
-          attr: { stroke: 'black', strokeWidth: 2 },
-          duration: 0.2,
-        });
+        gsap.to(circle, { opacity: 1, scale: 1.4, duration: 0.2 });
+
         updateTooltipFromCircle(player);
       }
     }
   };
 
   const handleCircleMouseMove = (
-    e: React.MouseEvent<SVGCircleElement, MouseEvent>,
+    _e: React.MouseEvent<SVGCircleElement, MouseEvent>,
     player: Player,
   ) => {
-    if (!selectedPlayerId) {
+    if (!selectedEmail) {
       updateTooltipFromCircle(player);
     }
   };
 
   const handleCircleMouseLeave = (player: Player) => {
-    if (!selectedPlayerId) {
+    if (!selectedEmail) {
       const circle = circleRefs.current[player.id];
       if (circle) {
-        gsap.to(circle, { scale: 1, duration: 0.2 });
-        gsap.to(circle, {
-          attr: { stroke: 'none', strokeWidth: 0 },
-          duration: 0.2,
-        });
+        gsap.to(circle, { scale: 1, opacity: 0.5, duration: 0.2 });
       }
       setTooltip({ visible: false, x: 0, y: 0, email: '', distance: '0' });
     }
   };
 
-  return (
-    // Outer TV screen container with a big top border and medium side/bottom borders, non-rounded.
+  // Update circle styles based on selectedEmail.
+  useEffect(() => {
+    players.forEach((player) => {
+      const circle = circleRefs.current[player.id];
+      if (circle) {
+        if (!selectedEmail) {
+          gsap.to(circle, { opacity: 0.7, scale: 1, duration: 0.2 });
+        } else if (player.email === selectedEmail) {
+          gsap.to(circle, { opacity: 1, scale: 1.4, duration: 0.2 });
+        } else {
+          gsap.to(circle, { opacity: 0.5, scale: 1, duration: 0.2 });
+        }
+      }
+    });
+  }, [selectedEmail, players]);
 
+  return (
     <div className="nes-container is-dark with-title">
       <p className="title">Nicasource TV</p>
-
-      {/* Center the SVG track */}
       <div
         ref={containerRef}
         className="relative flex items-center justify-center p-5"
@@ -178,7 +170,7 @@ export const RacingTrack: React.FC = () => {
             xmlSpace="preserve"
           >
             <image
-              href="https://res.cloudinary.com/reymundotenorio/image/upload/v1742266987/BANP/racing-track.svg"
+              href="/src/assets/images/racing-track.svg"
               width="640"
               height="480"
             />
@@ -219,17 +211,7 @@ export const RacingTrack: React.FC = () => {
               />
             ))}
           </svg>
-          {tooltip.visible && (
-            <div
-              className="pointer-events-none absolute -translate-x-1/2 -translate-y-full transform whitespace-nowrap rounded bg-black bg-opacity-70 px-2 py-1 text-xs text-white"
-              style={{ left: tooltip.x, top: tooltip.y }}
-            >
-              <div>
-                <strong>{tooltip.email}</strong>
-              </div>
-              <div>{tooltip.distance} m</div>
-            </div>
-          )}
+          {tooltip.visible && <Tooltip {...tooltip} />}
         </div>
       </div>
     </div>
