@@ -68,7 +68,7 @@ export default function SprintScreen() {
 
     const newDistance =
       distanceTraveled > TOTAL_DISTANCE ? TOTAL_DISTANCE : distanceTraveled;
-    throttleAddScoreToEvent('sprint', { email: user.email, userName: user.name, uid: user.uid }, {
+    throttleAddScoreToEvent('sprint', { uid: user.uid }, {
       finishTime: useSprintStore.getState().time,
       distanceTraveled: newDistance,
     });
