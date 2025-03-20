@@ -163,7 +163,7 @@ const RacingTrack: React.FC<RacingTrackProps> = ({
 
   return (
     <div className="player-game h-8/12 nes-container is-rounded flex max-h-[576px] max-w-[1024px] items-center justify-start gap-8 self-start overflow-auto bg-[#61696B] lg:self-center">
-      <div className="interface nes-container is-rounded relative top-2 h-[520px] max-h-[520px] min-h-[520px] w-[800px] min-w-[800px] max-w-[800px] overflow-hidden bg-black">
+      <div className="interface nes-container is-rounded relative top-2 h-[520px] max-h-[520px] min-h-[520px] w-[800px] min-w-[800px] max-w-[800px] overflow-hidden bg-green-900">
         {loading ? (
           <Label className="text-white" htmlFor="loading">
             Loading...
