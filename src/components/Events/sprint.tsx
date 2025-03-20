@@ -67,9 +67,10 @@ export default function SprintScreen() {
   useEffect(() => {
     if (!started || finished || !user) return;
 
+    const newDistance = distanceTraveled > 1000 ? 1000 : distanceTraveled;
     throttleAddScoreToEvent('sprint', user.email, {
       finishTime: useSprintStore.getState().time,
-      distanceTraveled: useSprintStore.getState().distanceTraveled,
+      distanceTraveled: newDistance,
     });
   }, [started, finished, distanceTraveled, user]);
 
