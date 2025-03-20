@@ -21,3 +21,7 @@ export const getTime = (ticks: number) => {
   // Return "mm:ss.t" format (or adjust to your preference)
   return `${paddedMinutes}:${paddedSeconds}:${paddedTenths}`;
 };
+
+export const getUsername = (email: string) => {
+  return email.split('@')[0];
+};
