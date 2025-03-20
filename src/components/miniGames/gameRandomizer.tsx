@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { games, GameType } from '@/types/Game';
 import { GameSlot } from './gameSlot';
 import { addScoreToGame } from '@/firebase/database/games';
+import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
 
 function StatusContainer({ message }: { message: string }) {
   return (
@@ -15,15 +16,10 @@ function StatusContainer({ message }: { message: string }) {
 export default function GameRandomizer() {
   const [currentGame, setCurrentGame] = useState<GameType | undefined>();
   const [seed, setSeed] = useState<number>(0);
+  const { user } = useCurrentUser();
 
-  const {
-    trigger,
-    started,
-    finished,
-    finishTime,
-    distanceTraveled,
-    passed,
-  } = useSprintStore();
+  const { trigger, started, finished, finishTime, distanceTraveled, passed } =
+    useSprintStore();
 
   const randomize = () => {
     const randomGame = games[Math.floor(Math.random() * games.length)];
@@ -41,8 +37,8 @@ export default function GameRandomizer() {
   }, []);
 
   useEffect(() => {
-    if (currentGame && finished) {
-      addScoreToGame(currentGame, 'player@gmail.com', {
+    if (currentGame && finished && user) {
+      addScoreToGame(currentGame, user.email, {
         finishTime,
         distanceTraveled,
         passed,
@@ -50,7 +46,7 @@ export default function GameRandomizer() {
       // TODO We need to reset the game and randomize a new one
       // I see that this can be done by resetting the game, ideas in how to reset the game from here?
     }
-  }, [finished, currentGame, finishTime, distanceTraveled, passed]);
+  }, [finished, currentGame, finishTime, distanceTraveled, passed, user]);
 
   if (!started) {
     return <StatusContainer message="Get Ready, Set..!" />;
@@ -64,5 +60,9 @@ export default function GameRandomizer() {
     return <StatusContainer message="Loading game..." />;
   }
 
-  return <GameSlot currentGame={currentGame} seed={seed} />;
+  return (
+    <div className="flex min-h-full w-[800px]">
+      <GameSlot currentGame={currentGame} seed={seed} />
+    </div>
+  );
 }

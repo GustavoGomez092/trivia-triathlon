@@ -1,5 +1,6 @@
 import { GameType } from '@/types/Game';
 import WhackAKey from './whackAKey';
+import TargetShooting from './targetShooting';
 
 export interface GameComponentProps {
   seed: number;
@@ -14,6 +15,7 @@ const gameComponentMap: Record<
   React.ComponentType<GameComponentProps> | undefined
 > = {
   whackAKey: WhackAKey,
+  targetShooting: TargetShooting
 };
 
 export function GameSlot({

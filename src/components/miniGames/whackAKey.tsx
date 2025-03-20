@@ -23,7 +23,7 @@ function WhackAKey() {
   const { speedIncrease, speedDecrease } = useSprintStore();
 
   // The keyboard keys we'll monitor
-  const moleKeys = ['Q', 'W', 'E', 'R', 'A', 'S', 'D', 'F', 'Z', 'X', 'C', 'V'];
+  const moleKeys = ['Q'];
 
   // Which mole (by index) is currently active
   const [activeMoleIndex, setActiveMoleIndex] = useState<number | null>(null);
@@ -99,7 +99,7 @@ function WhackAKey() {
   }, [finished, passed]);
 
   return (
-    <div className="nes-container is-rounded flex min-h-full w-[800px] flex-col items-center justify-center bg-gray-200 p-8">
+    <div className="nes-container is-rounded flex min-h-full w-full flex-col items-center justify-center bg-gray-200 p-8">
       <h1 className="mb-4 text-2xl font-bold">Whack-a-Key</h1>
       <div className="flex flex-col items-center justify-center bg-gray-200 lg:flex-row">
         {!finished && (
