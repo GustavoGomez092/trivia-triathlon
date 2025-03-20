@@ -46,7 +46,7 @@ export default function LoginPage() {
   }, [runner]);
 
   const handleNavigateToWaitingRoom = () => {
-    router.navigate({ to: '/waiting-room' });
+    router.navigate({ to: '/spectator' });
   };
 
   return (

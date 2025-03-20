@@ -8,7 +8,7 @@ import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForGame';
 import './index.css';
 
 const Spectator = () => {
-  const { scores, loading } = useTopUsersForEvent('whackAKey');
+  const { scores, loading } = useTopUsersForEvent('sprint');
   const router = useRouter();
   const [selectedEmail, setSelectedEmail] = useState<string | null>(null);
 
