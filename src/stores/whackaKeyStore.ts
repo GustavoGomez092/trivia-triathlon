@@ -1,36 +1,36 @@
-import { Player } from '@/types/Player'
-import { create } from 'zustand'
-import useSprintStore from './sprintStore'
+import { Player } from '@/types/Player';
+import { create } from 'zustand';
+import useSprintStore from './sprintStore';
 
-const { setTrigger, setPassed: setPassedSprint } = useSprintStore.getState()
+const { setTrigger, setPassed: setPassedSprint } = useSprintStore.getState();
 
 enum Difficulty {
-  EASY = "EASY",
-  MEDIUM = "MEDIUM",
-  HARD = "HARD"
-} 
+  EASY = 'EASY',
+  MEDIUM = 'MEDIUM',
+  HARD = 'HARD',
+}
 
 export interface WhackAKeyStore {
-  difficulty: Difficulty,
-  started: boolean,
-  time: number,
-  player: Player | null,
-  speed: number,
-  finished: boolean,
-  correctKeys: number,
-  correctKeysTarget: number,
-  incorrectKeys: number,
-  incorrectKeysTarget: number,
-  moleKeys: number,
-  passed: boolean,
-  start: () => void,
-  finish: () => void,
-  reset: () => void,
-  correct: () => void,
-  incorrect: () => void,
-  setPlayer: (player: Player) => void,
-  setDifficulty: (difficulty: Difficulty) => void,
-  setPassed: (val: boolean) => void,
+  difficulty: Difficulty;
+  started: boolean;
+  time: number;
+  player: Player | null;
+  speed: number;
+  finished: boolean;
+  correctKeys: number;
+  correctKeysTarget: number;
+  incorrectKeys: number;
+  incorrectKeysTarget: number;
+  moleKeys: number;
+  passed: boolean;
+  start: () => void;
+  finish: () => void;
+  reset: () => void;
+  correct: () => void;
+  incorrect: () => void;
+  setPlayer: (player: Player) => void;
+  setDifficulty: (difficulty: Difficulty) => void;
+  setPassed: (val: boolean) => void;
 }
 
 const useWhackaKeyStore = create<WhackAKeyStore>((set) => ({
@@ -47,22 +47,36 @@ const useWhackaKeyStore = create<WhackAKeyStore>((set) => ({
   moleKeys: 4,
   passed: false,
   start: () => set({ started: true }),
-  finish: () => set(() =>({ finished: true })),
-  reset: () => set(() =>{
-    setTrigger(Math.floor(Math.random() * 1000) + 1000)
-    return { started: false, finished: false, time: 0, correctKeys: 0, incorrectKeys: 0, passed: false }
-  }),
+  finish: () => set(() => ({ finished: true })),
+  reset: () =>
+    set(() => {
+      setTrigger(Math.floor(Math.random() * 1000) + 1000);
+      return {
+        started: false,
+        finished: false,
+        time: 0,
+        correctKeys: 0,
+        incorrectKeys: 0,
+        passed: false,
+      };
+    }),
   correct: () => set((state) => ({ correctKeys: state.correctKeys + 1 })),
   incorrect: () => set((state) => ({ incorrectKeys: state.incorrectKeys + 1 })),
-  setPlayer: (player:Player) => set({ player }),
-  setDifficulty: (difficulty:Difficulty) => set({ 
-    difficulty: difficulty,
-    moleKeys: difficulty === Difficulty.EASY ? 4 : difficulty === Difficulty.MEDIUM ? 8 : 12
-  }),
+  setPlayer: (player: Player) => set({ player }),
+  setDifficulty: (difficulty: Difficulty) =>
+    set({
+      difficulty: difficulty,
+      moleKeys:
+        difficulty === Difficulty.EASY
+          ? 4
+          : difficulty === Difficulty.MEDIUM
+            ? 8
+            : 12,
+    }),
   setPassed: (val: boolean) => {
     set({ passed: val });
     setPassedSprint(val);
   },
-}))
+}));
 
-export default useWhackaKeyStore
+export default useWhackaKeyStore;

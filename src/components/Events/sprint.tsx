@@ -6,7 +6,7 @@ import { useLottie } from 'lottie-react';
 import sprinter from '@/assets/lottie/sprinter.json';
 import useSprintStore from '@/stores/sprintStore';
 import { Timer } from '@/components/ui/timer';
-import useThrottle, { cn, TOTAL_DISTANCE } from '@/lib/utils';
+import { cn, getDistance, TOTAL_DISTANCE, useThrottle } from '@/lib/utils';
 import confetti from 'canvas-confetti';
 import { addScoreToEvent } from '@/firebase/database/games';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
@@ -66,7 +66,8 @@ export default function SprintScreen() {
   useEffect(() => {
     if (!started || finished || !user) return;
 
-    const newDistance = distanceTraveled > 1000 ? 1000 : distanceTraveled;
+    const newDistance =
+      distanceTraveled > TOTAL_DISTANCE ? TOTAL_DISTANCE : distanceTraveled;
     throttleAddScoreToEvent('sprint', user.email, {
       userName: user.name,
       finishTime: useSprintStore.getState().time,
@@ -274,12 +275,7 @@ export default function SprintScreen() {
         <div className="distance">
           <div className="distance-traveled absolute bottom-3 left-3 z-30">
             <span className="text-white">DISTANCE </span>
-            <span className="text-white">
-              {distanceTraveled < TOTAL_DISTANCE
-                ? distanceTraveled
-                : TOTAL_DISTANCE}
-              mts
-            </span>
+            <span className="text-white">{getDistance(distanceTraveled)}</span>
           </div>
         </div>
       </div>

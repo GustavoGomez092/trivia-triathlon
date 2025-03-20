@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import { useState } from 'react';
-import { Label } from '@/components/ui/label';
 import { PositionTable } from '@/components/PositionTable';
 import { RacingTrack } from '@/components/RacingTrack';
 import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent.ts';
@@ -9,6 +8,7 @@ import './index.css';
 
 const Spectator = () => {
   const { scores, loading } = useTopUsersForEvent('sprint');
+
   const router = useRouter();
   const [selectedEmail, setSelectedEmail] = useState<string | null>(null);
 
@@ -17,26 +17,23 @@ const Spectator = () => {
   };
 
   return (
-    <div className="min-h-svh spectator-page flex w-full items-start justify-between gap-8 p-6 md:p-10">
-      <div className="z-30 w-full">
-        {loading ? (
-          <Label htmlFor="loading">Loading...</Label>
-        ) : (
-          <RacingTrack scores={scores!} selectedEmail={selectedEmail} />
-        )}
+    <div className="spectator-page h-svh w-svw flex p-4">
+      <div className="player-main flex w-8/12 flex-col gap-6">
+        <RacingTrack
+          loading={loading}
+          scores={scores!}
+          selectedEmail={selectedEmail}
+        />
       </div>
 
-      <div className="z-30 w-max">
-        {loading ? (
-          <Label htmlFor="loading">Loading...</Label>
-        ) : (
-          <PositionTable
-            scores={scores!}
-            onRowEnter={(email) => setSelectedEmail(email)}
-            onRowLeave={() => setSelectedEmail(null)}
-            selectedEmail={selectedEmail}
-          />
-        )}
+      <div className="w-3xl flex">
+        <PositionTable
+          loading={loading}
+          onRowEnter={(email) => setSelectedEmail(email)}
+          onRowLeave={() => setSelectedEmail(null)}
+          scores={scores!}
+          selectedEmail={selectedEmail}
+        />
       </div>
 
       <Button

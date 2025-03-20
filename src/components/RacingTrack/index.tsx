@@ -1,27 +1,33 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
-import { TOTAL_DISTANCE } from '@/lib/utils';
+import { getUsername, TOTAL_DISTANCE, getSanitizedEmail } from '@/lib/utils';
 import { Tooltip, TooltipProps } from '@/components/ui/tooltip';
 import { UserScore } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import racingTrack from '@/assets/images/racing-track.svg';
+import controlPanel from '@/assets/images/controlPanel.png';
+import nsLogo from '@/assets/images/NS-logo-cropped.png';
+import { Label } from '@/components/ui/label';
 
 gsap.registerPlugin(MotionPathPlugin);
 
 interface Player {
+  color: string;
+  distance: number;
+  email: string;
   id: number;
   lane: number;
-  distance: number;
-  color: string;
-  email: string;
+  name: string;
 }
 
 interface RacingTrackProps {
+  loading: boolean;
   scores: UserScore[];
   selectedEmail: string | null;
 }
 
-export const RacingTrack: React.FC<RacingTrackProps> = ({
+const RacingTrack: React.FC<RacingTrackProps> = ({
+  loading,
   scores,
   selectedEmail,
 }) => {
@@ -34,8 +40,8 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
     visible: false,
     x: 0,
     y: 0,
-    email: '',
-    distance: '0',
+    name: '',
+    distance: 0,
   });
 
   // Convert real score data to players.
@@ -47,6 +53,7 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
       // Compute a color based on index (you can adjust the divisor if needed)
       color: `hsl(${(index * 360) / (scores.length || 20)}, 100%, 50%)`,
       email: score.email,
+      name: score.userName,
     }));
     setPlayers(newPlayers);
   }, [scores]);
@@ -96,8 +103,8 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
         visible: true,
         x: circleRect.left - containerRect.left + circleRect.width / 2 - 50,
         y: circleRect.top - containerRect.top - 10,
-        email: player.email,
-        distance: player.distance.toFixed(0),
+        name: player.name || getUsername(player.email),
+        distance: player.distance,
       });
     }
   };
@@ -132,7 +139,7 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
       if (circle) {
         gsap.to(circle, { scale: 1, opacity: 0.5, duration: 0.2 });
       }
-      setTooltip({ visible: false, x: 0, y: 0, email: '', distance: '0' });
+      setTooltip({ visible: false, x: 0, y: 0, name: '', distance: 0 });
     }
   };
 
@@ -143,7 +150,9 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
       if (circle) {
         if (!selectedEmail) {
           gsap.to(circle, { opacity: 0.7, scale: 1, duration: 0.2 });
-        } else if (player.email === selectedEmail) {
+        } else if (
+          getSanitizedEmail(player.email) === getSanitizedEmail(selectedEmail)
+        ) {
           gsap.to(circle, { opacity: 1, scale: 1.4, duration: 0.2 });
         } else {
           gsap.to(circle, { opacity: 0.5, scale: 1, duration: 0.2 });
@@ -153,64 +162,77 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
   }, [selectedEmail, players]);
 
   return (
-    <div className="nes-container is-dark with-title">
-      <p className="title">Nicasource TV</p>
-      <div
-        ref={containerRef}
-        className="relative flex items-center justify-center p-5"
-      >
-        <div className="relative">
-          <svg
-            style={{ imageRendering: 'pixelated' }}
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-            version="1.1"
-            width="640"
-            height="480"
-            viewBox="0 0 640 480"
-            xmlSpace="preserve"
+    <div className="player-game h-8/12 nes-container is-rounded flex max-h-[576px] max-w-[1024px] items-center justify-start gap-8 self-start overflow-auto bg-[#61696B] lg:self-center">
+      <div className="interface nes-container is-rounded relative top-2 h-[520px] max-h-[520px] min-h-[520px] w-[800px] min-w-[800px] max-w-[800px] overflow-hidden bg-black">
+        {loading ? (
+          <Label className="text-white" htmlFor="loading">
+            Loading...
+          </Label>
+        ) : (
+          <div
+            ref={containerRef}
+            className="relative flex items-center justify-center"
           >
-            <image href={racingTrack} width="640" height="480" />
-            {/* Racetrack Paths (5 lanes) */}
-            {[...Array(5)].map((_, index) => (
-              <g
-                key={index}
-                transform={`matrix(${1 + index * 0.1} 0 0 ${
-                  1 + index * 0.15
-                } 310.4 247.2)`}
+            <div className="relative">
+              <svg
+                style={{ imageRendering: 'pixelated' }}
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                width="640"
+                height="480"
+                viewBox="0 0 640 480"
+                xmlSpace="preserve"
               >
-                <path
-                  className="lane"
-                  style={{
-                    stroke: 'transparent',
-                    strokeWidth: 2,
-                    fill: 'none',
-                  }}
-                  vectorEffect="non-scaling-stroke"
-                  transform="translate(-309.4, -246.2)"
-                  d="M 193.4 143.2 L 424.2 143.6 Q 506.2 159.2 511 243.2 Q 505.8 336 421.4 349.2 L 208.6 349.2 Q 112.6 341.2 107.8 247.2 Q 108.6 159.6 193.4 143.2"
-                />
-              </g>
-            ))}
-            {/* Player Circles */}
-            {players.map((player) => (
-              <circle
-                key={player.id}
-                ref={(el) => (circleRefs.current[player.id] = el)}
-                cx="640"
-                cy="240"
-                r="10"
-                fill={player.color}
-                opacity="0.7"
-                onMouseEnter={(e) => handleCircleMouseEnter(e, player)}
-                onMouseMove={(e) => handleCircleMouseMove(e, player)}
-                onMouseLeave={() => handleCircleMouseLeave(player)}
-              />
-            ))}
-          </svg>
-          {tooltip.visible && <Tooltip {...tooltip} />}
-        </div>
+                <image href={racingTrack} width="640" height="480" />
+                {/* Racetrack Paths (5 lanes) */}
+                {[...Array(5)].map((_, index) => (
+                  <g
+                    key={index}
+                    transform={`matrix(${1 + index * 0.1} 0 0 ${
+                      1 + index * 0.15
+                    } 310.4 247.2)`}
+                  >
+                    <path
+                      className="lane"
+                      style={{
+                        stroke: 'transparent',
+                        strokeWidth: 2,
+                        fill: 'none',
+                      }}
+                      vectorEffect="non-scaling-stroke"
+                      transform="translate(-309.4, -246.2)"
+                      d="M 193.4 143.2 L 424.2 143.6 Q 506.2 159.2 511 243.2 Q 505.8 336 421.4 349.2 L 208.6 349.2 Q 112.6 341.2 107.8 247.2 Q 108.6 159.6 193.4 143.2"
+                    />
+                  </g>
+                ))}
+                {/* Player Circles */}
+                {players.map((player) => (
+                  <circle
+                    key={player.id}
+                    ref={(el) => (circleRefs.current[player.id] = el)}
+                    cx="640"
+                    cy="240"
+                    r="10"
+                    fill={player.color}
+                    opacity="0.7"
+                    onMouseEnter={(e) => handleCircleMouseEnter(e, player)}
+                    onMouseMove={(e) => handleCircleMouseMove(e, player)}
+                    onMouseLeave={() => handleCircleMouseLeave(player)}
+                  />
+                ))}
+              </svg>
+              {tooltip.visible && <Tooltip {...tooltip} />}
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="knobs hidden h-full flex-col items-center justify-center gap-8 2xl:flex">
+        <img src={controlPanel} className="relative top-2 w-[130px]" alt="" />
+        <img src={nsLogo} className="mb-4 h-12 w-auto" alt="" />
       </div>
     </div>
   );
 };
+
+export { RacingTrack };

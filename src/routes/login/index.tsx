@@ -1,4 +1,4 @@
-import { LoginForm } from '@/components/login-form';
+import { LoginForm } from '@/components/LoginForm';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import './index.css';
 import { Button } from '@/components/ui/button';

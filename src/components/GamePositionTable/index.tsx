@@ -1,7 +1,8 @@
 import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent.ts';
-import { Table } from './ui/table';
-import { cn, getTime } from '@/lib/utils';
+import { Table } from '../ui/table';
+import { cn, getTime, getSanitizedEmail, getUsername } from '@/lib/utils';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
+import { Label } from '../ui/label';
 
 const TABLE_HEADERS = Object.freeze([
   { title: 'Pos', key: 'pos' },
@@ -21,7 +22,7 @@ const GamePositionTable = () => {
       <h1 className="text-2xl font-bold">Event Stats</h1>
 
       {isLoading ? (
-        <p>Loading...</p>
+        <Label htmlFor="loading">Loading...</Label>
       ) : (
         <Table>
           <thead>
@@ -34,8 +35,8 @@ const GamePositionTable = () => {
 
           <tbody>
             {scores?.map((score, index) => {
-              const email = score.email;
-              const sanitizedEmail = user?.email.replace(/\./g, '_');
+              const email = getSanitizedEmail(score.email);
+              const sanitizedEmail = getSanitizedEmail(user?.email);
               const isCurrentUser = email === sanitizedEmail;
               return (
                 <tr
@@ -48,7 +49,7 @@ const GamePositionTable = () => {
                   )}
                 >
                   <td>{index + 1}</td>
-                  <td>{score.userName}</td>
+                  <td>{score.userName || getUsername(score.email)}</td>
                   <td>{score.score.distanceTraveled} m</td>
                   <td>{getTime(score.score.finishTime)}</td>
                 </tr>
@@ -61,4 +62,4 @@ const GamePositionTable = () => {
   );
 };
 
-export default GamePositionTable;
+export { GamePositionTable };
