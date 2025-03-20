@@ -1,15 +1,16 @@
 import { Button } from '@/components/ui/button';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
-import './index.css';
+import { useState } from 'react';
+import { Label } from '@/components/ui/label';
 import { PositionTable } from '@/components/PositionTable';
 import { RacingTrack } from '@/components/RacingTrack';
 import { useTopUsersForGame } from '@/firebase/hooks/useTopUsersForGame';
-import { Label } from '@/components/ui/label';
+import './index.css';
 
-const waitingRoom = () => {
+const WaitingRoom = () => {
   const { scores, loading } = useTopUsersForGame('whackAKey');
-
   const router = useRouter();
+  const [selectedEmail, setSelectedEmail] = useState<string | null>(null);
 
   const handleReturnToLogin = () => {
     router.navigate({ to: '/login' });
@@ -21,7 +22,7 @@ const waitingRoom = () => {
         {loading ? (
           <Label htmlFor="loading">Loading...</Label>
         ) : (
-          <RacingTrack />
+          <RacingTrack scores={scores!} selectedEmail={selectedEmail} />
         )}
       </div>
 
@@ -29,7 +30,12 @@ const waitingRoom = () => {
         {loading ? (
           <Label htmlFor="loading">Loading...</Label>
         ) : (
-          <PositionTable scores={scores} />
+          <PositionTable
+            scores={scores!}
+            onRowEnter={(email) => setSelectedEmail(email)}
+            onRowLeave={() => setSelectedEmail(null)}
+            selectedEmail={selectedEmail}
+          />
         )}
       </div>
 
@@ -45,5 +51,5 @@ const waitingRoom = () => {
 };
 
 export const Route = createFileRoute('/waiting-room/')({
-  component: waitingRoom,
+  component: WaitingRoom,
 });
