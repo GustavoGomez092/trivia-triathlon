@@ -22,7 +22,8 @@ export function useTopUsersForEvent(event?: EventType) {
       email: snap.key || '',
       score: snap.val() as ScoreData,
     }))
-    .sort((a, b) => a.score.finishTime - b.score.finishTime);
+    .sort((a, b) => a.score.finishTime - b.score.finishTime)
+    .sort((a, b) => b.score.distanceTraveled - a.score.distanceTraveled);
 
   return { scores, loading, error };
 }
