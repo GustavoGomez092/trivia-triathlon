@@ -8,6 +8,7 @@ import { isEventStarted } from '@/firebase/database/games.ts';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser.ts';
 import { requireAuthLoader } from '@/firebase/database/requireAuthLoader.ts';
 import GamePositionTable from '@/components/GamePositionTable';
+import nsLogo from '@/assets/images/NS-logo-cropped.png';
 
 export const Route = createFileRoute('/player-sprint/')({
   component: RouteComponent,
@@ -36,19 +37,20 @@ function RouteComponent() {
           <div className="interface nes-container is-rounded relative top-2 h-[496px] max-h-[496px] min-h-[496px] w-[800px] min-w-[800px] max-w-[800px] overflow-hidden">
             <SprintScreen />
           </div>
-          <div className="knobs hidden h-full items-start 2xl:flex">
+          <div className="knobs hidden h-full flex-col items-center justify-center gap-8 2xl:flex">
             <img
               src={controlPanel}
               className="relative top-2 w-[130px]"
               alt=""
             />
+            <img src={nsLogo} className="mb-4 h-12 w-auto" alt="" />
           </div>
         </div>
         <div className="player-mini-games h-4/12 flex items-center justify-center">
           <GameRandomizer />
         </div>
       </div>
-      <div className="event-stats flex max-w-3xl">
+      <div className="event-stats w-3xl flex">
         <GamePositionTable />
       </div>
     </div>

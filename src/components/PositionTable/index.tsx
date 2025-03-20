@@ -1,8 +1,8 @@
 import { cn, getDistance, getTime } from '@/lib/utils';
-import { Card, CardContent } from '@/components/ui/card';
 import { FC } from 'react';
 import { UserScore } from '@/firebase/hooks/useTopUsersForGame';
 import { Table } from '@/components/ui/table';
+import { Label } from '@/components/ui/label';
 
 const TABLE_HEADERS = Object.freeze([
   { title: 'Pos', key: 'pos' },
@@ -12,8 +12,8 @@ const TABLE_HEADERS = Object.freeze([
 ]);
 
 interface PositionTableProps {
-  className?: string;
   getNameByEmail: (email: string) => string;
+  loading?: boolean;
   onRowEnter?: (email: string) => void;
   onRowLeave?: () => void;
   scores?: UserScore[];
@@ -21,16 +21,19 @@ interface PositionTableProps {
 }
 
 const PositionTable: FC<PositionTableProps> = ({
-  className,
   getNameByEmail,
+  loading,
   onRowEnter,
   onRowLeave,
   scores,
 }) => {
   return (
-    <div className={cn('flex max-w-3xl flex-col gap-6', className)}>
-      <div className="nes-container is-rounded flex h-fit w-full flex-col items-center gap-4 bg-gray-200 p-8">
-        <h1 className="text-2xl font-bold">Event Positions</h1>
+    <div className="nes-container is-rounded flex h-fit w-full flex-col items-center gap-4 bg-gray-200 p-8">
+      <h1 className="text-2xl font-bold">Event Positions</h1>
+
+      {loading ? (
+        <Label htmlFor="loading">Loading...</Label>
+      ) : (
         <Table>
           <thead>
             <tr>
@@ -66,7 +69,7 @@ const PositionTable: FC<PositionTableProps> = ({
             })}
           </tbody>
         </Table>
-      </div>
+      )}
     </div>
   );
 };

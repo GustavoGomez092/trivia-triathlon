@@ -20,31 +20,25 @@ const Spectator = () => {
   };
 
   return (
-    <div className="min-h-svh spectator-page flex w-full items-start justify-between gap-8 p-6 md:p-10">
-      <div className="z-30 w-full">
-        {loading || loadingUsers ? (
-          <Label htmlFor="loading">Loading...</Label>
-        ) : (
-          <RacingTrack
-            getNameByEmail={getNameByEmail}
-            scores={scores!}
-            selectedEmail={selectedEmail}
-          />
-        )}
+    <div className="spectator-page h-svh w-svw flex p-4">
+      <div className="player-main pointer-events-none flex w-8/12 flex-col gap-6">
+        <RacingTrack
+          loading={loading || loadingUsers}
+          getNameByEmail={getNameByEmail}
+          scores={scores!}
+          selectedEmail={selectedEmail}
+        />
       </div>
 
-      <div className="z-30 w-max">
-        {loading || loadingUsers ? (
-          <Label htmlFor="loading">Loading...</Label>
-        ) : (
-          <PositionTable
-            getNameByEmail={getNameByEmail}
-            onRowEnter={(email) => setSelectedEmail(email)}
-            onRowLeave={() => setSelectedEmail(null)}
-            scores={scores!}
-            selectedEmail={selectedEmail}
-          />
-        )}
+      <div className="w-3xl flex">
+        <PositionTable
+          loading={loading || loadingUsers}
+          getNameByEmail={getNameByEmail}
+          onRowEnter={(email) => setSelectedEmail(email)}
+          onRowLeave={() => setSelectedEmail(null)}
+          scores={scores!}
+          selectedEmail={selectedEmail}
+        />
       </div>
 
       <Button
