@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { useNavigate } from '@tanstack/react-router';
 import { database } from '../database/firebase-config';
-import {EventType} from "@/types/Game.ts";
+import { EventType } from '@/types/Game.ts';
 
 export default function useIsEventStarted(event: EventType) {
   const navigate = useNavigate();
