@@ -68,6 +68,7 @@ export default function SprintScreen() {
 
     const newDistance = distanceTraveled > 1000 ? 1000 : distanceTraveled;
     throttleAddScoreToEvent('sprint', user.email, {
+      userName: user.name,
       finishTime: useSprintStore.getState().time,
       distanceTraveled: newDistance,
     });

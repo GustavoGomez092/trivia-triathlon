@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { TOTAL_DISTANCE } from '@/lib/utils';
 import { Tooltip, TooltipProps } from '@/components/ui/tooltip';
-import { UserScore } from '@/firebase/hooks/useTopUsersForGame';
+import { UserScore } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import racingTrack from '@/assets/images/racing-track.svg';
 
 gsap.registerPlugin(MotionPathPlugin);

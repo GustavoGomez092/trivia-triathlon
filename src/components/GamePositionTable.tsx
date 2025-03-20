@@ -1,4 +1,4 @@
-import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForGame';
+import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import { Table } from './ui/table';
 import { cn, getTime, getUsername } from '@/lib/utils';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
@@ -48,7 +48,7 @@ const GamePositionTable = () => {
                   )}
                 >
                   <td>{index + 1}</td>
-                  <td>{getUsername(email)}</td>
+                  <td>{score.userName}</td>
                   <td>{score.score.distanceTraveled} m</td>
                   <td>{getTime(score.score.finishTime)}</td>
                 </tr>

@@ -1,7 +1,7 @@
-import { cn, getTime, getUsername } from '@/lib/utils';
+import { cn, getTime } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { FC } from 'react';
-import { UserScore } from '@/firebase/hooks/useTopUsersForGame';
+import { UserScore } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import { Table } from '@/components/ui/table';
 
 const TABLE_HEADERS = Object.freeze([
@@ -56,7 +56,7 @@ const PositionTable: FC<PositionTableProps> = ({
                     style={{ color: rowColor }}
                   >
                     <td>{index + 1}</td>
-                    <td>{getUsername(email)}</td>
+                    <td>{score.userName}</td>
                     <td>{score.score.distanceTraveled} m</td>
                     <td>{getTime(score.score.finishTime)}</td>
                   </tr>

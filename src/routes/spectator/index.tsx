@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { PositionTable } from '@/components/PositionTable';
 import { RacingTrack } from '@/components/RacingTrack';
-import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForGame';
+import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import './index.css';
 
 const Spectator = () => {

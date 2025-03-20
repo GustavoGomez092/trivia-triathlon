@@ -6,6 +6,7 @@ import { ScoreData } from '../database/games';
 
 export interface UserScore {
   email: string;
+  userName: string;
   score: ScoreData;
 }
 
@@ -18,10 +19,15 @@ export function useTopUsersForEvent(event?: EventType) {
   const [snapshots, loading, error] = useList(scoresRef);
 
   const scores: UserScore[] = (snapshots ?? [])
-    .map((snap) => ({
-      email: snap.key || '',
-      score: snap.val() as ScoreData,
-    }))
+      .map((snap) => {
+        const data = snap.val();
+        const { userName, ...scoreData } = data;
+        return {
+          email: snap.key ?? '',
+          userName,
+          score: scoreData as ScoreData,
+        };
+      })
     .sort((a, b) => a.score.finishTime - b.score.finishTime)
     .sort((a, b) => b.score.distanceTraveled - a.score.distanceTraveled);
 
