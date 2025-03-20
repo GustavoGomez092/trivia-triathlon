@@ -5,10 +5,13 @@ import { Label } from '@/components/ui/label';
 import { PositionTable } from '@/components/PositionTable';
 import { RacingTrack } from '@/components/RacingTrack';
 import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForGame';
+import { useGetUsers } from '@/firebase/hooks/useCurrentUser';
 import './index.css';
 
 const Spectator = () => {
   const { scores, loading } = useTopUsersForEvent('sprint');
+  const { loading: loadingUsers, getNameByEmail } = useGetUsers();
+
   const router = useRouter();
   const [selectedEmail, setSelectedEmail] = useState<string | null>(null);
 
@@ -19,21 +22,26 @@ const Spectator = () => {
   return (
     <div className="min-h-svh spectator-page flex w-full items-start justify-between gap-8 p-6 md:p-10">
       <div className="z-30 w-full">
-        {loading ? (
+        {loading || loadingUsers ? (
           <Label htmlFor="loading">Loading...</Label>
         ) : (
-          <RacingTrack scores={scores!} selectedEmail={selectedEmail} />
+          <RacingTrack
+            getNameByEmail={getNameByEmail}
+            scores={scores!}
+            selectedEmail={selectedEmail}
+          />
         )}
       </div>
 
       <div className="z-30 w-max">
-        {loading ? (
+        {loading || loadingUsers ? (
           <Label htmlFor="loading">Loading...</Label>
         ) : (
           <PositionTable
-            scores={scores!}
+            getNameByEmail={getNameByEmail}
             onRowEnter={(email) => setSelectedEmail(email)}
             onRowLeave={() => setSelectedEmail(null)}
+            scores={scores!}
             selectedEmail={selectedEmail}
           />
         )}

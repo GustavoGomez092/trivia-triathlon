@@ -1,4 +1,4 @@
-import { cn, getTime, getUsername } from '@/lib/utils';
+import { cn, getDistance, getTime } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { FC } from 'react';
 import { UserScore } from '@/firebase/hooks/useTopUsersForGame';
@@ -13,17 +13,19 @@ const TABLE_HEADERS = Object.freeze([
 
 interface PositionTableProps {
   className?: string;
-  scores?: UserScore[];
+  getNameByEmail: (email: string) => string;
   onRowEnter?: (email: string) => void;
   onRowLeave?: () => void;
+  scores?: UserScore[];
   selectedEmail?: string | null;
 }
 
 const PositionTable: FC<PositionTableProps> = ({
   className,
-  scores,
+  getNameByEmail,
   onRowEnter,
   onRowLeave,
+  scores,
 }) => {
   return (
     <div className={cn('flex flex-col gap-6', className)}>
@@ -56,8 +58,8 @@ const PositionTable: FC<PositionTableProps> = ({
                     style={{ color: rowColor }}
                   >
                     <td>{index + 1}</td>
-                    <td>{getUsername(email)}</td>
-                    <td>{score.score.distanceTraveled} m</td>
+                    <td>{getNameByEmail(email)}</td>
+                    <td>{getDistance(score.score.distanceTraveled)}</td>
                     <td>{getTime(score.score.finishTime)}</td>
                   </tr>
                 );

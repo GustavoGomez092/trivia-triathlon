@@ -17,11 +17,13 @@ interface Player {
 }
 
 interface RacingTrackProps {
+  getNameByEmail: (email: string) => string;
   scores: UserScore[];
   selectedEmail: string | null;
 }
 
 export const RacingTrack: React.FC<RacingTrackProps> = ({
+  getNameByEmail,
   scores,
   selectedEmail,
 }) => {
@@ -34,8 +36,8 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
     visible: false,
     x: 0,
     y: 0,
-    email: '',
-    distance: '0',
+    name: '',
+    distance: 0,
   });
 
   // Convert real score data to players.
@@ -96,8 +98,8 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
         visible: true,
         x: circleRect.left - containerRect.left + circleRect.width / 2 - 50,
         y: circleRect.top - containerRect.top - 10,
-        email: player.email,
-        distance: player.distance.toFixed(0),
+        name: getNameByEmail(player.email),
+        distance: player.distance,
       });
     }
   };
@@ -132,7 +134,7 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
       if (circle) {
         gsap.to(circle, { scale: 1, opacity: 0.5, duration: 0.2 });
       }
-      setTooltip({ visible: false, x: 0, y: 0, email: '', distance: '0' });
+      setTooltip({ visible: false, x: 0, y: 0, name: '', distance: 0 });
     }
   };
 
