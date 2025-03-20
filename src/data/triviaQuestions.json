@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "What color is a flamingo when it's born?",
+    "options": ["Pink", "Gray", "White", "Orange"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 2,
+    "question": "What is the only food that doesn't spoil?",
+    "options": ["Dried beans", "Honey", "Pemmican", "Salt"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 3,
+    "question": "Which planet has the shortest day?",
+    "options": ["Mercury", "Venus", "Jupiter", "Neptune"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 4,
+    "question": "How many hearts does an octopus have?",
+    "options": ["1", "2", "3", "4"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 5,
+    "question": "What percentage of the Earth's surface is covered by the ocean?",
+    "options": ["51%", "61%", "71%", "81%"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 6,
+    "question": "What is the only mammal that can't jump?",
+    "options": ["Elephant", "Sloth", "Hippo", "Rhino"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 7,
+    "question": "What is the smallest country in the world?",
+    "options": ["Monaco", "Vatican City", "San Marino", "Liechtenstein"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 8,
+    "question": "Which planet is known as the Red Planet?",
+    "options": ["Mars", "Jupiter", "Saturn", "Venus"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 9,
+    "question": "What is the hardest natural substance on Earth?",
+    "options": ["Gold", "Iron", "Diamond", "Platinum"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 10,
+    "question": "Which ocean is the largest?",
+    "options": ["Atlantic", "Indian", "Arctic", "Pacific"],
+    "correctAnswer": 3
+  },
+  {
+    "id": 11,
+    "question": "What is the capital of Australia?",
+    "options": ["Sydney", "Melbourne", "Canberra", "Brisbane"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 12,
+    "question": "Which country is known as the Land of the Rising Sun?",
+    "options": ["China", "Japan", "Thailand", "India"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 13,
+    "question": "What is the largest desert in the world?",
+    "options": ["Sahara", "Gobi", "Arctic", "Antarctic"],
+    "correctAnswer": 3
+  },
+  {
+    "id": 14,
+    "question": "Which animal is known as the King of the Jungle?",
+    "options": ["Tiger", "Elephant", "Lion", "Gorilla"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 15,
+    "question": "What is the tallest mountain in the world?",
+    "options": ["K2", "Kangchenjunga", "Lhotse", "Mount Everest"],
+    "correctAnswer": 3
+  },
+  {
+    "id": 16,
+    "question": "Which planet is closest to the sun?",
+    "options": ["Venus", "Earth", "Mercury", "Mars"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 17,
+    "question": "What is the largest mammal in the world?",
+    "options": ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 18,
+    "question": "Which country is the largest by area?",
+    "options": ["Canada", "China", "Russia", "United States"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 19,
+    "question": "What is the longest river in the world?",
+    "options": ["Amazon", "Nile", "Yangtze", "Mississippi"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 20,
+    "question": "Which planet is known for its rings?",
+    "options": ["Jupiter", "Saturn", "Uranus", "Neptune"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 21,
+    "question": "What is the smallest bone in the human body?",
+    "options": ["Stapes", "Femur", "Tibia", "Fibula"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 22,
+    "question": "Which element has the chemical symbol 'O'?",
+    "options": ["Oxygen", "Gold", "Silver", "Iron"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 23,
+    "question": "What is the capital of France?",
+    "options": ["Berlin", "Madrid", "Rome", "Paris"],
+    "correctAnswer": 3
+  },
+  {
+    "id": 24,
+    "question": "Which planet is known as the Earth's twin?",
+    "options": ["Mars", "Venus", "Jupiter", "Saturn"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 25,
+    "question": "What is the largest continent?",
+    "options": ["Africa", "Asia", "Europe", "North America"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 26,
+    "question": "Which ocean is the smallest?",
+    "options": ["Atlantic", "Indian", "Arctic", "Pacific"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 27,
+    "question": "What is the capital of Canada?",
+    "options": ["Toronto", "Vancouver", "Ottawa", "Montreal"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 28,
+    "question": "Which planet is known as the Blue Planet?",
+    "options": ["Earth", "Neptune", "Uranus", "Mars"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 29,
+    "question": "What is the largest island in the world?",
+    "options": ["Greenland", "New Guinea", "Borneo", "Madagascar"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 30,
+    "question": "Which country has the most population?",
+    "options": ["India", "United States", "China", "Indonesia"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 31,
+    "question": "What is the smallest planet in our solar system?",
+    "options": ["Mercury", "Venus", "Mars", "Pluto"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 32,
+    "question": "Which country is known as the Land of the Midnight Sun?",
+    "options": ["Norway", "Sweden", "Finland", "Iceland"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 33,
+    "question": "What is the largest organ in the human body?",
+    "options": ["Heart", "Liver", "Skin", "Lungs"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 34,
+    "question": "Which planet is known as the Morning Star?",
+    "options": ["Mars", "Venus", "Jupiter", "Saturn"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 35,
+    "question": "What is the capital of Japan?",
+    "options": ["Tokyo", "Osaka", "Kyoto", "Nagoya"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 36,
+    "question": "Which country is known as the Land of Fire and Ice?",
+    "options": ["Iceland", "Greenland", "Norway", "Finland"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 37,
+    "question": "What is the largest ocean?",
+    "options": ["Atlantic", "Indian", "Arctic", "Pacific"],
+    "correctAnswer": 3
+  },
+  {
+    "id": 38,
+    "question": "Which planet is known as the Gas Giant?",
+    "options": ["Jupiter", "Saturn", "Uranus", "Neptune"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 39,
+    "question": "What is the capital of Italy?",
+    "options": ["Rome", "Milan", "Venice", "Florence"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 40,
+    "question": "Which country is known as the Land of Smiles?",
+    "options": ["China", "Japan", "Thailand", "India"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 41,
+    "question": "What is the largest country in South America?",
+    "options": ["Argentina", "Brazil", "Chile", "Peru"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 42,
+    "question": "Which planet is known as the Ice Giant?",
+    "options": ["Jupiter", "Saturn", "Uranus", "Neptune"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 43,
+    "question": "What is the capital of Germany?",
+    "options": ["Berlin", "Munich", "Frankfurt", "Hamburg"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 44,
+    "question": "Which country is known as the Land of the Free?",
+    "options": ["United States", "Canada", "Australia", "New Zealand"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 45,
+    "question": "What is the largest desert in Africa?",
+    "options": ["Kalahari", "Sahara", "Namib", "Libyan"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 46,
+    "question": "Which planet is known as the Water Planet?",
+    "options": ["Earth", "Mars", "Venus", "Neptune"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 47,
+    "question": "What is the capital of Spain?",
+    "options": ["Barcelona", "Madrid", "Seville", "Valencia"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 48,
+    "question": "Which country is known as the Land of the Long White Cloud?",
+    "options": ["Australia", "New Zealand", "Fiji", "Samoa"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 49,
+    "question": "What is the largest island in the Mediterranean Sea?",
+    "options": ["Sicily", "Sardinia", "Cyprus", "Crete"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 50,
+    "question": "Which planet is known as the Evening Star?",
+    "options": ["Mars", "Venus", "Jupiter", "Saturn"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 51,
+    "question": "What is the capital of Russia?",
+    "options": ["Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 52,
+    "question": "Which country is known as the Land of the Rising Sun?",
+    "options": ["China", "Japan", "Thailand", "India"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 53,
+    "question": "What is the largest lake in the world?",
+    "options": ["Caspian Sea", "Lake Superior", "Lake Victoria", "Lake Huron"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 54,
+    "question": "Which planet is known as the Windy Planet?",
+    "options": ["Mars", "Jupiter", "Saturn", "Neptune"],
+    "correctAnswer": 3
+  },
+  {
+    "id": 55,
+    "question": "What is the capital of the United Kingdom?",
+    "options": ["London", "Edinburgh", "Cardiff", "Belfast"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 56,
+    "question": "Which country is known as the Land of the Thunder Dragon?",
+    "options": ["Nepal", "Bhutan", "Tibet", "Mongolia"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 57,
+    "question": "What is the largest island in the Caribbean?",
+    "options": ["Cuba", "Hispaniola", "Jamaica", "Puerto Rico"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 58,
+    "question": "Which planet is known as the Stormy Planet?",
+    "options": ["Mars", "Jupiter", "Saturn", "Neptune"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 59,
+    "question": "What is the capital of Brazil?",
+    "options": ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 60,
+    "question": "Which country is known as the Land of the Midnight Sun?",
+    "options": ["Norway", "Sweden", "Finland", "Iceland"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 61,
+    "question": "What is the largest island in the Indian Ocean?",
+    "options": ["Madagascar", "Sri Lanka", "Sumatra", "Borneo"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 62,
+    "question": "Which planet is known as the Ringed Planet?",
+    "options": ["Jupiter", "Saturn", "Uranus", "Neptune"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 63,
+    "question": "What is the capital of India?",
+    "options": ["Mumbai", "Delhi", "Bangalore", "Kolkata"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 64,
+    "question": "Which country is known as the Land of the Free?",
+    "options": ["United States", "Canada", "Australia", "New Zealand"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 65,
+    "question": "What is the largest desert in Asia?",
+    "options": ["Gobi", "Karakum", "Thar", "Taklamakan"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 66,
+    "question": "Which planet is known as the Blue Planet?",
+    "options": ["Earth", "Neptune", "Uranus", "Mars"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 67,
+    "question": "What is the capital of China?",
+    "options": ["Shanghai", "Beijing", "Guangzhou", "Shenzhen"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 68,
+    "question": "Which country is known as the Land of the Long White Cloud?",
+    "options": ["Australia", "New Zealand", "Fiji", "Samoa"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 69,
+    "question": "What is the largest island in the Mediterranean Sea?",
+    "options": ["Sicily", "Sardinia", "Cyprus", "Crete"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 70,
+    "question": "Which planet is known as the Evening Star?",
+    "options": ["Mars", "Venus", "Jupiter", "Saturn"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 71,
+    "question": "What is the capital of Russia?",
+    "options": ["Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 72,
+    "question": "Which country is known as the Land of the Rising Sun?",
+    "options": ["China", "Japan", "Thailand", "India"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 73,
+    "question": "What is the largest lake in the world?",
+    "options": ["Caspian Sea", "Lake Superior", "Lake Victoria", "Lake Huron"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 74,
+    "question": "Which planet is known as the Windy Planet?",
+    "options": ["Mars", "Jupiter", "Saturn", "Neptune"],
+    "correctAnswer": 3
+  },
+  {
+    "id": 75,
+    "question": "What is the capital of the United Kingdom?",
+    "options": ["London", "Edinburgh", "Cardiff", "Belfast"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 76,
+    "question": "Which country is known as the Land of the Thunder Dragon?",
+    "options": ["Nepal", "Bhutan", "Tibet", "Mongolia"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 77,
+    "question": "What is the largest island in the Caribbean?",
+    "options": ["Cuba", "Hispaniola", "Jamaica", "Puerto Rico"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 78,
+    "question": "Which planet is known as the Stormy Planet?",
+    "options": ["Mars", "Jupiter", "Saturn", "Neptune"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 79,
+    "question": "What is the capital of Brazil?",
+    "options": ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 80,
+    "question": "Which country is known as the Land of the Midnight Sun?",
+    "options": ["Norway", "Sweden", "Finland", "Iceland"],
+    "correctAnswer": 0
+  }
+]

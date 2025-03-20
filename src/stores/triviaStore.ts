@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import useSprintStore from './sprintStore';
+import triviaQuestions from '@/data/triviaQuestions.json';
 
 type TriviaQuestion = {
   id: number;
@@ -30,48 +31,6 @@ interface TriviaState {
 }
 
 const TOTAL_QUESTIONS = 1;
-
-// 100 trivia questions about fun facts
-const triviaQuestions: TriviaQuestion[] = [
-  {
-    id: 1,
-    question: "What color is a flamingo when it's born?",
-    options: ['Pink', 'Gray', 'White', 'Orange'],
-    correctAnswer: 1, // Gray
-  },
-  {
-    id: 2,
-    question: "What is the only food that doesn't spoil?",
-    options: ['Dried beans', 'Honey', 'Pemmican', 'Salt'],
-    correctAnswer: 1, // Honey
-  },
-  // Add 98 more questions here
-  {
-    id: 3,
-    question: 'Which planet has the shortest day?',
-    options: ['Mercury', 'Venus', 'Jupiter', 'Neptune'],
-    correctAnswer: 2, // Jupiter
-  },
-  {
-    id: 4,
-    question: 'How many hearts does an octopus have?',
-    options: ['1', '2', '3', '4'],
-    correctAnswer: 2, // 3
-  },
-  {
-    id: 5,
-    question: "What percentage of the Earth's surface is covered by the ocean?",
-    options: ['51%', '61%', '71%', '81%'],
-    correctAnswer: 2, // 71%
-  },
-  // ... and so on until 100 questions
-  {
-    id: 100,
-    question: "What is the only mammal that can't jump?",
-    options: ['Elephant', 'Sloth', 'Hippo', 'Rhino'],
-    correctAnswer: 0, // Elephant
-  },
-];
 
 const { setTrigger, setPassed: setPassedSprint } = useSprintStore.getState();
 
