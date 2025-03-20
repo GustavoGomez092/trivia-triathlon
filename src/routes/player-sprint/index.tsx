@@ -6,9 +6,11 @@ import GameRandomizer from '@/components/miniGames/gameRandomizer';
 import { useEffect } from "react";
 import { isEventStarted } from "@/firebase/database/games.ts";
 import { useCurrentUser } from "@/firebase/hooks/useCurrentUser.ts";
+import { requireAuthLoader } from "@/firebase/database/requireAuthLoader.ts";
 
 export const Route = createFileRoute('/player-sprint/')({
   component: RouteComponent,
+  loader: requireAuthLoader,
 });
 
 function RouteComponent() {
