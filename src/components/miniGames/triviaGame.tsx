@@ -4,14 +4,13 @@ import useSprintStore from '@/stores/sprintStore';
 
 const TriviaGame: FC = () => {
   const {
-    currentQuestions,
+    currentQuestion,
     passed,
     gameActive,
     finished,
     isCorrect,
     showFeedback,
     selectedOption,
-    currentQuestionIndex,
     finish,
     reset,
     setPassed,
@@ -89,7 +88,7 @@ const TriviaGame: FC = () => {
     );
   }
 
-  if (!currentQuestions.length) {
+  if (currentQuestion === null) {
     return (
       <div className="nes-container is-rounded flex min-h-full w-full flex-col items-center justify-center bg-gray-200 p-8">
         <h1 className="mb-4 text-2xl font-bold">Trivia Challenge</h1>
@@ -103,8 +102,6 @@ const TriviaGame: FC = () => {
       </div>
     );
   }
-
-  const currentQuestion = currentQuestions[currentQuestionIndex];
 
   return (
     <div className="nes-container is-rounded relative z-50 min-h-full w-full overflow-hidden bg-gray-200">
