@@ -1,5 +1,5 @@
-.spectator-page {
-  background-image: url(@/assets/images/spectator.png);
+.waiting-room-page {
+  background-image: url(@/assets/images/waiting-room.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
