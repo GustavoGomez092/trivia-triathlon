@@ -1,7 +1,7 @@
 import './index.css';
 import { createFileRoute } from '@tanstack/react-router';
 import SprintScreen from '@/components/Events/sprint';
-import controlPanel from '@/assets/images/knobs.png';
+import controlPanel from 'images/knobs.png';
 import GameRandomizer from '@/components/miniGames/gameRandomizer';
 
 export const Route = createFileRoute('/player-sprint/')({

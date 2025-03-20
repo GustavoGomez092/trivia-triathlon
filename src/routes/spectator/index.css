@@ -1,5 +1,5 @@
 .spectator-page {
-  background-image: url(@/assets/images/spectators-bg.png);
+  background-image: url(images/spectators-bg.png);
   background-repeat: no-repeat;
   background-size: cover;
 }

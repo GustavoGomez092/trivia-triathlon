@@ -8,7 +8,7 @@ import { ref, get, set } from 'firebase/database';
 import { signInAnonymously } from 'firebase/auth';
 import { database, auth } from '@/firebase/database/firebase-config';
 import { useRouter } from '@tanstack/react-router';
-import nsLogo from '@/assets/images/NS-logo-cropped.png';
+import nsLogo from 'images/NS-logo-cropped.png';
 
 export function LoginForm({
   className,

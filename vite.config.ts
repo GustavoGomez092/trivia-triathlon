@@ -15,13 +15,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-    },
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        assetFileNames: 'assets/[name][extname]', // Evita que renombre las imágenes
-      },
+      images: path.resolve(__dirname, './public/images'),
     },
   },
 });
