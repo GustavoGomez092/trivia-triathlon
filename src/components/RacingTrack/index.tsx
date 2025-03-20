@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { TOTAL_DISTANCE } from '@/lib/utils';
 import { Tooltip, TooltipProps } from '@/components/ui/tooltip';
-import { UserScore } from '@/firebase/hooks/useTopUsersForGame';
+import { UserScore } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import racingTrack from '@/assets/images/racing-track.svg';
 import controlPanel from '@/assets/images/controlPanel.png';
 import nsLogo from '@/assets/images/NS-logo-cropped.png';
@@ -20,14 +20,12 @@ interface Player {
 }
 
 interface RacingTrackProps {
-  getNameByEmail: (email: string) => string;
   loading: boolean;
   scores: UserScore[];
   selectedEmail: string | null;
 }
 
 export const RacingTrack: React.FC<RacingTrackProps> = ({
-  getNameByEmail,
   loading,
   scores,
   selectedEmail,
@@ -103,7 +101,7 @@ export const RacingTrack: React.FC<RacingTrackProps> = ({
         visible: true,
         x: circleRect.left - containerRect.left + circleRect.width / 2 - 50,
         y: circleRect.top - containerRect.top - 10,
-        name: getNameByEmail(player.email),
+        name: player.email,
         distance: player.distance,
       });
     }

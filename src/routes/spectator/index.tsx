@@ -1,16 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import { useState } from 'react';
-import { Label } from '@/components/ui/label';
 import { PositionTable } from '@/components/PositionTable';
 import { RacingTrack } from '@/components/RacingTrack';
-import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForGame';
-import { useGetUsers } from '@/firebase/hooks/useCurrentUser';
+import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import './index.css';
 
 const Spectator = () => {
   const { scores, loading } = useTopUsersForEvent('sprint');
-  const { loading: loadingUsers, getNameByEmail } = useGetUsers();
 
   const router = useRouter();
   const [selectedEmail, setSelectedEmail] = useState<string | null>(null);
@@ -23,8 +20,7 @@ const Spectator = () => {
     <div className="spectator-page h-svh w-svw flex p-4">
       <div className="player-main pointer-events-none flex w-8/12 flex-col gap-6">
         <RacingTrack
-          loading={loading || loadingUsers}
-          getNameByEmail={getNameByEmail}
+          loading={loading}
           scores={scores!}
           selectedEmail={selectedEmail}
         />
@@ -32,8 +28,7 @@ const Spectator = () => {
 
       <div className="w-3xl flex">
         <PositionTable
-          loading={loading || loadingUsers}
-          getNameByEmail={getNameByEmail}
+          loading={loading}
           onRowEnter={(email) => setSelectedEmail(email)}
           onRowLeave={() => setSelectedEmail(null)}
           scores={scores!}

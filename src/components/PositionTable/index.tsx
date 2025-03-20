@@ -1,6 +1,6 @@
 import { cn, getDistance, getTime } from '@/lib/utils';
 import { FC } from 'react';
-import { UserScore } from '@/firebase/hooks/useTopUsersForGame';
+import { UserScore } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import { Table } from '@/components/ui/table';
 import { Label } from '@/components/ui/label';
 
@@ -12,7 +12,6 @@ const TABLE_HEADERS = Object.freeze([
 ]);
 
 interface PositionTableProps {
-  getNameByEmail: (email: string) => string;
   loading?: boolean;
   onRowEnter?: (email: string) => void;
   onRowLeave?: () => void;
@@ -21,7 +20,6 @@ interface PositionTableProps {
 }
 
 const PositionTable: FC<PositionTableProps> = ({
-  getNameByEmail,
   loading,
   onRowEnter,
   onRowLeave,
@@ -61,7 +59,7 @@ const PositionTable: FC<PositionTableProps> = ({
                   style={{ color: rowColor }}
                 >
                   <td>{index + 1}</td>
-                  <td>{getNameByEmail(email)}</td>
+                  <td>{email}</td>
                   <td>{getDistance(score.score.distanceTraveled)}</td>
                   <td>{getTime(score.score.finishTime)}</td>
                 </tr>

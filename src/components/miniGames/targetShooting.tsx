@@ -52,8 +52,10 @@ const TargetShooting: FC = () => {
     if (!clayTargetRef.current || !gameContainerRef.current)
       return { x: 0, y: 0 };
 
-    const xCoor = Math.floor(Math.random() * 141) - 20;
-    const yCoor = Math.floor(Math.random() * -21) - 20;
+    // Modified to start between 10% and 90% of the width
+    const xCoor = Math.floor(Math.random() * 81) + 10;
+    // Set bottom to 0% to start at the bottom
+    const yCoor = 0;
 
     clayTargetRef.current.style.left = `${xCoor}%`;
     clayTargetRef.current.style.bottom = `${yCoor}%`;
@@ -69,7 +71,10 @@ const TargetShooting: FC = () => {
       let left = coords.x;
       let bottom = coords.y;
 
-      const pullRight = left <= 50;
+      // If position is < 30%, move right
+      // If position is > 70%, move left
+      // Otherwise, use the 50% threshold as before
+      const pullRight = left < 30 || (left >= 30 && left <= 70 && left <= 50);
       const randomLeft = Math.floor(Math.random()) + newSpeed;
       const randomBottom = Math.floor(Math.random()) + newSpeed;
 
