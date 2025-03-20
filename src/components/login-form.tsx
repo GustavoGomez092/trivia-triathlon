@@ -14,6 +14,7 @@ export function LoginForm({
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [inviteCode, setInviteCode] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -43,6 +44,7 @@ export function LoginForm({
         await set(ref(database, `users/${uid}`), {
           email,
           inviteCode,
+          name,
           loggedInAt: new Date().toISOString(),
         });
 
@@ -90,6 +92,18 @@ export function LoginForm({
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="name">Name</Label>
+                </div>
+                <Input
+                  id="name"
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
