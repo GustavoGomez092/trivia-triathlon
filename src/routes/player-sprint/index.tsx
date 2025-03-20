@@ -1,7 +1,7 @@
 import './index.css';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import SprintScreen from '@/components/Events/sprint';
-import controlPanel from '@/assets/images/knobs.png';
+import controlPanel from '@/assets/images/controlPanel.png';
 import GameRandomizer from '@/components/miniGames/gameRandomizer';
 import { useEffect } from 'react';
 import { isEventStarted } from '@/firebase/database/games.ts';
