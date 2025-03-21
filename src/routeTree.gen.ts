@@ -10,12 +10,13 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as WaitingRoomIndexImport } from './routes/waiting-room/index'
-import { Route as SpectatorIndexImport } from './routes/spectator/index'
-import { Route as PlayerSprintIndexImport } from './routes/player-sprint/index'
-import { Route as LoginIndexImport } from './routes/login/index'
+import { Route as rootRoute } from './routes/__root';
+import { Route as IndexImport } from './routes/index';
+import { Route as WaitingRoomIndexImport } from './routes/waiting-room/index';
+import { Route as SpectatorIndexImport } from './routes/spectator/index';
+import { Route as PodiumIndexImport } from './routes/podium/index';
+import { Route as PlayerSprintIndexImport } from './routes/player-sprint/index';
+import { Route as LoginIndexImport } from './routes/login/index';
 
 // Create/Update Routes
 
@@ -23,135 +24,166 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const WaitingRoomIndexRoute = WaitingRoomIndexImport.update({
   id: '/waiting-room/',
   path: '/waiting-room/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const SpectatorIndexRoute = SpectatorIndexImport.update({
   id: '/spectator/',
   path: '/spectator/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
+
+const PodiumIndexRoute = PodiumIndexImport.update({
+  id: '/podium/',
+  path: '/podium/',
+  getParentRoute: () => rootRoute,
+} as any);
 
 const PlayerSprintIndexRoute = PlayerSprintIndexImport.update({
   id: '/player-sprint/',
   path: '/player-sprint/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const LoginIndexRoute = LoginIndexImport.update({
   id: '/login/',
   path: '/login/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/login/': {
-      id: '/login/'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginIndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/login/';
+      path: '/login';
+      fullPath: '/login';
+      preLoaderRoute: typeof LoginIndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/player-sprint/': {
-      id: '/player-sprint/'
-      path: '/player-sprint'
-      fullPath: '/player-sprint'
-      preLoaderRoute: typeof PlayerSprintIndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/player-sprint/';
+      path: '/player-sprint';
+      fullPath: '/player-sprint';
+      preLoaderRoute: typeof PlayerSprintIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/podium/': {
+      id: '/podium/';
+      path: '/podium';
+      fullPath: '/podium';
+      preLoaderRoute: typeof PodiumIndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/spectator/': {
-      id: '/spectator/'
-      path: '/spectator'
-      fullPath: '/spectator'
-      preLoaderRoute: typeof SpectatorIndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/spectator/';
+      path: '/spectator';
+      fullPath: '/spectator';
+      preLoaderRoute: typeof SpectatorIndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/waiting-room/': {
-      id: '/waiting-room/'
-      path: '/waiting-room'
-      fullPath: '/waiting-room'
-      preLoaderRoute: typeof WaitingRoomIndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/waiting-room/';
+      path: '/waiting-room';
+      fullPath: '/waiting-room';
+      preLoaderRoute: typeof WaitingRoomIndexImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/login': typeof LoginIndexRoute
-  '/player-sprint': typeof PlayerSprintIndexRoute
-  '/spectator': typeof SpectatorIndexRoute
-  '/waiting-room': typeof WaitingRoomIndexRoute
+  '/': typeof IndexRoute;
+  '/login': typeof LoginIndexRoute;
+  '/player-sprint': typeof PlayerSprintIndexRoute;
+  '/podium': typeof PodiumIndexRoute;
+  '/spectator': typeof SpectatorIndexRoute;
+  '/waiting-room': typeof WaitingRoomIndexRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/login': typeof LoginIndexRoute
-  '/player-sprint': typeof PlayerSprintIndexRoute
-  '/spectator': typeof SpectatorIndexRoute
-  '/waiting-room': typeof WaitingRoomIndexRoute
+  '/': typeof IndexRoute;
+  '/login': typeof LoginIndexRoute;
+  '/player-sprint': typeof PlayerSprintIndexRoute;
+  '/podium': typeof PodiumIndexRoute;
+  '/spectator': typeof SpectatorIndexRoute;
+  '/waiting-room': typeof WaitingRoomIndexRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/login/': typeof LoginIndexRoute
-  '/player-sprint/': typeof PlayerSprintIndexRoute
-  '/spectator/': typeof SpectatorIndexRoute
-  '/waiting-room/': typeof WaitingRoomIndexRoute
+  __root__: typeof rootRoute;
+  '/': typeof IndexRoute;
+  '/login/': typeof LoginIndexRoute;
+  '/player-sprint/': typeof PlayerSprintIndexRoute;
+  '/podium/': typeof PodiumIndexRoute;
+  '/spectator/': typeof SpectatorIndexRoute;
+  '/waiting-room/': typeof WaitingRoomIndexRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/player-sprint' | '/spectator' | '/waiting-room'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/player-sprint' | '/spectator' | '/waiting-room'
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/player-sprint'
+    | '/podium'
+    | '/spectator'
+    | '/waiting-room';
+  fileRoutesByTo: FileRoutesByTo;
+  to:
+    | '/'
+    | '/login'
+    | '/player-sprint'
+    | '/podium'
+    | '/spectator'
+    | '/waiting-room';
   id:
     | '__root__'
     | '/'
     | '/login/'
     | '/player-sprint/'
+    | '/podium/'
     | '/spectator/'
-    | '/waiting-room/'
-  fileRoutesById: FileRoutesById
+    | '/waiting-room/';
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  LoginIndexRoute: typeof LoginIndexRoute
-  PlayerSprintIndexRoute: typeof PlayerSprintIndexRoute
-  SpectatorIndexRoute: typeof SpectatorIndexRoute
-  WaitingRoomIndexRoute: typeof WaitingRoomIndexRoute
+  IndexRoute: typeof IndexRoute;
+  LoginIndexRoute: typeof LoginIndexRoute;
+  PlayerSprintIndexRoute: typeof PlayerSprintIndexRoute;
+  PodiumIndexRoute: typeof PodiumIndexRoute;
+  SpectatorIndexRoute: typeof SpectatorIndexRoute;
+  WaitingRoomIndexRoute: typeof WaitingRoomIndexRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginIndexRoute: LoginIndexRoute,
   PlayerSprintIndexRoute: PlayerSprintIndexRoute,
+  PodiumIndexRoute: PodiumIndexRoute,
   SpectatorIndexRoute: SpectatorIndexRoute,
   WaitingRoomIndexRoute: WaitingRoomIndexRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {
@@ -162,6 +194,7 @@ export const routeTree = rootRoute
         "/",
         "/login/",
         "/player-sprint/",
+        "/podium/",
         "/spectator/",
         "/waiting-room/"
       ]
@@ -174,6 +207,9 @@ export const routeTree = rootRoute
     },
     "/player-sprint/": {
       "filePath": "player-sprint/index.tsx"
+    },
+    "/podium/": {
+      "filePath": "podium/index.tsx"
     },
     "/spectator/": {
       "filePath": "spectator/index.tsx"

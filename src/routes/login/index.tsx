@@ -51,6 +51,10 @@ export default function LoginPage() {
     router.navigate({ to: '/spectator' });
   };
 
+  const handleNavigateToPodium = () => {
+    router.navigate({ to: '/podium' });
+  };
+
   return (
     <div className="min-h-svh login-page flex w-full items-center justify-center p-6 md:p-10">
       <div className="z-30 w-full max-w-md">
@@ -58,7 +62,14 @@ export default function LoginPage() {
       </div>
       <Button
         variant="secondary"
-        className="!fixed bottom-6 right-6 z-20"
+        className="!fixed bottom-6 left-6 z-40"
+        onClick={handleNavigateToPodium}
+      >
+        Podium
+      </Button>
+      <Button
+        variant="secondary"
+        className="!fixed bottom-6 right-6 z-40"
         onClick={handleNavigateToWaitingRoom}
       >
         Enter as spectator

@@ -1,0 +1,6 @@
+.podium-page {
+  background-image: url(@/assets/images/podiumbg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+}
