@@ -44,7 +44,5 @@ export function useTopUsersForEvent(event?: EventType) {
       .sort((a, b) => a.score.finishTime - b.score.finishTime)
       .sort((a, b) => b.score.distanceTraveled - a.score.distanceTraveled);
 
-  console.log(scores.length);
-
   return { scores, loading, error };
 }

@@ -9,9 +9,10 @@ import { signInAnonymously } from 'firebase/auth';
 import { database, auth } from '@/firebase/database/firebase-config';
 import { useRouter } from '@tanstack/react-router';
 import nsLogo from '@/assets/images/NS-logo-cropped.png';
-import {addScoreToEvent, getEventScore} from "@/firebase/database/games.ts";
-import {getUserByEmail} from "@/firebase/database/user.ts";
+import { addScoreToEvent, getEventScore } from "@/firebase/database/games.ts";
+import { getUserByEmail } from "@/firebase/database/user.ts";
 
+const MAX_NAME_LENGTH = 20;
 const LoginForm = ({
   className,
   ...props
@@ -22,6 +23,29 @@ const LoginForm = ({
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  const isValidName = () => {
+    if (!name || name.trim().length === 0) {
+      setError('Name is required.');
+      setLoading(false);
+      return false;
+    }
+
+    const trimmedName = name.trim();
+    if (trimmedName.length > MAX_NAME_LENGTH) {
+      setError(`Name cannot exceed ${MAX_NAME_LENGTH} characters.`);
+      setLoading(false);
+      return false;
+    }
+
+    if (!/[A-Za-z]/.test(trimmedName)) {
+      setError('Name must contain at least one letter.');
+      setLoading(false);
+      return false;
+    }
+
+    return true;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,8 +63,11 @@ const LoginForm = ({
       }
 
       const codeData = snapshot.val();
-
       if (codeData.active && codeData.code === inviteCode) {
+        if (!isValidName()) {
+          return;
+        }
+
         const existentUser = await getUserByEmail(email);
         if (existentUser) {
             setError('User with this email already exists.');
