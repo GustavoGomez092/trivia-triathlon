@@ -67,19 +67,20 @@ function WhackAKey() {
       finish();
     }
 
+    // Handle keydown events
     const handleKeyDown = (e: { key: string }) => {
       // Convert pressed key to uppercase (to match our moleKeys)
       const pressedKey = e.key.toUpperCase();
       // Check if pressedKey matches the active mole's key
-      if (
-        activeMoleIndex !== null &&
-        moleKeys[activeMoleIndex] === pressedKey
-      ) {
-        correct();
-        // Optional: set active mole to null or end it immediately
+      if (activeMoleIndex !== null) {
+        if (moleKeys[activeMoleIndex] === pressedKey) {
+          correct();
+        } else {
+          incorrect();
+        }
+
+        // Clear the active mole so the interval doesn't mark it as missed.
         setActiveMoleIndex(null);
-      } else {
-        incorrect();
       }
     };
 
