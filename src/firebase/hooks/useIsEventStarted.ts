@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import { ref, onValue } from 'firebase/database';
 import { useNavigate } from '@tanstack/react-router';
 import { database } from '../database/firebase-config';

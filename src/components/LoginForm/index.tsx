@@ -11,6 +11,7 @@ import { useRouter } from '@tanstack/react-router';
 import nsLogo from '@/assets/images/NS-logo-cropped.png';
 import { addScoreToEvent, getEventScore } from "@/firebase/database/games.ts";
 import { getUserByEmail } from "@/firebase/database/user.ts";
+import { useLoginEventStatus } from "@/firebase/hooks/useLoginEventStatus.ts";
 
 const MAX_NAME_LENGTH = 20;
 const LoginForm = ({
@@ -23,6 +24,7 @@ const LoginForm = ({
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { errorMessage: errorMessageEventStatus, isStarted } = useLoginEventStatus('sprint');
 
   const isValidName = () => {
     if (!name || name.trim().length === 0) {
@@ -53,6 +55,13 @@ const LoginForm = ({
     setLoading(true);
 
     try {
+
+      if (isStarted) {
+        setError(errorMessageEventStatus);
+        setLoading(false);
+        return;
+      }
+
       const codeRef = ref(database, 'currentValidCode');
       const snapshot = await get(codeRef);
 
