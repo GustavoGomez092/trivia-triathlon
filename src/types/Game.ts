@@ -12,3 +12,4 @@ export type GameType = (typeof games)[number];
 export const events = ['sprint', 'swimming', 'shooting'] as const;
 
 export type EventType = (typeof events)[number];
+export const CURRENT_EVENT = "swimming";

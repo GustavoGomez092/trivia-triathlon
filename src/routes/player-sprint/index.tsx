@@ -7,6 +7,7 @@ import { requireAuthLoader } from '@/firebase/database/requireAuthLoader.ts';
 import { GamePositionTable } from '@/components/GamePositionTable';
 import nsLogo from '@/assets/images/NS-logo-cropped.png';
 import useIsEventStarted from '@/firebase/hooks/useIsEventStarted.ts';
+import { CURRENT_EVENT } from '@/types/Game';
 
 export const Route = createFileRoute('/player-sprint/')({
   component: RouteComponent,
@@ -14,7 +15,7 @@ export const Route = createFileRoute('/player-sprint/')({
 });
 
 function RouteComponent() {
-  useIsEventStarted('sprint');
+  useIsEventStarted(CURRENT_EVENT);
 
   return (
     <div className="sprint-event h-svh w-svw flex gap-4 bg-sky-400 p-4">

@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { getSanitizedEmail, getUsername } from '@/lib/utils';
 import useEventCountdownNavigation from '@/firebase/hooks/useEventCountdownNavigation';
 import './index.css';
+import { CURRENT_EVENT } from '@/types/Game';
 
 interface PlayerBadgeProps {
   currentUserEmail: string;
@@ -35,10 +36,10 @@ const PlayerBadge: FC<PlayerBadgeProps> = ({
 const waitingRoom = () => {
   const { user } = useCurrentUser();
   const { email: currentUserEmail } = user || {};
-  const { scores, loading } = useTopUsersForEvent('sprint');
+  const { scores, loading } = useTopUsersForEvent(CURRENT_EVENT);
 
   const countdown = useEventCountdownNavigation({
-    event: 'sprint',
+    event: CURRENT_EVENT,
     startCount: 5,
     redirectTo: '/player-sprint',
   });

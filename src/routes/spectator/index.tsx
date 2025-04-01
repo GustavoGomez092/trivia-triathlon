@@ -5,9 +5,10 @@ import { PositionTable } from '@/components/PositionTable';
 import { RacingTrack } from '@/components/RacingTrack';
 import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import './index.css';
+import { CURRENT_EVENT } from '@/types/Game';
 
 const Spectator = () => {
-  const { scores, loading } = useTopUsersForEvent('sprint');
+  const { scores, loading } = useTopUsersForEvent(CURRENT_EVENT);
 
   const router = useRouter();
   const [selectedEmail, setSelectedEmail] = useState<string | null>(null);

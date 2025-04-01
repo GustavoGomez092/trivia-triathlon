@@ -9,6 +9,7 @@ import {
 } from '@/lib/utils';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
 import { Label } from '../ui/label';
+import { CURRENT_EVENT } from '@/types/Game';
 
 const TABLE_HEADERS = Object.freeze([
   { title: 'Pos', key: 'pos' },
@@ -18,7 +19,7 @@ const TABLE_HEADERS = Object.freeze([
 ]);
 
 const GamePositionTable = () => {
-  const { scores, loading: isLoadingStats } = useTopUsersForEvent('sprint');
+  const { scores, loading: isLoadingStats } = useTopUsersForEvent(CURRENT_EVENT);
   const { user, loading: isLoadingUser } = useCurrentUser();
 
   const isLoading = isLoadingStats || isLoadingUser;

@@ -12,6 +12,7 @@ import nsLogo from '@/assets/images/NS-logo-cropped.png';
 import { addScoreToEvent, getEventScore } from "@/firebase/database/games.ts";
 import { getUserByEmail } from "@/firebase/database/user.ts";
 import { useLoginEventStatus } from "@/firebase/hooks/useLoginEventStatus.ts";
+import { CURRENT_EVENT } from '@/types/Game';
 
 const MAX_NAME_LENGTH = 20;
 const LoginForm = ({
@@ -24,7 +25,7 @@ const LoginForm = ({
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { errorMessage: errorMessageEventStatus, isStarted } = useLoginEventStatus('sprint');
+  const { errorMessage: errorMessageEventStatus, isStarted } = useLoginEventStatus(CURRENT_EVENT);
 
   const isValidName = () => {
     if (!name || name.trim().length === 0) {
@@ -96,7 +97,7 @@ const LoginForm = ({
         };
         await set(ref(database, `users/${uid}`), userData);
 
-        const eventScore = await getEventScore('sprint', uid);
+        const eventScore = await getEventScore(CURRENT_EVENT, uid);
         if (!eventScore?.distanceTraveled) {
           const scoreUserData = {
             email,
@@ -104,7 +105,7 @@ const LoginForm = ({
             uid,
           }
 
-          await addScoreToEvent('sprint', 'set', scoreUserData , {
+          await addScoreToEvent(CURRENT_EVENT, 'set', scoreUserData , {
             finishTime: 0,
             distanceTraveled: 0,
           });

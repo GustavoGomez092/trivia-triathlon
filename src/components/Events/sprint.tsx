@@ -10,6 +10,7 @@ import { cn, getDistance, TOTAL_DISTANCE, useThrottle } from '@/lib/utils';
 import confetti from 'canvas-confetti';
 import { addScoreToEvent } from '@/firebase/database/games';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
+import { CURRENT_EVENT } from '@/types/Game';
 
 export default function SprintScreen() {
   gsap.registerPlugin(useGSAP);
@@ -68,7 +69,7 @@ export default function SprintScreen() {
 
     const newDistance =
       distanceTraveled > TOTAL_DISTANCE ? TOTAL_DISTANCE : distanceTraveled;
-    throttleAddScoreToEvent('sprint', 'update', { uid: user.uid }, {
+    throttleAddScoreToEvent(CURRENT_EVENT, 'update', { uid: user.uid }, {
       finishTime: useSprintStore.getState().time,
       distanceTraveled: newDistance,
     });
