@@ -3,6 +3,7 @@ import WhackAKey from './whackAKey';
 import TargetShooting from './targetShooting';
 import TriviaGame from './triviaGame';
 import PatternRecognition from './patternRecognition';
+import SequenceMemoryGame from './sequenceMemoryGame';
 
 export interface GameComponentProps {
   seed: number;
@@ -21,7 +22,7 @@ const gameComponentMap: Record<
   targetShooting: TargetShooting,
   triviaGame: TriviaGame,
   patternRecognition: PatternRecognition,
-  splashDash: null,
+  sequenceMemoryGame: SequenceMemoryGame
 };
 
 export function GameSlot({
@@ -30,7 +31,6 @@ export function GameSlot({
 }: Readonly<GameSlotProps>): JSX.Element | null {
   const GameComponent = gameComponentMap[currentGame];
   if (GameComponent) {
-    console.log(`Here`);
     return <GameComponent key={otherProps.seed} {...otherProps} />;
   }
 
