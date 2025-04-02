@@ -136,8 +136,9 @@ const PatternRecognition: FC = () => {
                   key={`user-${index}`}
                   type="button"
                   onClick={() => handleCellClick(index)}
-                  className={`nes-btn pointer-events-auto !h-[2rem] !w-[2rem] p-0 ${isActive ? 'is-success' : 'is-warning'
-                    } ${showFeedback ? 'opacity-50' : 'hover:opacity-80'}`}
+                  className={`nes-btn pointer-events-auto !h-[2rem] !w-[2rem] p-0 ${
+                    isActive ? 'is-success' : 'is-warning'
+                  } ${showFeedback ? 'opacity-50' : 'hover:opacity-80'}`}
                   disabled={showFeedback}
                 />
               ))}
@@ -151,8 +152,9 @@ const PatternRecognition: FC = () => {
                 <button
                   key={`target-${index}`}
                   type="button"
-                  className={`nes-btn !h-[2rem] !w-[2rem] p-0 ${isActive ? 'is-success' : 'is-warning'
-                    }`}
+                  className={`nes-btn !h-[2rem] !w-[2rem] p-0 ${
+                    isActive ? 'is-success' : 'is-warning'
+                  }`}
                   disabled
                 />
               ))}
@@ -160,7 +162,7 @@ const PatternRecognition: FC = () => {
           </div>
 
           <div className="flex min-h-full flex-col items-center justify-between gap-2 pb-10">
-            <div className="text-lg">Time left: {timeLeft}s</div>
+            <p>Time left: {timeLeft}s</p>
             <button
               type="button"
               onClick={handleCheck}
