@@ -1,4 +1,4 @@
-import useSprintStore from '@/stores/sprintStore';
+import useEventStore from '@/stores/eventStore';
 import useWhackaKeyStore from '@/stores/whackaKeyStore';
 import { Check, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -20,7 +20,7 @@ function WhackAKey() {
     incorrect,
   } = useWhackaKeyStore();
 
-  const { speedIncrease, speedDecrease } = useSprintStore();
+  const { speedIncrease, speedDecrease } = useEventStore();
 
   // The keyboard keys we'll monitor
   const moleKeys = ['Q', 'W', 'E', 'R', 'A', 'S', 'D', 'F', 'Z', 'X', 'C', 'V'];
@@ -121,9 +121,8 @@ function WhackAKey() {
                       <Check
                         key={index}
                         size={24}
-                        className={`${
-                          index < correctKeys ? 'bg-green-500' : 'bg-gray-400'
-                        }`}
+                        className={`${index < correctKeys ? 'bg-green-500' : 'bg-gray-400'
+                          }`}
                       />
                     ))
                   }
@@ -138,9 +137,8 @@ function WhackAKey() {
                       <X
                         key={index}
                         size={24}
-                        className={`${
-                          index < incorrectKeys ? 'bg-red-500' : 'bg-gray-400'
-                        }`}
+                        className={`${index < incorrectKeys ? 'bg-red-500' : 'bg-gray-400'
+                          }`}
                       />
                     ))
                   }

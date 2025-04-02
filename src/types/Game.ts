@@ -5,11 +5,22 @@ export interface Game {
   currentEvent: Event;
 }
 
-export const games = ['whackAKey', 'targetShooting', 'triviaGame'] as const;
+export const sprintGames = ['whackAKey', 'targetShooting', 'triviaGame'] as const;
+export const swimmingGames = ['splashDash'] as const;
+export const shootingGames = ['targetShooting'] as const;
 
-export type GameType = (typeof games)[number];
+export type SprintGameType = (typeof sprintGames)[number];
+export type SwimmingGameType = (typeof swimmingGames)[number];
+export type ShootingGameType = (typeof shootingGames)[number];
+export type GameType = SprintGameType | SwimmingGameType | ShootingGameType;
 
 export const events = ['sprint', 'swimming', 'shooting'] as const;
-
 export type EventType = (typeof events)[number];
+
+export const eventGamesMap: Record<EventType, readonly string[]> = {
+  sprint: sprintGames,
+  swimming: swimmingGames,
+  shooting: shootingGames,
+} as const;
+
 export const CURRENT_EVENT = "swimming";

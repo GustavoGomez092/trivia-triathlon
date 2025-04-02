@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import useSprintStore from './sprintStore';
+import useEventStore from './eventStore';
 import triviaQuestions from '@/data/triviaQuestions.json';
 
 type TriviaQuestion = {
@@ -27,7 +27,7 @@ interface TriviaState {
   setSelectedOption: (optionIndex: number) => void;
 }
 
-const { setTrigger, setPassed: setPassedSprint } = useSprintStore.getState();
+const { setTrigger, setPassed: setPassedSprint } = useEventStore.getState();
 
 const useTriviaStore = create<TriviaState>((set, get) => ({
   currentQuestion: null,

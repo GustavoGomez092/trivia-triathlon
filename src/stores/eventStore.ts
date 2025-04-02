@@ -2,7 +2,7 @@ import { TOTAL_DISTANCE } from '@/lib/utils';
 import { Player } from '@/types/Player';
 import { create } from 'zustand';
 
-export interface SprintStore {
+export interface EventStore {
   started: boolean;
   time: number;
   passed: boolean;
@@ -25,7 +25,7 @@ export interface SprintStore {
   setTrigger: (trigger: number) => void;
 }
 
-const useSprintStore = create<SprintStore>((set) => ({
+const useEventStore = create<EventStore>((set) => ({
   started: false,
   time: 0,
   passed: false,
@@ -54,4 +54,4 @@ const useSprintStore = create<SprintStore>((set) => ({
   setTrigger: (trigger) => set({ trigger }),
 }));
 
-export default useSprintStore;
+export default useEventStore;

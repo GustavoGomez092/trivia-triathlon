@@ -1,4 +1,4 @@
-import useSprintStore from '@/stores/sprintStore';
+import useEventStore from '@/stores/eventStore';
 import useTargetShootingStore from '@/stores/targetShootingStore';
 import { useEffect, useRef, useCallback, FC } from 'react';
 
@@ -31,7 +31,7 @@ const TargetShooting: FC = () => {
   const gameContainerRef = useRef<HTMLDivElement | null>(null);
   const intervalIdRef = useRef<number | null>(null);
 
-  const { speedIncrease, speedDecrease } = useSprintStore();
+  const { speedIncrease, speedDecrease } = useEventStore();
 
   useEffect(() => {
     if (score === TOTAL_SCORE) {
@@ -307,9 +307,8 @@ const TargetShooting: FC = () => {
         <svg
           id="clay-target"
           viewBox="0 0 50 20"
-          className={`absolute h-10 w-24 ${
-            showTarget ? 'inline-block' : 'hidden'
-          }`}
+          className={`absolute h-10 w-24 ${showTarget ? 'inline-block' : 'hidden'
+            }`}
           ref={clayTargetRef}
           style={{ position: 'absolute' }}
           pointerEvents="none"

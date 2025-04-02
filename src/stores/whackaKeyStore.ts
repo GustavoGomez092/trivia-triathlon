@@ -1,8 +1,8 @@
 import { Player } from '@/types/Player';
 import { create } from 'zustand';
-import useSprintStore from './sprintStore';
+import useEventStore from './eventStore';
 
-const { setTrigger, setPassed: setPassedSprint } = useSprintStore.getState();
+const { setTrigger, setPassed: setPassedSprint } = useEventStore.getState();
 
 enum Difficulty {
   EASY = 'EASY',

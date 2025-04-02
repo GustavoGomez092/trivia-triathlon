@@ -4,7 +4,7 @@ import { useGSAP } from '@gsap/react';
 import { useRef, useEffect } from 'react';
 import { useLottie } from 'lottie-react';
 import sprinter from '@/assets/lottie/sprinter.json';
-import useSprintStore from '@/stores/sprintStore';
+import useEventStore from '@/stores/eventStore';
 import { Timer } from '@/components/ui/timer';
 import { cn, getDistance, TOTAL_DISTANCE, useThrottle } from '@/lib/utils';
 import confetti from 'canvas-confetti';
@@ -24,7 +24,7 @@ export default function SprintScreen() {
     setTime,
     setDistanceTraveled,
     started,
-  } = useSprintStore();
+  } = useEventStore();
 
   const crowd = useRef(null);
   const singleCrowd = useRef(null);
@@ -49,12 +49,12 @@ export default function SprintScreen() {
     if (!started) return;
     const timer = setInterval(() => {
       if (finished) {
-        const newTime = useSprintStore.getState().time;
+        const newTime = useEventStore.getState().time;
 
         setTime(newTime);
         clearInterval(timer);
       } else {
-        const newTime = useSprintStore.getState().time + 1;
+        const newTime = useEventStore.getState().time + 1;
         setTime(newTime);
       }
     }, 100);
@@ -70,7 +70,7 @@ export default function SprintScreen() {
     const newDistance =
       distanceTraveled > TOTAL_DISTANCE ? TOTAL_DISTANCE : distanceTraveled;
     throttleAddScoreToEvent(CURRENT_EVENT, 'update', { uid: user.uid }, {
-      finishTime: useSprintStore.getState().time,
+      finishTime: useEventStore.getState().time,
       distanceTraveled: newDistance,
     });
   }, [started, finished, distanceTraveled, user]);

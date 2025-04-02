@@ -1,7 +1,7 @@
-import useSprintStore from '@/stores/sprintStore';
 import { useEffect, useState } from 'react';
-import { games, GameType } from '@/types/Game';
+import { GameType, eventGamesMap, CURRENT_EVENT } from '@/types/Game';
 import { GameSlot } from './gameSlot';
+import useEventStore from '@/stores/eventStore';
 
 function StatusContainer({ message }: { message: string }) {
   return (
@@ -16,12 +16,13 @@ export default function GameRandomizer() {
   const [seed, setSeed] = useState<number>(0);
   const [lastGame, setLastGame] = useState<GameType | undefined>();
 
-  const { trigger, started, finished } = useSprintStore();
+  const { trigger, started, finished } = useEventStore();
 
   const randomize = () => {
+    const availableGames = eventGamesMap[CURRENT_EVENT];
     let randomGame;
     do {
-      randomGame = games[Math.floor(Math.random() * games.length)];
+      randomGame = availableGames[Math.floor(Math.random() * availableGames.length)] as GameType;
     } while (randomGame === lastGame);
 
     const randomSeed = Math.floor(Math.random() * 1000);
@@ -52,7 +53,7 @@ export default function GameRandomizer() {
 
   return (
     <div className="flex min-h-full w-[800px]">
-      <GameSlot currentGame={currentGame} seed={seed} />
+      <GameSlot currentGame={currentGame} seed={seed} event={CURRENT_EVENT} />
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import { cn, getTime } from '@/lib/utils';
-import useSprintStore from '@/stores/sprintStore';
+import useEventStore from '@/stores/eventStore';
 
 function Timer({ className, ...props }: React.ComponentProps<'div'>) {
-  const { time } = useSprintStore();
+  const { time } = useEventStore();
 
   return (
     <div className={cn('timer', className)} {...props}>

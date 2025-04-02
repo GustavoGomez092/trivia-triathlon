@@ -1,6 +1,6 @@
 import { useEffect, useState, FC } from 'react';
 import useTriviaStore from '@/stores/triviaStore';
-import useSprintStore from '@/stores/sprintStore';
+import useEventStore from '@/stores/eventStore';
 
 const TriviaGame: FC = () => {
   const {
@@ -19,7 +19,7 @@ const TriviaGame: FC = () => {
     setSelectedOption,
   } = useTriviaStore();
 
-  const { speedIncrease, speedDecrease } = useSprintStore();
+  const { speedIncrease, speedDecrease } = useEventStore();
 
   // Timer state (in seconds)
   const [timeLeft, setTimeLeft] = useState(10);
@@ -154,15 +154,13 @@ const TriviaGame: FC = () => {
             <button
               key={index}
               type="button"
-              className={`nes-btn pointer-events-auto ${
-                showFeedback && selectedOption === index
-                  ? isCorrect
-                    ? 'is-success'
-                    : 'is-error'
-                  : ''
-              } w-full p-4 text-left ${
-                selectedOption === index ? 'is-primary' : ''
-              }`}
+              className={`nes-btn pointer-events-auto ${showFeedback && selectedOption === index
+                ? isCorrect
+                  ? 'is-success'
+                  : 'is-error'
+                : ''
+                } w-full p-4 text-left ${selectedOption === index ? 'is-primary' : ''
+                }`}
               onClick={() => handleOptionSelect(index)}
               disabled={showFeedback}
             >

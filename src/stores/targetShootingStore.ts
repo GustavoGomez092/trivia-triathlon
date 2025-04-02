@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import useSprintStore from './sprintStore';
+import useEventStore from './eventStore';
 
-const { setTrigger, setPassed: setPassedSprint } = useSprintStore.getState();
+const { setTrigger, setPassed: setPassedSprint } = useEventStore.getState();
 
 export interface TargetShootingStore {
   score: number;
