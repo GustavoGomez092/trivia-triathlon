@@ -21,7 +21,6 @@ const PatternRecognition: FC = () => {
   const { speedIncrease, speedDecrease } = useEventStore();
   const [timeLeft, setTimeLeft] = useState(10);
 
-  // Iniciar juego y generar patrón cuando el componente se monta
   useEffect(() => {
     setGameActive(true);
     generateNewPattern();
@@ -32,7 +31,6 @@ const PatternRecognition: FC = () => {
     };
   }, [setGameActive, generateNewPattern]);
 
-  // Timer effect
   useEffect(() => {
     if (!gameActive || finished || showFeedback) return;
 
@@ -59,7 +57,6 @@ const PatternRecognition: FC = () => {
     checkPattern,
   ]);
 
-  // Cuando el juego termina, reiniciar después de 1 segundo
   useEffect(() => {
     if (finished) {
       if (passed) {
@@ -86,7 +83,6 @@ const PatternRecognition: FC = () => {
   ]);
 
   const handleCellClick = (index: number) => {
-    console.log('🚀 ~ handleCellClick ~ index:', index);
     if (!gameActive || showFeedback) return;
     toggleCell(index);
   };
@@ -125,7 +121,6 @@ const PatternRecognition: FC = () => {
   return (
     <div className="nes-container is-rounded relative z-50 min-h-full w-full overflow-hidden bg-gray-200">
       <div className="relative flex min-h-full w-full flex-col justify-evenly gap-6 px-4 text-center">
-        {/* Título, puntuación y temporizador */}
         <div className="flex items-center justify-center">
           <div className="text-nowrap text-2xl font-bold">
             Pattern Recognition
