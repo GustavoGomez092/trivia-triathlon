@@ -7,9 +7,17 @@ import { requireAuthLoader } from '@/firebase/database/requireAuthLoader.ts';
 import { GamePositionTable } from '@/components/GamePositionTable';
 import nsLogo from '@/assets/images/NS-logo-cropped.png';
 import useIsEventStarted from '@/firebase/hooks/useIsEventStarted.ts';
-import { CURRENT_EVENT } from '@/types/Game';
+import { CURRENT_EVENT, EventType } from '@/types/Game';
+import SprintScreen from '@/components/Events/sprint';
+import { ReactNode } from 'react';
 
-export const Route = createFileRoute('/player-sprint/')({
+const SCREEN: Record<EventType, ReactNode> = {
+  sprint: <SprintScreen />,
+  swimming: <SwimmingScreen />,
+  shooting: <>TODO</>,
+}
+
+export const Route = createFileRoute('/player-screen/')({
   component: RouteComponent,
   loader: requireAuthLoader,
 });
@@ -22,7 +30,7 @@ function RouteComponent() {
       <div className="player-main pointer-events-none flex w-8/12 flex-col gap-6">
         <div className="player-game h-8/12 nes-container is-rounded flex max-h-[576px] max-w-[1024px] items-start justify-start gap-8 self-start overflow-hidden bg-[#61696B] lg:self-center">
           <div className="interface nes-container is-rounded relative top-2 h-[496px] max-h-[496px] min-h-[496px] w-[800px] min-w-[800px] max-w-[800px] overflow-hidden">
-            <SwimmingScreen />
+            {SCREEN[CURRENT_EVENT]}
           </div>
           <div className="knobs hidden h-full flex-col items-center justify-center gap-8 2xl:flex">
             <img

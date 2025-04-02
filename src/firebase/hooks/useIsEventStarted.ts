@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { useNavigate } from '@tanstack/react-router';
 import { database } from '../database/firebase-config';
@@ -14,7 +14,7 @@ export default function useIsEventStarted(event: EventType) {
       if (!validCodeData || !validCodeData.started) {
         navigate({ to: '/waiting-room' });
       } else {
-        navigate({ to: '/player-sprint' });
+        navigate({ to: '/player-screen' });
       }
     });
 
