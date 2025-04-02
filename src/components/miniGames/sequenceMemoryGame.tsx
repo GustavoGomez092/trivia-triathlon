@@ -23,6 +23,7 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
         passed,
         level,
         targetLevel,
+        reset,
         start,
         addToPlayerSequence,
         showSequence,
@@ -118,17 +119,18 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
         return () => clearInterval(timer);
     }, [gameActive, isShowingSequence, sequence.length, addToPlayerSequence, speedDecrease]);
 
-    // Auto-restart when game is finished and not passed
+    // Auto-restart when game ends (win or lose)
     useEffect(() => {
-        if (finished && !passed) {
-            const timer = setTimeout(() => {
-                setLives(MAX_LIVES); // Reset lives before restarting
-                setHasFailed(false);
-                start();
+        let timer: NodeJS.Timeout;
+        if (finished || lives <= 0) {
+            timer = setTimeout(() => {
+                reset();
             }, 1000);
-            return () => clearTimeout(timer);
         }
-    }, [finished, passed, start]);
+        return () => {
+            if (timer) clearTimeout(timer);
+        };
+    }, [finished, lives, reset]);
 
     const handleColorClick = (color: string) => {
         if (!gameActive || isShowingSequence) return;
@@ -139,13 +141,6 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
             setHasFailed(true);
             const newLives = lives - 1;
             setLives(newLives);
-
-            // If no lives left, make sure we reset lives on next restart
-            if (newLives <= 0) {
-                setTimeout(() => {
-                    setLives(MAX_LIVES);
-                }, 1000);
-            }
         }
 
         // Always add to sequence to trigger store's restart logic
