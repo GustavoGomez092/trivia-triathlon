@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+const PATTERN_LENGTH = 15;
+
 interface PatternRecognitionState {
   userPattern: boolean[];
   targetPattern: boolean[];
@@ -18,8 +20,8 @@ interface PatternRecognitionState {
 
 const usePatternRecognitionStore = create<PatternRecognitionState>(
   (set, get) => ({
-    userPattern: Array(15).fill(false),
-    targetPattern: Array(15).fill(false),
+    userPattern: Array(PATTERN_LENGTH).fill(false),
+    targetPattern: Array(PATTERN_LENGTH).fill(false),
     gameActive: false,
     finished: false,
     passed: false,
@@ -31,7 +33,7 @@ const usePatternRecognitionStore = create<PatternRecognitionState>(
     setUserPattern: (pattern) => set({ userPattern: pattern }),
 
     generateNewPattern: () => {
-      const newPattern = Array(15)
+      const newPattern = Array(PATTERN_LENGTH)
         .fill(false)
         .map(() => Math.random() > 0.5);
       set({ targetPattern: newPattern });
@@ -59,7 +61,7 @@ const usePatternRecognitionStore = create<PatternRecognitionState>(
 
     reset: () => {
       set({
-        userPattern: Array(15).fill(false),
+        userPattern: Array(PATTERN_LENGTH).fill(false),
         finished: false,
         showFeedback: false,
       });
