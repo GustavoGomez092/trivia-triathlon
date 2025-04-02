@@ -2,6 +2,7 @@ import { GameType, EventType } from '@/types/Game';
 import WhackAKey from './whackAKey';
 import TargetShooting from './targetShooting';
 import TriviaGame from './triviaGame';
+import PatternRecognition from './patternRecognition';
 
 export interface GameComponentProps {
   seed: number;
@@ -19,7 +20,8 @@ const gameComponentMap: Record<
   whackAKey: WhackAKey,
   targetShooting: TargetShooting,
   triviaGame: TriviaGame,
-  splashDash: null
+  patternRecognition: PatternRecognition,
+  splashDash: null,
 };
 
 export function GameSlot({
