@@ -2,7 +2,6 @@ import { GameType, EventType } from '@/types/Game';
 import WhackAKey from './whackAKey';
 import TargetShooting from './targetShooting';
 import TriviaGame from './triviaGame';
-import SplashDash from './splashDash';
 
 export interface GameComponentProps {
   seed: number;
@@ -15,12 +14,12 @@ export interface GameSlotProps extends GameComponentProps {
 
 const gameComponentMap: Record<
   GameType,
-  React.ComponentType<GameComponentProps> | undefined
+  React.ComponentType<GameComponentProps> | undefined | null
 > = {
   whackAKey: WhackAKey,
   targetShooting: TargetShooting,
   triviaGame: TriviaGame,
-  splashDash: SplashDash
+  splashDash: null
 };
 
 export function GameSlot({
