@@ -124,7 +124,7 @@ const PatternRecognition: FC = () => {
 
   return (
     <div className="nes-container is-rounded relative z-50 min-h-full w-full overflow-hidden bg-gray-200">
-      <div className="relative flex min-h-full w-full flex-col justify-between gap-6 px-4 text-center">
+      <div className="relative flex min-h-full w-full flex-col justify-evenly gap-6 px-4 text-center">
         {/* Título, puntuación y temporizador */}
         <div className="flex items-center justify-center">
           <div className="text-nowrap text-2xl font-bold">
