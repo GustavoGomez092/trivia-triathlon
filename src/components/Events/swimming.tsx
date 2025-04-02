@@ -12,6 +12,7 @@ import confetti from 'canvas-confetti';
 import { addScoreToEvent } from '@/firebase/database/games';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
 import { CURRENT_EVENT } from '@/types/Game';
+import './swimming.css';
 
 export default function SwimmingScreen() {
   gsap.registerPlugin(useGSAP);
@@ -53,12 +54,7 @@ export default function SwimmingScreen() {
     setSpeed,
   } = useLottie(swimmerOne);
 
-  const {
-    View: SwimmerTwoView,
-    goToAndStop: goToAndStopTwo,
-    playSegments: playSegmentsTwo,
-    setSpeed: setSpeedTwo,
-  } = useLottie(swimmerTwo);
+  const { View: SwimmerTwoView, setSpeed: setSpeedTwo } = useLottie(swimmerTwo);
 
   useEffect(() => {
     if (!started) return;
@@ -146,7 +142,13 @@ export default function SwimmingScreen() {
       gsap.to('.swimmer-surface', {
         y: 0,
         duration: 1,
-        delay: 1,
+        delay: 2,
+        ease: 'linear',
+      });
+
+      gsap.to('.podium', {
+        x: -160,
+        duration: 0.5,
         ease: 'linear',
       });
     }
@@ -163,7 +165,7 @@ export default function SwimmingScreen() {
           ease: 'linear',
         });
         timeline.current.duration(3);
-        setSpeed(1);
+        setSpeedTwo(0.8);
         break;
       case 75:
         gsap.to(swimmerContainer.current, {
@@ -172,7 +174,7 @@ export default function SwimmingScreen() {
           ease: 'linear',
         });
         timeline.current.duration(2.5);
-        setSpeed(1.5);
+        setSpeedTwo(1);
         break;
       case 100:
         gsap.to(swimmerContainer.current, {
@@ -181,7 +183,7 @@ export default function SwimmingScreen() {
           ease: 'linear',
         });
         timeline.current.duration(2);
-        setSpeed(2);
+        setSpeedTwo(1.2);
         break;
       case 125:
         gsap.to(swimmerContainer.current, {
@@ -190,7 +192,7 @@ export default function SwimmingScreen() {
           ease: 'linear',
         });
         timeline.current.duration(1.5);
-        setSpeed(2.5);
+        setSpeedTwo(1.4);
         break;
       case 150:
         gsap.to(swimmerContainer.current, {
@@ -199,7 +201,7 @@ export default function SwimmingScreen() {
           ease: 'linear',
         });
         timeline.current.duration(1);
-        setSpeed(3);
+        setSpeedTwo(1.6);
         break;
       default:
         null;
@@ -275,19 +277,20 @@ export default function SwimmingScreen() {
       </div>
       <div className="track absolute bottom-0 left-0 z-20 h-36 w-full bg-[#00BBDE]"></div>
       <div className="track absolute -bottom-14 left-0 z-30 h-36 w-full bg-[#00BBDE]"></div>
+      <div className="top-50 absolute z-40">
+        <>{SwimmerOneView}</>
+      </div>
       <div className="player absolute bottom-10 left-[calc(50%-160px)] z-20">
         <div
           ref={swimmerContainer}
-          className="sprinter relative top-16 h-80 w-80"
+          className="swimmer relative top-16 h-80 w-80"
         >
-          <div className="absolute -left-60">
-            <>{SwimmerOneView}</>
-          </div>
           <div className="swimmer-surface top-26 absolute z-20 h-full w-full">
             <>{SwimmerTwoView}</>
           </div>
         </div>
       </div>
+      <div className="podium floor-tile absolute bottom-0 left-0 z-30 h-36 w-40 bg-gray-200"></div>
       <div className="stats">
         <div className="timer absolute left-10 top-10 z-30">
           <Timer />
