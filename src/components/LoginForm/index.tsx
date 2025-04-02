@@ -80,9 +80,9 @@ const LoginForm = ({
 
         const existentUser = await getUserByEmail(email);
         if (existentUser) {
-            setError('User with this email already exists.');
-            setLoading(false);
-            return;
+          setError('User with this email already exists.');
+          setLoading(false);
+          return;
         }
 
         const userCredential = await signInAnonymously(auth);
@@ -105,7 +105,7 @@ const LoginForm = ({
             uid,
           }
 
-          await addScoreToEvent(CURRENT_EVENT, 'set', scoreUserData , {
+          await addScoreToEvent(CURRENT_EVENT, 'set', scoreUserData, {
             finishTime: 0,
             distanceTraveled: 0,
           });
