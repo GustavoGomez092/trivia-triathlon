@@ -122,6 +122,8 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
     useEffect(() => {
         if (finished && !passed) {
             const timer = setTimeout(() => {
+                setLives(MAX_LIVES); // Reset lives before restarting
+                setHasFailed(false);
                 start();
             }, 1000);
             return () => clearTimeout(timer);
@@ -135,8 +137,15 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
         if (!isCorrect && !hasFailed) {
             speedDecrease();
             setHasFailed(true);
-            setLives((prev) => prev - 1);
-            // Don't call finish() here, let addToPlayerSequence handle the restart
+            const newLives = lives - 1;
+            setLives(newLives);
+
+            // If no lives left, make sure we reset lives on next restart
+            if (newLives <= 0) {
+                setTimeout(() => {
+                    setLives(MAX_LIVES);
+                }, 1000);
+            }
         }
 
         // Always add to sequence to trigger store's restart logic
@@ -220,7 +229,7 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
                             <button
                                 key={color}
                                 data-color={color}
-                                className="relative overflow-hidden active:scale-95 active:brightness-90"
+                                className="nes-btn relative overflow-hidden active:scale-95 active:brightness-90"
                                 onClick={() => handleColorClick(color)}
                                 disabled={!gameActive || isShowingSequence}
                                 style={{
