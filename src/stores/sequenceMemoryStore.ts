@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import useEventStore from './eventStore';
 
-const { setTrigger, setPassed: setPassedSwimming } = useEventStore.getState();
+const { setTrigger, setPassed: setPassedSwimming, speedIncrease } = useEventStore.getState();
 
 interface SequenceMemoryState {
     sequence: string[];
@@ -113,17 +113,18 @@ const useSequenceMemoryStore = create<SequenceMemoryState>((set) => ({
             if (newPlayerSequence.length === state.sequence.length) {
                 // Game completed
                 if (state.level === TARGET_LEVEL) {
-                    set({ passed: true });
-                    set({ finished: true });
                     return {
                         playerSequence: newPlayerSequence,
                         gameActive: false,
+                        passed: true,
+                        finished: true
                     };
                 }
 
                 // Level up
                 const newLength = state.sequence.length + 2;
                 const newSequence = generateSequence(newLength);
+                speedIncrease(); // Increase speed on level up
                 return {
                     sequence: newSequence,
                     playerSequence: [],

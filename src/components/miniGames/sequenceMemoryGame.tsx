@@ -6,6 +6,9 @@ import useEventStore from '@/stores/eventStore';
 const SEQUENCE_COLORS = ['red', 'blue', 'green', 'yellow'];
 const MAX_LIVES = 3;
 const SEQUENCE_MEMORY_GAME_TITLE = 'Sequence Memory';
+const BASE_SHOW_DELAY = 500; // Faster show time
+const BASE_PAUSE_DELAY = 200; // Faster pause between colors
+const SEQUENCE_SPEED_MULTIPLIER = 0.8; // Higher multiplier for faster overall speed
 
 const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
     const [activeColor, setActiveColor] = useState<string | null>(null);
@@ -13,7 +16,7 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
     const [timeLeft, setTimeLeft] = useState<number | null>(null);
     const [lives, setLives] = useState(MAX_LIVES);
 
-    const { speedIncrease, speedDecrease } = useEventStore();
+    const { speedIncrease, speedDecrease, speed } = useEventStore();
     const {
         sequence,
         playerSequence,
@@ -63,11 +66,12 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
         if (!isShowingSequence || !sequence.length) return;
 
         let currentIndex = 0;
-        const baseShowDelay = 600;
-        const basePauseDelay = 200;
-        const speedMultiplier = Math.max(0.5, 1 - (level - 1) * 0.2);
-        const showDelay = baseShowDelay * speedMultiplier;
-        const pauseDelay = basePauseDelay * speedMultiplier;
+        const speedAdjustment = SEQUENCE_SPEED_MULTIPLIER * (1 + ((150 - speed) / 150));
+        const showDelay = BASE_SHOW_DELAY * speedAdjustment;
+        const pauseDelay = BASE_PAUSE_DELAY * speedAdjustment;
+
+        let hideTimer: NodeJS.Timeout;
+        let nextTimer: NodeJS.Timeout;
 
         const showNextColor = () => {
             if (currentIndex >= sequence.length) {
@@ -77,19 +81,24 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
             }
 
             setActiveColor(sequence[currentIndex]);
-            const hideTimer = setTimeout(() => {
+            hideTimer = setTimeout(() => {
                 setActiveColor(null);
-                const nextTimer = setTimeout(() => {
+                nextTimer = setTimeout(() => {
                     currentIndex++;
                     showNextColor();
                 }, pauseDelay);
-                return () => clearTimeout(nextTimer);
             }, showDelay);
-            return () => clearTimeout(hideTimer);
         };
 
         showNextColor();
-    }, [sequence, isShowingSequence, showSequence, level]);
+
+        // Cleanup all timers
+        return () => {
+            if (hideTimer) clearTimeout(hideTimer);
+            if (nextTimer) clearTimeout(nextTimer);
+            setActiveColor(null);
+        };
+    }, [sequence, isShowingSequence, showSequence, speed]);
 
     useEffect(() => {
         if (!gameActive || isShowingSequence || !sequence.length) {
