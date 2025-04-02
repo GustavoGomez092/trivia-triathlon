@@ -4,6 +4,7 @@ import TargetShooting from './targetShooting';
 import TriviaGame from './triviaGame';
 import PatternRecognition from './patternRecognition';
 import SequenceMemoryGame from './sequenceMemoryGame';
+import IconMemory from './iconMemory';
 
 export interface GameComponentProps {
   seed: number;
@@ -22,7 +23,8 @@ const gameComponentMap: Record<
   targetShooting: TargetShooting,
   triviaGame: TriviaGame,
   patternRecognition: PatternRecognition,
-  sequenceMemoryGame: SequenceMemoryGame
+  sequenceMemoryGame: SequenceMemoryGame,
+  iconMemory: IconMemory,
 };
 
 export function GameSlot({
