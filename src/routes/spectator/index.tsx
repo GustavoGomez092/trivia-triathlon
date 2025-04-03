@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import { useState } from 'react';
 import { PositionTable } from '@/components/PositionTable';
-import { RacingTrack } from '@/components/RacingTrack';
+import { SwimmingPool } from '@/components/SwimmingPool';
 import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent.ts';
 import './index.css';
 import { CURRENT_EVENT } from '@/types/Game';
@@ -20,7 +20,7 @@ const Spectator = () => {
   return (
     <div className="spectator-page h-svh w-svw flex p-4">
       <div className="player-main flex w-8/12 flex-col gap-6">
-        <RacingTrack
+        <SwimmingPool
           loading={loading}
           scores={scores!}
           selectedEmail={selectedEmail}
