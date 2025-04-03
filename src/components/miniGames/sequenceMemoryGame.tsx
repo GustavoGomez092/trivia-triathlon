@@ -10,6 +10,21 @@ const BASE_SHOW_DELAY = 500; // Faster show time
 const BASE_PAUSE_DELAY = 200; // Faster pause between colors
 const SEQUENCE_SPEED_MULTIPLIER = 0.8; // Higher multiplier for faster overall speed
 
+const getNesColorClass = (color: string) => {
+    switch (color) {
+        case 'red':
+            return 'is-error';
+        case 'blue':
+            return 'is-primary';
+        case 'green':
+            return 'is-success';
+        case 'yellow':
+            return 'is-warning';
+        default:
+            return '';
+    }
+};
+
 const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
     const [activeColor, setActiveColor] = useState<string | null>(null);
     const [hasFailed, setHasFailed] = useState(false);
@@ -102,12 +117,16 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
 
     useEffect(() => {
         if (!gameActive || isShowingSequence || !sequence.length) {
-            setTimeLeft(null);
+            if (timeLeft !== null) {
+                setTimeLeft(null);
+            }
             return;
         }
 
         const totalTime = 5 + sequence.length;
-        setTimeLeft(totalTime);
+        if (timeLeft === null) {
+            setTimeLeft(totalTime);
+        }
 
         const timer = setInterval(() => {
             setTimeLeft((prev) => {
@@ -126,7 +145,7 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [gameActive, isShowingSequence, sequence.length, addToPlayerSequence, speedDecrease]);
+    }, [gameActive, isShowingSequence, sequence.length, addToPlayerSequence, speedDecrease, timeLeft]);
 
     // Auto-restart when game ends (win or lose)
     useEffect(() => {
@@ -158,7 +177,7 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
 
     if (finished && passed) {
         return (
-            <div className="flex min-h-full w-full flex-col items-center justify-center bg-gray-200 p-8">
+            <div className="nes-container is-rounded flex min-h-full w-full flex-col items-center justify-center bg-gray-200 p-8">
                 <h1 className="mb-4 text-2xl font-bold">{SEQUENCE_MEMORY_GAME_TITLE}</h1>
                 <div className="flex flex-col items-center justify-center">
                     <h1 className="text-center text-4xl font-bold text-green-500">
@@ -171,7 +190,7 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
 
     if (finished && !passed) {
         return (
-            <div className="flex min-h-full w-full flex-col items-center justify-center bg-gray-200 p-8">
+            <div className="nes-container is-rounded flex min-h-full w-full flex-col items-center justify-center bg-gray-200 p-8">
                 <h1 className="mb-4 text-2xl font-bold">{SEQUENCE_MEMORY_GAME_TITLE}</h1>
                 <div className="flex flex-col items-center justify-center">
                     <h1 className="text-center text-4xl font-bold text-red-500">
@@ -229,34 +248,33 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
                 {/* Color buttons grid */}
                 <div className="flex-1 flex items-center justify-center">
                     <div className="grid grid-cols-2 gap-5" style={{ width: '100%', maxWidth: '240px' }}>
-                        {SEQUENCE_COLORS.map((color) => (
-                            <button
-                                key={color}
-                                data-color={color}
-                                className="nes-btn relative overflow-hidden active:scale-95 active:brightness-90"
-                                onClick={() => handleColorClick(color)}
-                                disabled={!gameActive || isShowingSequence}
-                                style={{
-                                    pointerEvents: !gameActive || isShowingSequence ? 'none' : 'auto',
-                                    height: '45px',
-                                    fontSize: '0.875rem',
-                                    width: '100%',
-                                    backgroundColor: isShowingSequence
-                                        ? (color === activeColor ? color : '#d3d3d3')  // Gray during sequence unless active
-                                        : color,  // Show actual colors after sequence
-                                    color: ['yellow', 'green'].includes(color) ? '#000' : '#fff',
-                                    textTransform: 'capitalize',
-                                    opacity: !gameActive ? 0.7 : 1,
-                                    transform: color === activeColor ? 'scale(1.05)' : 'scale(1)',
-                                    transition: 'all 0.15s ease',
-                                    outline: 'none',
-                                    border: 'none',
-                                    cursor: (!gameActive || isShowingSequence) ? 'default' : 'pointer'
-                                }}
-                            >
-                                {color}
-                            </button>
-                        ))}
+                        {SEQUENCE_COLORS.map((color) => {
+                            const nesClass = getNesColorClass(color);
+                            const isActive = color === activeColor;
+                            const showColor = isShowingSequence ? isActive : gameActive;
+                            const preventClick = isShowingSequence || activeColor !== null;
+
+                            return (
+                                <button
+                                    key={color}
+                                    data-color={color}
+                                    className={`nes-btn ${showColor ? nesClass : 'is-disabled'} !border-0 !outline-none rounded-lg`}
+                                    onClick={() => !preventClick && handleColorClick(color)}
+                                    disabled={!gameActive || preventClick}
+                                    style={{
+                                        height: '45px',
+                                        fontSize: '0.875rem',
+                                        width: '100%',
+                                        transform: isActive ? 'scale(1.05)' : 'scale(1)',
+                                        transition: 'all 0.15s ease',
+                                        pointerEvents: preventClick ? 'none' : 'auto',
+                                        opacity: showColor ? 1 : 0.7
+                                    }}
+                                >
+                                    {color}
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
