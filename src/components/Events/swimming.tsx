@@ -1,4 +1,4 @@
-import crowdGif from '@/assets/images/sprint/crowd.gif';
+import crowdGif from '@/assets/images/sprint/crowd-pool.gif';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRef, useEffect } from 'react';
@@ -137,6 +137,14 @@ export default function SwimmingScreen() {
       playSegments([0, 60], true);
       timeline.current = gsap.timeline({ paused: true, repeat: -1 });
       timeline.current.to(crowd.current, { x: -800, ease: 'none' });
+      timeline.current.to(
+        ['.lane-1', '.lane-2'],
+        {
+          x: -800,
+          ease: 'none',
+        },
+        0,
+      );
       timeline.current.duration(2).play();
 
       gsap.to('.swimmer-surface', {
@@ -275,8 +283,102 @@ export default function SwimmingScreen() {
           />
         </div>
       </div>
-      <div className="track absolute bottom-0 left-0 z-20 h-36 w-full bg-[#00BBDE]"></div>
+      <div className="track absolute -bottom-4 left-0 z-20 h-36 w-full bg-[#00BBDE]"></div>
       <div className="track absolute -bottom-14 left-0 z-30 h-36 w-full bg-[#00BBDE]"></div>
+      <div className="the-lanes">
+        <div className="lane-1 absolute -bottom-1 left-0 z-30 flex">
+          <div className="lane flex h-2 w-full bg-red-500">
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+          </div>
+          <div className="lane flex h-2 w-full bg-red-500">
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+          </div>
+        </div>
+        <div className="lane-2 absolute bottom-20 left-0 z-30 flex">
+          <div className="lane flex h-2 w-full bg-red-500">
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+          </div>
+          <div className="lane flex h-2 w-full bg-red-500">
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+          </div>
+        </div>
+      </div>
       <div className="top-50 absolute z-40">
         <>{SwimmerOneView}</>
       </div>
