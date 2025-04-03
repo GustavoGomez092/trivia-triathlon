@@ -5,9 +5,16 @@ export interface Game {
   currentEvent: Event;
 }
 
-
-export const swimmingGames = ['patternRecognition', 'sequenceMemoryGame'] as const;
-export const sprintGames = ['whackAKey', 'targetShooting', 'triviaGame'] as const;
+export const swimmingGames = [
+  'patternRecognition',
+  'sequenceMemoryGame',
+  'iconMemory',
+] as const;
+export const sprintGames = [
+  'whackAKey',
+  'targetShooting',
+  'triviaGame',
+] as const;
 export const shootingGames = ['targetShooting'] as const;
 
 export type SprintGameType = (typeof sprintGames)[number];
