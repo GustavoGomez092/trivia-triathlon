@@ -189,7 +189,7 @@ const IconMemory: FC = () => {
                   <div className="flex items-center justify-center">
                     {React.createElement(
                       iconMap[card.icon as keyof typeof iconMap],
-                      { size: 30 },
+                      { size: 32 },
                     )}
                   </div>
                 )}

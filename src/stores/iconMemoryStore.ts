@@ -4,6 +4,7 @@ import useEventStore from './eventStore';
 const { setTrigger, setPassed: setPassedIconMemory } = useEventStore.getState();
 
 export const CARD_PAIRS = 6; // Número de pares de cartas (16 cartas en total)
+const TIME_LEFT = 25;
 
 export type IconName =
   | 'home'
@@ -60,7 +61,7 @@ const useIconMemoryStore = create<IconMemoryState>((set, get) => ({
   gameActive: true,
   finished: false,
   passed: false,
-  timeLeft: 30,
+  timeLeft: TIME_LEFT,
   availableIcons: [
     'home',
     'user',
@@ -119,7 +120,7 @@ const useIconMemoryStore = create<IconMemoryState>((set, get) => ({
       cards: newCards,
       flippedCards: [],
       gameActive: true,
-      timeLeft: 30,
+      timeLeft: TIME_LEFT,
       finished: false,
       passed: false,
     });
@@ -182,7 +183,7 @@ const useIconMemoryStore = create<IconMemoryState>((set, get) => ({
       gameActive: true,
       finished: false,
       passed: false,
-      timeLeft: 30,
+      timeLeft: TIME_LEFT,
     });
   },
 }));
