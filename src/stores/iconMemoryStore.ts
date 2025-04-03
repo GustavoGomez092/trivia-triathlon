@@ -15,10 +15,7 @@ export type IconName =
   | 'heart'
   | 'moon'
   | 'sun'
-  | 'cloud'
-  | 'cloud-rain'
   | 'wind'
-  | 'cloud-snow'
   | 'cloud-lightning'
   | 'umbrella'
   | 'coffee'
@@ -71,10 +68,7 @@ const useIconMemoryStore = create<IconMemoryState>((set, get) => ({
     'heart',
     'moon',
     'sun',
-    'cloud',
-    'cloud-rain',
     'wind',
-    'cloud-snow',
     'cloud-lightning',
     'umbrella',
     'coffee',
