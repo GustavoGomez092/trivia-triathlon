@@ -1,6 +1,7 @@
 import { useEffect, FC, useState } from 'react';
 import usePatternRecognitionStore from '@/stores/patternRecognitionStore';
 import useEventStore from '@/stores/eventStore';
+import { cn } from '@/lib/utils';
 
 const PatternRecognition: FC = () => {
   const {
@@ -160,7 +161,12 @@ const PatternRecognition: FC = () => {
           </div>
 
           <div className="flex min-h-full flex-col items-center justify-between gap-2 pb-10">
-            <div className="text-lg">Time left: {timeLeft}s</div>
+            <p className="font-semibold">
+              Time left: <br />{' '}
+              <span className={cn(timeLeft <= 3 && 'text-red-500')}>
+                {timeLeft}s
+              </span>
+            </p>
             <button
               type="button"
               onClick={handleCheck}

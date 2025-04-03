@@ -41,7 +41,7 @@ const waitingRoom = () => {
   const countdown = useEventCountdownNavigation({
     event: CURRENT_EVENT,
     startCount: 5,
-    redirectTo: '/player-sprint',
+    redirectTo: '/player-screen',
   });
 
   return (

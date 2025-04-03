@@ -1,6 +1,8 @@
 import { create } from 'zustand';
+import useEventStore from './eventStore';
 
 const PATTERN_LENGTH = 15;
+const { setTrigger, setPassed: setPassedPatternRecognition } = useEventStore.getState();
 
 interface PatternRecognitionState {
   userPattern: boolean[];
@@ -28,7 +30,10 @@ const usePatternRecognitionStore = create<PatternRecognitionState>(
     showFeedback: false,
 
     setGameActive: (active) => set({ gameActive: active }),
-    setPassed: (passed) => set({ passed }),
+    setPassed: (passed) => {
+      set({ passed, finished: true });
+      setPassedPatternRecognition(passed);
+    },
 
     setUserPattern: (pattern) => set({ userPattern: pattern }),
 
@@ -60,6 +65,7 @@ const usePatternRecognitionStore = create<PatternRecognitionState>(
     },
 
     reset: () => {
+      setTrigger(Math.floor(Math.random() * 1000) + 1000);
       set({
         userPattern: Array(PATTERN_LENGTH).fill(false),
         finished: false,

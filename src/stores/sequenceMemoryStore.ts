@@ -1,4 +1,7 @@
 import { create } from 'zustand';
+import useEventStore from './eventStore';
+
+const { setTrigger, setPassed: setPassedSwimming, speedIncrease } = useEventStore.getState();
 
 interface SequenceMemoryState {
     sequence: string[];
@@ -11,6 +14,7 @@ interface SequenceMemoryState {
     targetLevel: number;
     lives: number;
     start: () => void;
+    reset: () => void;
     addToPlayerSequence: (color: string) => void;
     showSequence: () => void;
     setPassed: (value: boolean) => void;
@@ -109,17 +113,18 @@ const useSequenceMemoryStore = create<SequenceMemoryState>((set) => ({
             if (newPlayerSequence.length === state.sequence.length) {
                 // Game completed
                 if (state.level === TARGET_LEVEL) {
-                    set({ passed: true });
-                    set({ finished: true });
                     return {
                         playerSequence: newPlayerSequence,
                         gameActive: false,
+                        passed: true,
+                        finished: true
                     };
                 }
 
                 // Level up
                 const newLength = state.sequence.length + 2;
                 const newSequence = generateSequence(newLength);
+                speedIncrease(); // Increase speed on level up
                 return {
                     sequence: newSequence,
                     playerSequence: [],
@@ -132,13 +137,29 @@ const useSequenceMemoryStore = create<SequenceMemoryState>((set) => ({
             return { playerSequence: newPlayerSequence };
         });
     },
-
+    reset: () =>
+        set(() => {
+            setTrigger(Math.floor(Math.random() * 1000) + 1000);
+            const newSequence = generateSequence(INITIAL_SEQUENCE_LENGTH);
+            return {
+                sequence: newSequence,
+                playerSequence: [],
+                isShowingSequence: true,
+                gameActive: true,
+                finished: false,
+                passed: false,
+                level: 1,
+                targetLevel: TARGET_LEVEL,
+                lives: MAX_LIVES,
+            }
+        }),
     showSequence: () => {
         set({ isShowingSequence: false });
     },
 
     setPassed: (value: boolean) => {
         set({ passed: value, finished: true });
+        setPassedSwimming(value);
     },
 
     finish: () => {

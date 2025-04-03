@@ -1,9 +1,10 @@
-import crowdGif from '@/assets/images/sprint/crowd.gif';
+import crowdGif from '@/assets/images/sprint/crowd-pool.gif';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRef, useEffect } from 'react';
 import { useLottie } from 'lottie-react';
-import sprinter from '@/assets/lottie/sprinter.json';
+import swimmerJump from '@/assets/lottie/swimmer-jump.json';
+import swimmerSwim from '@/assets/lottie/swimmer-swim.json';
 import useEventStore from '@/stores/eventStore';
 import { Timer } from '@/components/ui/timer';
 import { cn, getDistance, TOTAL_DISTANCE, useThrottle } from '@/lib/utils';
@@ -11,6 +12,7 @@ import confetti from 'canvas-confetti';
 import { addScoreToEvent } from '@/firebase/database/games';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
 import { CURRENT_EVENT } from '@/types/Game';
+import './swimming.css';
 
 export default function SwimmingScreen() {
   gsap.registerPlugin(useGSAP);
@@ -34,9 +36,15 @@ export default function SwimmingScreen() {
   const { user } = useCurrentUser();
 
   const swimmerOne = {
-    animationData: sprinter,
-    loop: true,
+    animationData: swimmerJump,
+    loop: false,
     autoplay: false,
+  };
+
+  const swimmerTwo = {
+    animationData: swimmerSwim,
+    loop: true,
+    autoplay: true,
   };
 
   const {
@@ -45,6 +53,9 @@ export default function SwimmingScreen() {
     playSegments,
     setSpeed,
   } = useLottie(swimmerOne);
+
+  const { View: SwimmerTwoView, setSpeed: setSpeedTwo } = useLottie(swimmerTwo);
+
   useEffect(() => {
     if (!started) return;
     const timer = setInterval(() => {
@@ -69,10 +80,15 @@ export default function SwimmingScreen() {
 
     const newDistance =
       distanceTraveled > TOTAL_DISTANCE ? TOTAL_DISTANCE : distanceTraveled;
-    throttleAddScoreToEvent(CURRENT_EVENT, 'update', { uid: user.uid }, {
-      finishTime: useEventStore.getState().time,
-      distanceTraveled: newDistance,
-    });
+    throttleAddScoreToEvent(
+      CURRENT_EVENT,
+      'update',
+      { uid: user.uid },
+      {
+        finishTime: useEventStore.getState().time,
+        distanceTraveled: newDistance,
+      },
+    );
   }, [started, finished, distanceTraveled, user]);
 
   useEffect(() => {
@@ -107,7 +123,10 @@ export default function SwimmingScreen() {
   }, [started, finished, distanceTraveled]);
 
   useEffect(() => {
-    goToAndStop(16, true);
+    gsap.set('.swimmer-surface', {
+      y: 60,
+    });
+    goToAndStop(0, true);
     setTimeout(() => {
       start();
     }, 2000);
@@ -115,10 +134,31 @@ export default function SwimmingScreen() {
 
   useEffect(() => {
     if (started && !finished) {
-      playSegments([17, 56], true);
+      playSegments([0, 60], true);
       timeline.current = gsap.timeline({ paused: true, repeat: -1 });
       timeline.current.to(crowd.current, { x: -800, ease: 'none' });
+      timeline.current.to(
+        ['.lane-1', '.lane-2'],
+        {
+          x: -800,
+          ease: 'none',
+        },
+        0,
+      );
       timeline.current.duration(2).play();
+
+      gsap.to('.swimmer-surface', {
+        y: 0,
+        duration: 1,
+        delay: 2,
+        ease: 'linear',
+      });
+
+      gsap.to('.podium', {
+        x: -160,
+        duration: 0.5,
+        ease: 'linear',
+      });
     }
   }, [started]);
 
@@ -133,7 +173,7 @@ export default function SwimmingScreen() {
           ease: 'linear',
         });
         timeline.current.duration(3);
-        setSpeed(1);
+        setSpeedTwo(0.8);
         break;
       case 75:
         gsap.to(swimmerContainer.current, {
@@ -142,7 +182,7 @@ export default function SwimmingScreen() {
           ease: 'linear',
         });
         timeline.current.duration(2.5);
-        setSpeed(1.5);
+        setSpeedTwo(1);
         break;
       case 100:
         gsap.to(swimmerContainer.current, {
@@ -151,7 +191,7 @@ export default function SwimmingScreen() {
           ease: 'linear',
         });
         timeline.current.duration(2);
-        setSpeed(2);
+        setSpeedTwo(1.2);
         break;
       case 125:
         gsap.to(swimmerContainer.current, {
@@ -160,7 +200,7 @@ export default function SwimmingScreen() {
           ease: 'linear',
         });
         timeline.current.duration(1.5);
-        setSpeed(2.5);
+        setSpeedTwo(1.4);
         break;
       case 150:
         gsap.to(swimmerContainer.current, {
@@ -169,7 +209,7 @@ export default function SwimmingScreen() {
           ease: 'linear',
         });
         timeline.current.duration(1);
-        setSpeed(3);
+        setSpeedTwo(1.6);
         break;
       default:
         null;
@@ -243,14 +283,116 @@ export default function SwimmingScreen() {
           />
         </div>
       </div>
-      <div className="track absolute bottom-0 left-0 z-20 h-36 w-full bg-[#CD6342]">
-        <div className="track-line relative top-1.5 h-1 w-full bg-[#fff]"></div>
-      </div>
-      <div className="player absolute bottom-10 left-[calc(50%-160px)] z-20">
-        <div ref={swimmerContainer} className="sprinter h-80 w-80">
-          <>{SwimmerOneView}</>
+      <div className="track absolute -bottom-4 left-0 z-20 h-36 w-full bg-[#00BBDE]"></div>
+      <div className="track absolute -bottom-14 left-0 z-30 h-36 w-full bg-[#00BBDE]"></div>
+      <div className="the-lanes">
+        <div className="lane-1 absolute -bottom-1 left-0 z-30 flex">
+          <div className="lane flex h-2 w-full bg-red-500">
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+          </div>
+          <div className="lane flex h-2 w-full bg-red-500">
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+          </div>
+        </div>
+        <div className="lane-2 absolute bottom-20 left-0 z-30 flex">
+          <div className="lane flex h-2 w-full bg-red-500">
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+          </div>
+          <div className="lane flex h-2 w-full bg-red-500">
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+            <div className="h-full w-10 bg-transparent"></div>
+            <div className="h-full w-10 bg-white"></div>
+          </div>
         </div>
       </div>
+      <div className="top-50 absolute z-40">
+        <>{SwimmerOneView}</>
+      </div>
+      <div className="player absolute bottom-10 left-[calc(50%-160px)] z-20">
+        <div
+          ref={swimmerContainer}
+          className="swimmer relative top-16 h-80 w-80"
+        >
+          <div className="swimmer-surface top-26 absolute z-20 h-full w-full">
+            <>{SwimmerTwoView}</>
+          </div>
+        </div>
+      </div>
+      <div className="podium floor-tile absolute bottom-0 left-0 z-30 h-36 w-40 bg-gray-200"></div>
       <div className="stats">
         <div className="timer absolute left-10 top-10 z-30">
           <Timer />
