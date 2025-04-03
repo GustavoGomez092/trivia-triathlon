@@ -18,8 +18,8 @@ const Spectator = () => {
   };
 
   return (
-    <div className="spectator-page h-svh w-svw flex p-4">
-      <div className="player-main flex w-8/12 flex-col gap-6">
+    <div className="spectator-page h-svh w-svw flex gap-2 p-4">
+      <div className="player-main flex w-[60%] flex-col">
         <SwimmingPool
           loading={loading}
           scores={scores!}
@@ -27,7 +27,7 @@ const Spectator = () => {
         />
       </div>
 
-      <div className="w-3xl flex">
+      <div className="w-[40%]">
         <PositionTable
           loading={loading}
           onRowEnter={(email) => setSelectedEmail(email)}

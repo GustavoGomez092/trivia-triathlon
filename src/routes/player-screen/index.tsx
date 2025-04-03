@@ -15,7 +15,7 @@ const SCREEN: Record<EventType, ReactNode> = {
   sprint: <SprintScreen />,
   swimming: <SwimmingScreen />,
   shooting: <>TODO</>,
-}
+};
 
 export const Route = createFileRoute('/player-screen/')({
   component: RouteComponent,
@@ -26,10 +26,10 @@ function RouteComponent() {
   useIsEventStarted(CURRENT_EVENT);
 
   return (
-    <div className="sprint-event h-svh w-svw flex gap-4 bg-sky-400 p-4">
-      <div className="player-main pointer-events-none flex w-8/12 flex-col gap-6">
-        <div className="player-game h-8/12 nes-container is-rounded flex max-h-[576px] max-w-[1024px] items-start justify-start gap-8 self-start overflow-hidden bg-[#61696B] lg:self-center">
-          <div className="interface nes-container is-rounded relative top-2 h-[496px] max-h-[496px] min-h-[496px] w-[800px] min-w-[800px] max-w-[800px] overflow-hidden">
+    <div className="sprint-event h-svh w-svw flex gap-2 bg-sky-400 p-4">
+      <div className="player-main pointer-events-none flex w-[60%] flex-col gap-8 2xl:gap-6">
+        <div className="player-game h-7/12 2xl:h-8/12 nes-container is-rounded flex max-h-[576px] max-w-[1024px] items-start justify-start gap-8 self-start overflow-hidden bg-[#61696B] lg:self-center">
+          <div className="interface nes-container is-rounded relative -top-7 h-[496px] max-h-[496px] min-h-[496px] w-[800px] min-w-[800px] max-w-[800px] scale-95 overflow-hidden 2xl:top-0 2xl:scale-100">
             {SCREEN[CURRENT_EVENT]}
           </div>
           <div className="knobs hidden h-full flex-col items-center justify-center gap-8 2xl:flex">
@@ -45,7 +45,7 @@ function RouteComponent() {
           <GameRandomizer />
         </div>
       </div>
-      <div className="event-stats w-3xl flex">
+      <div className="event-stats flex w-[40%]">
         <GamePositionTable />
       </div>
     </div>

@@ -197,7 +197,7 @@ const SwimmingPool: React.FC<SwimmingPoolProps> = ({
 
   return (
     <div className="player-game h-8/12 nes-container is-rounded flex max-h-[576px] max-w-[1024px] items-center justify-start gap-8 self-start overflow-visible bg-[#61696B] lg:self-center">
-      <div className="interface nes-container is-rounded relative top-2 h-[520px] max-h-[520px] min-h-[520px] w-[800px] min-w-[800px] max-w-[800px] overflow-visible bg-blue-950 !p-0">
+      <div className="interface nes-container is-rounded relative top-0 h-[520px] max-h-[520px] min-h-[520px] w-[800px] min-w-[800px] max-w-[800px] overflow-visible bg-blue-950 !p-0">
         {loading ? (
           <Label className="text-white" htmlFor="loading">
             Loading...
