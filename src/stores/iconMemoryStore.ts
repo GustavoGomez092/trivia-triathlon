@@ -3,8 +3,8 @@ import useEventStore from './eventStore';
 
 const { setTrigger, setPassed: setPassedIconMemory } = useEventStore.getState();
 
-export const CARD_PAIRS = 6; // Número de pares de cartas (16 cartas en total)
-const TIME_LEFT = 25;
+export const CARD_PAIRS = 6;
+const TIME_LEFT = 30;
 
 export type IconName =
   | 'home'
