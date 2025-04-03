@@ -51,7 +51,6 @@ export default function SwimmingScreen() {
     View: SwimmerOneView,
     goToAndStop,
     playSegments,
-    setSpeed,
   } = useLottie(swimmerOne);
 
   const { View: SwimmerTwoView, setSpeed: setSpeedTwo } = useLottie(swimmerTwo);
