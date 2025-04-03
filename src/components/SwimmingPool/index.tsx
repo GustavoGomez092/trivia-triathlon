@@ -36,6 +36,7 @@ const SwimmingPool: React.FC<SwimmingPoolProps> = ({
   const playerTweens = useRef<gsap.core.Timeline[]>([]);
 
   const [players, setPlayers] = useState<Player[]>([]);
+  const [hoveredPlayerId, setHoveredPlayerId] = useState<number | null>(null);
   const [tooltip, setTooltip] = useState<TooltipProps>({
     visible: false,
     x: 0,
@@ -91,6 +92,20 @@ const SwimmingPool: React.FC<SwimmingPoolProps> = ({
 
         playerTweens.current[player.id] = timeline;
         timeline.progress(player.distance / TOTAL_DISTANCE);
+
+        const progress = player.distance / TOTAL_DISTANCE;
+        if (progress === 0) {
+          gsap.set(circleRefs.current[player.id], {
+            motionPath: {
+              path: lane,
+              align: lane,
+              autoRotate: false,
+              alignOrigin: [0.5, 0.5],
+              start: 0,
+              end: 0,
+            },
+          });
+        }
       }
     });
   }, [players]);
@@ -111,8 +126,8 @@ const SwimmingPool: React.FC<SwimmingPoolProps> = ({
       const containerRect = container.getBoundingClientRect();
       setTooltip({
         visible: true,
-        x: circleRect.left - containerRect.left + circleRect.width / 2 - 50,
-        y: circleRect.top - containerRect.top - 10,
+        x: circleRect.left - containerRect.left + circleRect.width / 2,
+        y: circleRect.top - containerRect.top + circleRect.height + 50,
         name: player.name || getUsername(player.email),
         distance: player.distance,
       });
@@ -126,7 +141,13 @@ const SwimmingPool: React.FC<SwimmingPoolProps> = ({
     if (!selectedEmail) {
       const circle = circleRefs.current[player.id];
       if (circle) {
-        gsap.to(circle, { opacity: 1, scale: 1.4, duration: 0.2 });
+        setHoveredPlayerId(player.id);
+        gsap.to(circle, {
+          opacity: 1,
+          scale: 1.4,
+          duration: 0.2,
+          overwrite: 'auto',
+        });
         updateTooltipFromCircle(player);
       }
     }
@@ -145,16 +166,22 @@ const SwimmingPool: React.FC<SwimmingPoolProps> = ({
     if (!selectedEmail) {
       const circle = circleRefs.current[player.id];
       if (circle) {
-        gsap.to(circle, { scale: 1, opacity: 0.5, duration: 0.2 });
+        setHoveredPlayerId(null);
+        gsap.to(circle, {
+          scale: 1,
+          opacity: 0.5,
+          duration: 0.2,
+          overwrite: 'auto',
+        });
       }
-      setTooltip({ visible: false, x: 0, y: 0, name: '', distance: 0 });
+      setTooltip((prev) => ({ ...prev, visible: false }));
     }
   };
 
   useEffect(() => {
     players.forEach((player) => {
       const circle = circleRefs.current[player.id];
-      if (circle) {
+      if (circle && hoveredPlayerId !== player.id) {
         if (!selectedEmail) {
           gsap.to(circle, { opacity: 0.7, scale: 1, duration: 0.2 });
         } else if (
@@ -166,11 +193,11 @@ const SwimmingPool: React.FC<SwimmingPoolProps> = ({
         }
       }
     });
-  }, [selectedEmail, players]);
+  }, [selectedEmail, players, hoveredPlayerId]);
 
   return (
     <div className="player-game h-8/12 nes-container is-rounded flex max-h-[576px] max-w-[1024px] items-center justify-start gap-8 self-start overflow-hidden bg-[#61696B] lg:self-center">
-      <div className="interface nes-container is-rounded relative top-2 h-[520px] max-h-[520px] min-h-[520px] w-[800px] min-w-[800px] max-w-[800px] overflow-hidden bg-green-900 !p-0">
+      <div className="interface nes-container is-rounded relative top-2 h-[520px] max-h-[520px] min-h-[520px] w-[800px] min-w-[800px] max-w-[800px] overflow-visible bg-blue-950 !p-0">
         {loading ? (
           <Label className="text-white" htmlFor="loading">
             Loading...
@@ -180,7 +207,7 @@ const SwimmingPool: React.FC<SwimmingPoolProps> = ({
             ref={containerRef}
             className="relative flex items-center justify-center"
           >
-            <div className="relative h-[520px] w-[800px]">
+            <div className="relative h-[513px] w-[800px]">
               <img
                 src={pool}
                 alt="Pool"
@@ -193,96 +220,29 @@ const SwimmingPool: React.FC<SwimmingPoolProps> = ({
                 viewBox="0 0 800 520"
                 className="pointer-events-none absolute left-0 top-0 h-full w-full"
               >
-                <g transform="matrix(1 0 0 1 396.83 103.83)">
-                  <path
-                    className="lane"
-                    d="M -370.5 1 L 370.5 -1"
-                    stroke="transparent"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                </g>
-                <g transform="matrix(1 0 0 1 396.5 257.83)">
-                  <path
-                    className="lane"
-                    d="M -370.5 1 L 370.5 -1"
-                    stroke="transparent"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                </g>
-                <g transform="matrix(1 0 0 1 397.5 155.83)">
-                  <path
-                    className="lane"
-                    d="M -370.5 1 L 370.5 -1"
-                    stroke="red"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                </g>
-                <g transform="matrix(1 0 0 1 396.5 307.5)">
-                  <path
-                    className="lane"
-                    d="M -370.5 1 L 370.5 -1"
-                    stroke="red"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                </g>
-                <g transform="matrix(1 0 0 1 396.5 359.5)">
-                  <path
-                    className="lane"
-                    d="M -370.5 1 L 370.5 -1"
-                    stroke="red"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                </g>
-                <g transform="matrix(1 0 0 1 396.5 406.5)">
-                  <path
-                    className="lane"
-                    d="M -370.5 1 L 370.5 -1"
-                    stroke="red"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                </g>
-                <g transform="matrix(1 0 0 1 396.5 467.5)">
-                  <path
-                    className="lane"
-                    d="M -370.5 1 L 370.5 -1"
-                    stroke="red"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                </g>
-                <g transform="matrix(1 0 0 1 396.83 207.5)">
-                  <path
-                    className="lane"
-                    d="M -370.5 1 L 370.5 -1"
-                    stroke="red"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                </g>
-                <g transform="matrix(1 0 0 1 396.5 48.83)">
-                  <path
-                    className="lane"
-                    d="M -370.5 1 L 370.5 -1"
-                    stroke="red"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                </g>
+                {[
+                  103.83, 257.83, 155.83, 307.5, 359.5, 406.5, 467.5, 207.5,
+                  48.83,
+                ].map((y, idx) => (
+                  <g key={idx} transform={`matrix(1 0 0 1 396.5 ${y})`}>
+                    <path
+                      className="lane"
+                      d="M -370.5 1 L 370.5 -1"
+                      stroke="transparent"
+                      strokeWidth="2"
+                      fill="none"
+                    />
+                  </g>
+                ))}
               </svg>
-              {players.map((player) => (
-                <svg
-                  key={player.id}
-                  className="absolute left-0 top-0 h-full w-full"
-                  viewBox="0 0 800 520"
-                  style={{ overflow: 'visible', pointerEvents: 'none' }}
-                >
+              <svg
+                className="absolute left-0 top-0 h-full w-full"
+                viewBox="0 0 800 520"
+                style={{ overflow: 'visible' }}
+              >
+                {players.map((player) => (
                   <circle
+                    key={player.id}
                     ref={(el) => (circleRefs.current[player.id] = el)}
                     cx="0"
                     cy="0"
@@ -294,17 +254,11 @@ const SwimmingPool: React.FC<SwimmingPoolProps> = ({
                     onMouseEnter={(e) => handleCircleMouseEnter(e, player)}
                     onMouseMove={(e) => handleCircleMouseMove(e, player)}
                     onMouseLeave={() => handleCircleMouseLeave(player)}
+                    style={{ pointerEvents: 'all' }}
                   />
-                </svg>
-              ))}
-              {tooltip.visible && (
-                <div
-                  className="absolute z-50"
-                  style={{ left: tooltip.x, top: tooltip.y }}
-                >
-                  <Tooltip {...tooltip} />
-                </div>
-              )}
+                ))}
+              </svg>
+              {tooltip.visible && <Tooltip {...tooltip} />}
             </div>
           </div>
         )}
