@@ -19,6 +19,7 @@ interface ColorMatchState {
     correctMatches: number;
     currentWord: ColorWord | null;
     lastResponseTime: number;
+    processingKeyPress: boolean; // Add this to track if we're processing a keypress
 
     targetMatches: number;
     gameTime: number;
@@ -50,38 +51,55 @@ const useColorMatchStore = create<ColorMatchState>((set, get) => ({
     correctMatches: 0,
     currentWord: null,
     lastResponseTime: 0,
+    processingKeyPress: false,
 
     targetMatches: 15,
 
     gameTime: 30,
 
     start: () => {
-        set({
-            started: true,
-            timeLeft: 30,
-            combo: 0,
-            correctMatches: 0,
-            currentWord: null,
-            lastResponseTime: Date.now()
-        });
-        get().generateNewWord();
+        const state = get();
+        if (!state.started && !state.finished) {
+            set({
+                started: true,
+                finished: false,
+                passed: false,
+                timeLeft: state.gameTime,
+                combo: 0,
+                correctMatches: 0,
+                currentWord: null,
+                lastResponseTime: Date.now(),
+                processingKeyPress: false
+            });
+            get().generateNewWord();
+        }
     },
 
     finish: (passed: boolean = false) => {
-        set({ finished: true, passed });
-        setPassedColorMatch(passed);
+        const state = get();
+        if (state.started && !state.finished) {
+            set({ finished: true, passed });
+            setPassedColorMatch(passed);
+            // Show game over screen for 1 seconds
+            setTimeout(() => {
+                setTrigger(Math.floor(Math.random() * 1000) + 1000);
+            }, 1000);
+        }
     },
 
     reset: () => {
-        setTrigger(Math.floor(Math.random() * 1000) + 1000);
+        // Only reset the game state without triggering a new game
+        const state = get();
         set({
             started: false,
             finished: false,
             passed: false,
-            timeLeft: 30,
+            timeLeft: state.gameTime,
             combo: 0,
             correctMatches: 0,
-            currentWord: null
+            // Don't clear the current word on reset to keep it visible on game over screen
+            lastResponseTime: Date.now(),
+            processingKeyPress: false
         });
     },
 
@@ -107,12 +125,18 @@ const useColorMatchStore = create<ColorMatchState>((set, get) => ({
 
     handleKeyPress: (key) => {
         const state = get();
-        if (!state.started || state.finished || !state.currentWord) return;
+        if (!state.started || state.finished || !state.currentWord || state.processingKeyPress) return;
+
+        // Set processing flag to prevent rapid keypresses
+        set({ processingKeyPress: true });
 
         const expectedColor = state.currentWord.color;
         const pressedColor = ARROW_MAP[key];
 
-        if (!pressedColor) return; // Invalid key
+        if (!pressedColor) {
+            set({ processingKeyPress: false });
+            return; // Invalid key
+        }
 
         const responseTime = (Date.now() - state.lastResponseTime) / 1000;
         let pointsEarned = 100;
@@ -134,9 +158,11 @@ const useColorMatchStore = create<ColorMatchState>((set, get) => ({
             });
 
             if (state.correctMatches + 1 >= state.targetMatches) {
-                set({ finished: true, passed: true });
-                setPassedColorMatch(true);
+                // Call finish instead of manually setting state to ensure proper game transition
+                set({ processingKeyPress: false });
                 speedIncrease();
+                // Use finish function to handle game completion and trigger next game
+                get().finish(true);
                 return;
             }
         } else {
@@ -148,6 +174,11 @@ const useColorMatchStore = create<ColorMatchState>((set, get) => ({
         }
 
         state.generateNewWord();
+
+        // Release the processing flag after a short delay
+        setTimeout(() => {
+            set({ processingKeyPress: false });
+        }, 150); // 150ms delay between keypresses to prevent too-rapid inputs
     }
 }));
 

@@ -39,16 +39,17 @@ const ColorMatch: FC = () => {
         const timerId = setInterval(() => {
             if (timeLeft <= 1) {
                 clearInterval(timerId);
-                if (!finished) {
-                    finish(false); // Game over, not passed
-                    speedDecrease();
-                }
+                setTimeLeft(0);
+                speedDecrease();
+                finish(false); // Game over, not passed
             } else {
                 setTimeLeft(timeLeft - 1);
             }
         }, 1000);
 
-        return () => clearInterval(timerId);
+        return () => {
+            clearInterval(timerId);
+        };
     }, [started, finished, timeLeft, setTimeLeft, speedDecrease, finish]);
 
     useEffect(() => {
@@ -65,7 +66,7 @@ const ColorMatch: FC = () => {
         return () => window.removeEventListener('keydown', handleKey);
     }, [started, finished, handleKeyPress]);
 
-    // Handle win condition and reset
+    // Handle win condition but do NOT reset (game transition handled by store)
     useEffect(() => {
         if (!finished) return;
 
@@ -74,15 +75,15 @@ const ColorMatch: FC = () => {
             speedIncrease();
         }
 
-        // Always reset after a delay
-        const resetTimer = setTimeout(reset, 1000);
-        return () => clearTimeout(resetTimer);
-    }, [finished, passed, speedIncrease, reset]);
+        // The store is now responsible for the game transition timing
+        // No reset needed here - let the game over screen be visible longer
+    }, [finished, passed, speedIncrease]);
 
     if (finished) {
         return (
             <div className="nes-container is-rounded flex min-h-full w-full flex-col items-center justify-center bg-slate-800 p-8">
                 <h1 className="mb-4 text-2xl font-bold text-white">Color Word Match</h1>
+
                 <div className="flex flex-col items-center justify-center gap-4">
                     <h2 className={cn(
                         'text-center text-4xl font-bold',
