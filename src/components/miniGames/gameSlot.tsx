@@ -5,6 +5,7 @@ import TriviaGame from './triviaGame';
 import PatternRecognition from './patternRecognition';
 import SequenceMemoryGame from './sequenceMemoryGame';
 import IconMemory from './iconMemory';
+import ColorMatch from './colorMatch';
 
 export interface GameComponentProps {
   seed: number;
@@ -25,6 +26,7 @@ const gameComponentMap: Record<
   patternRecognition: PatternRecognition,
   sequenceMemoryGame: SequenceMemoryGame,
   iconMemory: IconMemory,
+  colorMatch: ColorMatch,
 };
 
 export function GameSlot({

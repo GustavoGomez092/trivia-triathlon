@@ -9,6 +9,7 @@ export const swimmingGames = [
   'patternRecognition',
   'sequenceMemoryGame',
   'iconMemory',
+  'colorMatch',
 ] as const;
 export const sprintGames = [
   'whackAKey',
