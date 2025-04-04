@@ -78,6 +78,9 @@ const useColorMatchStore = create<ColorMatchState>((set, get) => ({
     finish: (passed: boolean = false) => {
         const state = get();
         if (state.started && !state.finished) {
+            if (passed) {
+                speedIncrease(); // Only increase speed when game is passed
+            }
             set({ finished: true, passed });
             setPassedColorMatch(passed);
             // Show game over screen for 1 seconds
@@ -160,7 +163,6 @@ const useColorMatchStore = create<ColorMatchState>((set, get) => ({
             if (state.correctMatches + 1 >= state.targetMatches) {
                 // Call finish instead of manually setting state to ensure proper game transition
                 set({ processingKeyPress: false });
-                speedIncrease();
                 // Use finish function to handle game completion and trigger next game
                 get().finish(true);
                 return;

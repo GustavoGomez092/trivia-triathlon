@@ -31,7 +31,7 @@ const ColorMatch: FC = () => {
         return () => reset();
     }, [start, reset]);
 
-    const { speedIncrease, speedDecrease } = useEventStore();
+    const { speedDecrease } = useEventStore();
 
     useEffect(() => {
         if (!started || finished) return;
@@ -66,18 +66,11 @@ const ColorMatch: FC = () => {
         return () => window.removeEventListener('keydown', handleKey);
     }, [started, finished, handleKeyPress]);
 
-    // Handle win condition but do NOT reset (game transition handled by store)
+    // Game over screen is handled by store
     useEffect(() => {
         if (!finished) return;
-
-        // Only call speedIncrease on successful completion
-        if (passed) {
-            speedIncrease();
-        }
-
-        // The store is now responsible for the game transition timing
         // No reset needed here - let the game over screen be visible longer
-    }, [finished, passed, speedIncrease]);
+    }, [finished]);
 
     if (finished) {
         return (
