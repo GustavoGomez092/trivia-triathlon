@@ -1,7 +1,12 @@
 import { create } from 'zustand';
 import useEventStore from './eventStore';
 
-const { setTrigger, setPassed: setPassedIconMemory } = useEventStore.getState();
+const {
+  setTrigger,
+  setPassed: setPassedIconMemory,
+  speedIncrease,
+  speedDecrease,
+} = useEventStore.getState();
 
 export const CARD_PAIRS = 6;
 const TIME_LEFT = 30;
@@ -152,6 +157,7 @@ const useIconMemoryStore = create<IconMemoryState>((set, get) => ({
             ),
             flippedCards: [],
           }));
+          speedIncrease();
         }, 500);
       } else {
         // No match
@@ -164,6 +170,7 @@ const useIconMemoryStore = create<IconMemoryState>((set, get) => ({
             ),
             flippedCards: [],
           }));
+          speedDecrease();
         }, 1000);
       }
     }
