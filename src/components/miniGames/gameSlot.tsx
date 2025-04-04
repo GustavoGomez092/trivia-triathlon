@@ -1,10 +1,13 @@
 import { GameType, EventType } from '@/types/Game';
-import WhackAKey from './whackAKey';
-import TargetShooting from './targetShooting';
-import TriviaGame from './triviaGame';
+import FindTheBall from './findTheBall';
+import IconMemory from './iconMemory';
 import PatternRecognition from './patternRecognition';
 import SequenceMemoryGame from './sequenceMemoryGame';
-import IconMemory from './iconMemory';
+import TargetShooting from './targetShooting';
+import TriviaGame from './triviaGame';
+import WhackAKey from './whackAKey';
+import DontClickTheBomb from './dontClickTheBomb';
+import QuickMathReflex from './quickMathReflex';
 import ColorMatch from './colorMatch';
 import WordPairs from './wordPairs';
 
@@ -27,6 +30,9 @@ const gameComponentMap: Record<
   patternRecognition: PatternRecognition,
   sequenceMemoryGame: SequenceMemoryGame,
   iconMemory: IconMemory,
+  findTheBall: FindTheBall,
+  dontClickBomb: DontClickTheBomb,
+  quickMathReflex: QuickMathReflex,
   colorMatch: ColorMatch,
   wordPairs: WordPairs,
 };

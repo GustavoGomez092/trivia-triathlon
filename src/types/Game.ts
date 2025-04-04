@@ -17,20 +17,32 @@ export const sprintGames = [
   'targetShooting',
   'triviaGame',
 ] as const;
-export const shootingGames = ['targetShooting'] as const;
+export const cyclingGames = [
+  'whackAKey',
+  'targetShooting',
+  'triviaGame',
+  'patternRecognition',
+  'sequenceMemoryGame',
+  'iconMemory',
+  'colorMatch',
+  'wordPairs',
+  'findTheBall',
+  'dontClickBomb',
+  'quickMathReflex',
+] as const;
 
 export type SprintGameType = (typeof sprintGames)[number];
 export type SwimmingGameType = (typeof swimmingGames)[number];
-export type ShootingGameType = (typeof shootingGames)[number];
-export type GameType = SprintGameType | SwimmingGameType | ShootingGameType;
+export type CyclingGameType = (typeof cyclingGames)[number];
+export type GameType = SprintGameType | SwimmingGameType | CyclingGameType;
 
-export const events = ['sprint', 'swimming', 'shooting'] as const;
+export const events = ['sprint', 'swimming', 'cycling'] as const;
 export type EventType = (typeof events)[number];
 
 export const eventGamesMap: Record<EventType, readonly string[]> = {
   sprint: sprintGames,
   swimming: swimmingGames,
-  shooting: shootingGames,
+  cycling: cyclingGames,
 } as const;
 
-export const CURRENT_EVENT = 'swimming';
+export const CURRENT_EVENT = 'cycling';

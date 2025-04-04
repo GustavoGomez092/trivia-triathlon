@@ -14,7 +14,7 @@ import { ReactNode } from 'react';
 const SCREEN: Record<EventType, ReactNode> = {
   sprint: <SprintScreen />,
   swimming: <SwimmingScreen />,
-  shooting: <>TODO</>,
+  cycling: <SwimmingScreen />,
 };
 
 export const Route = createFileRoute('/player-screen/')({
