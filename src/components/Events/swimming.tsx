@@ -58,36 +58,42 @@ export default function SwimmingScreen() {
 
   const router = useRouter();
 
-  // Load saved progress when component mounts
+  // Check progress in real-time
   useEffect(() => {
-    if (!user || started) return; // Don't load if game is in progress
+    if (!user) return;
 
-    const loadSavedProgress = async () => {
+    const checkProgress = async () => {
       try {
         const savedScore = await getEventScore(CURRENT_EVENT, user.uid);
-        if (savedScore && savedScore.distanceTraveled > 0) {
-          // If they've completed the distance, redirect to spectator
-          if (savedScore.distanceTraveled >= TOTAL_DISTANCE) {
-            router.navigate({ to: '/spectator' });
-            return;
-          }
 
-          // Otherwise restore their progress
+        const distance = savedScore?.distanceTraveled ?? 0;
+        if (distance >= TOTAL_DISTANCE) {
+          console.log('Distance reached, redirecting...');
+          router.navigate({ to: '/spectator' });
+          return;
+        }
+
+        // Only restore progress if we haven't started yet
+        if (!started && savedScore && savedScore.distanceTraveled > 0) {
           setDistanceTraveled(savedScore.distanceTraveled);
-          // Restore time if it exists
           if (savedScore.finishTime > 0) {
             setTime(savedScore.finishTime);
           }
         }
       } catch (error) {
-        console.error('Error loading saved progress:', error);
-        // On error, ensure we start fresh
-        setDistanceTraveled(0);
-        setTime(0);
+        console.error('Error checking progress:', error);
+        if (!started) {
+          setDistanceTraveled(0);
+          setTime(0);
+        }
       }
     };
 
-    loadSavedProgress();
+    // Check immediately and then every 2 seconds
+    checkProgress();
+    const interval = setInterval(checkProgress, 2000);
+
+    return () => clearInterval(interval);
   }, [user, started, router]);
 
   // Timer effect

@@ -24,7 +24,6 @@ export const Route = createFileRoute('/player-screen/')({
 
 function RouteComponent() {
   useIsEventStarted(CURRENT_EVENT);
-
   return (
     <div className="sprint-event h-svh w-svw flex gap-2 bg-sky-400 p-4">
       <div className="player-main pointer-events-none flex w-[60%] flex-col gap-8 2xl:gap-6">
