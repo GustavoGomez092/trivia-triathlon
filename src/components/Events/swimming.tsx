@@ -9,7 +9,7 @@ import useEventStore from '@/stores/eventStore';
 import { Timer } from '@/components/ui/timer';
 import { cn, getDistance, TOTAL_DISTANCE, useThrottle } from '@/lib/utils';
 import confetti from 'canvas-confetti';
-import { addScoreToEvent } from '@/firebase/database/games';
+import { addScoreToEvent, getEventScore } from '@/firebase/database/games';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
 import { CURRENT_EVENT } from '@/types/Game';
 import './swimming.css';
@@ -55,12 +55,38 @@ export default function SwimmingScreen() {
 
   const { View: SwimmerTwoView, setSpeed: setSpeedTwo } = useLottie(swimmerTwo);
 
+  // Load saved progress when component mounts
+  useEffect(() => {
+    if (!user || started || finished) return; // Don't load if game is in progress
+
+    const loadSavedProgress = async () => {
+      try {
+        const savedScore = await getEventScore(CURRENT_EVENT, user.uid);
+        if (savedScore && savedScore.distanceTraveled > 0) {
+          // Restore distance and update swimmer position
+          setDistanceTraveled(savedScore.distanceTraveled);
+          // Restore time if it exists
+          if (savedScore.finishTime > 0) {
+            setTime(savedScore.finishTime);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading saved progress:', error);
+        // On error, ensure we start fresh
+        setDistanceTraveled(0);
+        setTime(0);
+      }
+    };
+
+    loadSavedProgress();
+  }, [user, started, finished]);
+
+  // Timer effect
   useEffect(() => {
     if (!started) return;
     const timer = setInterval(() => {
       if (finished) {
         const newTime = useEventStore.getState().time;
-
         setTime(newTime);
         clearInterval(timer);
       } else {
