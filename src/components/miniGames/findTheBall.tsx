@@ -165,7 +165,13 @@ const FindTheBall: FC = () => {
       <h1 className="mb-4 text-center text-2xl font-bold">Find the ball</h1>
 
       <div className="mb-4 text-center">
-        <span className={cn('font-semibold', timeLeft <= 3 && 'text-red-500')}>
+        <span
+          className={cn(
+            'font-semibold',
+            timeLeft <= 3 && 'text-red-500',
+            isShuffling && 'opacity-0',
+          )}
+        >
           Time left: {timeLeft}s
         </span>
       </div>
