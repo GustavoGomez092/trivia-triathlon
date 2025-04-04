@@ -43,9 +43,8 @@ export const useThrottle = (callback: Function, limit: number) => {
 };
 
 export const getDistance = (distanceTraveled: number) => {
-  return `${
-    distanceTraveled < TOTAL_DISTANCE ? distanceTraveled : TOTAL_DISTANCE
-  } mts`;
+  return `${distanceTraveled < TOTAL_DISTANCE ? distanceTraveled : TOTAL_DISTANCE
+    } mts`;
 };
 
 export const getSanitizedEmail = (email?: string) => {

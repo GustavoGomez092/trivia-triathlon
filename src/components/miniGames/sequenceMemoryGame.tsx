@@ -58,14 +58,21 @@ const SequenceMemoryGame: React.FC<GameComponentProps> = () => {
         };
     }, [start, setPassed]);
 
-    // Check game completion
+    // Check level completion and game completion
     useEffect(() => {
         if (!gameActive || finished) return;
 
-        if (level === targetLevel && playerSequence.length === sequence.length) {
-            speedIncrease();
-            setPassed(true);
-            finish();
+        // If player completed the current sequence
+        if (playerSequence.length === sequence.length) {
+            // If reached target level, finish the game
+            if (level === targetLevel) {
+                speedIncrease(); // Final speed increase
+                setPassed(true);
+                finish();
+            } else {
+                // Level completed but not finished - increase speed
+                speedIncrease();
+            }
         }
     }, [gameActive, finished, level, targetLevel, playerSequence.length, sequence.length, speedIncrease, setPassed, finish]);
 

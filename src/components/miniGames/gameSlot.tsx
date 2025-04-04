@@ -8,6 +8,8 @@ import TriviaGame from './triviaGame';
 import WhackAKey from './whackAKey';
 import DontClickTheBomb from './dontClickTheBomb';
 import QuickMathReflex from './quickMathReflex';
+import ColorMatch from './colorMatch';
+import WordPairs from './wordPairs';
 
 export interface GameComponentProps {
   seed: number;
@@ -28,10 +30,11 @@ const gameComponentMap: Record<
   patternRecognition: PatternRecognition,
   sequenceMemoryGame: SequenceMemoryGame,
   iconMemory: IconMemory,
-
   findTheBall: FindTheBall,
   dontClickBomb: DontClickTheBomb,
   quickMathReflex: QuickMathReflex,
+  colorMatch: ColorMatch,
+  wordPairs: WordPairs,
 };
 
 export function GameSlot({

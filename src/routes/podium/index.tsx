@@ -2,16 +2,17 @@ import { Button } from '@/components/ui/button';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import './index.css';
 import { Table } from '@/components/ui/table';
-import results from '@/data/sprintResults.json';
+import data from '@/data/results.json';
 import { cn } from '@/lib/utils';
 
 const TABLE_HEADERS = Object.freeze([
   { title: 'Pos', key: 'position' },
   { title: 'Player', key: 'name' },
-  { title: 'Dist', key: 'distance' },
-  { title: 'Time', key: 'time' },
-  { title: 'Points', key: 'points' },
+  { title: 'Sprint', key: 'sprintPoints' },
+  { title: 'Swimming', key: 'swimmingPoints' },
+  { title: 'Total', key: 'totalPoints' },
 ]);
+const POSITION = ['🥇', '🥈', '🥉'];
 
 const Podium = () => {
   const router = useRouter();
@@ -35,24 +36,32 @@ const Podium = () => {
           </thead>
 
           <tbody>
-            {results?.map((score, index) => (
-              <tr
-                key={index}
-                className={cn(
-                  'whitespace-nowrap text-xs text-black/50 transition-colors',
-                  index === 0 && 'font-bold text-amber-500', // Gold medal (1st place)
-                  index === 1 && 'font-bold text-slate-500', // Silver medal (2nd place)
-                  index === 2 && 'font-bold text-amber-700', // Bronze medal (3rd place)
-                  index > 2 && 'text-black/40', // All other positions
-                )}
-              >
-                <td>{score.position}</td>
-                <td>{score.name}</td>
-                <td>{score.distance}</td>
-                <td>{score.time}</td>
-                <td>{score.points}</td>
-              </tr>
-            ))}
+            {data.results
+              ?.sort((a, b) => b.totalPoints - a.totalPoints)
+              .map((score, index) => (
+                <tr
+                  key={index}
+                  className={cn(
+                    'whitespace-nowrap text-xs text-black/50 transition-colors',
+                    index === 0 && 'font-bold text-amber-500', // Gold medal (1st place)
+                    index === 1 && 'font-bold text-slate-500', // Silver medal (2nd place)
+                    index === 2 && 'font-bold text-amber-700', // Bronze medal (3rd place)
+                    index > 2 && 'text-black/40', // All other positions
+                  )}
+                >
+                  <td className="text-right">
+                    <span
+                      className={cn(POSITION?.[index] ? 'text-xl' : 'text-xs')}
+                    >
+                      {POSITION?.[index] ? POSITION[index] : score.position}
+                    </span>
+                  </td>
+                  <td className="text-left">{score.name}</td>
+                  <td className="text-right">{score.sprintPoints}</td>
+                  <td className="text-right">{score.swimmingPoints}</td>
+                  <td className="text-right">{score.totalPoints}</td>
+                </tr>
+              ))}
           </tbody>
         </Table>
       </div>

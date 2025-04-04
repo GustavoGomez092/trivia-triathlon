@@ -9,6 +9,8 @@ export const swimmingGames = [
   'patternRecognition',
   'sequenceMemoryGame',
   'iconMemory',
+  'colorMatch',
+  'wordPairs',
 
   // 'findTheBall',
   // 'dontClickBomb',

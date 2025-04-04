@@ -66,12 +66,10 @@ const IconMemory: FC = () => {
 
   // Initialize game
   useEffect(() => {
-    initializeGame();
-
-    return () => {
-      reset();
-    };
-  }, [initializeGame, reset]);
+    if (!finished) {
+      initializeGame();
+    }
+  }, [initializeGame, finished]);
 
   // Check if game is complete
   useEffect(() => {
@@ -83,9 +81,9 @@ const IconMemory: FC = () => {
       setTimeout(() => {
         reset();
         initializeGame();
-      }, 1000);
+      }, 1500);
     }
-  }, [cards, speedIncrease, setFinished, setPassed, reset, initializeGame]);
+  }, [cards, speedIncrease, setFinished, setPassed, reset]);
 
   // Timer
   useEffect(() => {
@@ -101,7 +99,6 @@ const IconMemory: FC = () => {
 
           setTimeout(() => {
             reset();
-            initializeGame();
           }, 1000);
 
           return 0;
@@ -119,7 +116,6 @@ const IconMemory: FC = () => {
     setPassed,
     setFinished,
     reset,
-    initializeGame,
   ]);
 
   if (finished && passed) {
