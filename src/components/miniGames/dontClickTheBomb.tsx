@@ -73,7 +73,7 @@ const DontClickTheBomb: FC = () => {
             passed ? 'text-green-500' : 'text-red-500',
           )}
         >
-          {passed ? 'Well done!' : 'Boom! You hit a bomb!'}
+          {passed ? 'You passed!' : 'Boom! You hit a bomb!'}
         </h1>
       </div>
     );
