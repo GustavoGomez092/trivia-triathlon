@@ -5,35 +5,43 @@
       "name": "Ignacio Padilla",
       "email": "ignaciop@nicasource.com",
       "sprintPoints": 10,
-      "swimmingPoints": 5,
-      "totalPoints": 15
+      "swimmingPoints": 3,
+      "totalPoints": 13
     },
     {
       "position": 2,
-      "name": "Alvaro",
-      "email": "alvaroc@nicasource.com",
+      "name": "Lucas Agostini",
+      "email": "lucas.agostini@nicasource.com",
       "sprintPoints": 8,
-      "swimmingPoints": 3,
-      "totalPoints": 11
+      "swimmingPoints": 5,
+      "totalPoints": 13
     },
     {
       "position": 3,
-      "name": "Lucas Agostini",
-      "email": "lucas.agostini@nicasource.com",
+      "name": "Alvaro",
+      "email": "alvaroc@nicasource.com",
       "sprintPoints": 6,
-      "swimmingPoints": 4,
-      "totalPoints": 10
-    },
-    {
-      "position": 4,
-      "name": "Kathya",
-      "email": "kathyas@nicasource.com",
-      "sprintPoints": 5,
-      "swimmingPoints": 4,
+      "swimmingPoints": 3,
       "totalPoints": 9
     },
     {
+      "position": 4,
+      "name": "Hndz",
+      "email": "tadeoh@nicasource.com",
+      "sprintPoints": 0,
+      "swimmingPoints": 10,
+      "totalPoints": 10
+    },
+    {
       "position": 5,
+      "name": "Facundo Prieto",
+      "email": "facundo.prieto321@gmail.com",
+      "sprintPoints": 3,
+      "swimmingPoints": 8,
+      "totalPoints": 11
+    },
+    {
+      "position": 6,
       "name": "René Cortez",
       "email": "renec@nicasource.com",
       "sprintPoints": 5,
@@ -41,36 +49,28 @@
       "totalPoints": 9
     },
     {
-      "position": 6,
-      "name": "Carlos Cruz",
-      "email": "carlos.cruz@nicasource.com",
-      "sprintPoints": 4,
-      "swimmingPoints": 4,
-      "totalPoints": 8
-    },
-    {
       "position": 7,
-      "name": "Jackzeel Garcia",
-      "email": "jackzeel.garcia@jolt.com",
-      "sprintPoints": 4,
-      "swimmingPoints": 4,
-      "totalPoints": 8
-    },
-    {
-      "position": 8,
-      "name": "LuisLopezPeralta",
-      "email": "luis.lopez@nicasource.com",
-      "sprintPoints": 4,
-      "swimmingPoints": 4,
-      "totalPoints": 8
-    },
-    {
-      "position": 9,
       "name": "Eduardo Encina",
       "email": "eduardoe@nicasource.com",
       "sprintPoints": 5,
       "swimmingPoints": 3,
       "totalPoints": 8
+    },
+    {
+      "position": 8,
+      "name": "Kathya",
+      "email": "kathyas@nicasource.com",
+      "sprintPoints": 5,
+      "swimmingPoints": 4,
+      "totalPoints": 9
+    },
+    {
+      "position": 9,
+      "name": "Jose Luis",
+      "email": "josem@nicasource.com",
+      "sprintPoints": 0,
+      "swimmingPoints": 6,
+      "totalPoints": 6
     },
     {
       "position": 10,
@@ -82,46 +82,22 @@
     },
     {
       "position": 11,
-      "name": "Alondra Tellez",
-      "email": "alondra.tellez@nicasource.com",
+      "name": "Carlos Cruz",
+      "email": "carlos.cruz@nicasource.com",
       "sprintPoints": 4,
-      "swimmingPoints": 3,
-      "totalPoints": 7
+      "swimmingPoints": 5,
+      "totalPoints": 9
     },
     {
       "position": 12,
-      "name": "Bismarck",
-      "email": "bismarcks@nicasource.com",
+      "name": "Jackzeel Garcia",
+      "email": "jackzeel.garcia@jolt.com",
       "sprintPoints": 4,
-      "swimmingPoints": 3,
-      "totalPoints": 7
+      "swimmingPoints": 4,
+      "totalPoints": 8
     },
     {
       "position": 13,
-      "name": "Fidel",
-      "email": "fidelg@nicasource.com",
-      "sprintPoints": 4,
-      "swimmingPoints": 3,
-      "totalPoints": 7
-    },
-    {
-      "position": 14,
-      "name": "Roberto Gonzalez",
-      "email": "robertog@nicasource.com",
-      "sprintPoints": 4,
-      "swimmingPoints": 3,
-      "totalPoints": 7
-    },
-    {
-      "position": 15,
-      "name": "Orlando Cuadra",
-      "email": "orlando.cuadra@nicasource.com",
-      "sprintPoints": 3,
-      "swimmingPoints": 4,
-      "totalPoints": 7
-    },
-    {
-      "position": 16,
       "name": "Ali",
       "email": "alis@nicasource.com",
       "sprintPoints": 3,
@@ -129,111 +105,7 @@
       "totalPoints": 7
     },
     {
-      "position": 17,
-      "name": "Marvin Obando",
-      "email": "marvino@nicasource.com",
-      "sprintPoints": 3,
-      "swimmingPoints": 3,
-      "totalPoints": 6
-    },
-    {
-      "position": 18,
-      "name": "Fabricio",
-      "email": "fabricios@nicasource.com",
-      "sprintPoints": 3,
-      "swimmingPoints": 3,
-      "totalPoints": 6
-    },
-    {
-      "position": 19,
-      "name": "Lavi",
-      "email": "laviniam@nicasource.com",
-      "sprintPoints": 3,
-      "swimmingPoints": 3,
-      "totalPoints": 6
-    },
-    {
-      "position": 20,
-      "name": "Josimar",
-      "email": "josimar.bellorin@nicasource.com",
-      "sprintPoints": 3,
-      "swimmingPoints": 3,
-      "totalPoints": 6
-    },
-    {
-      "position": 21,
-      "name": "Isabel",
-      "email": "isabelm@nicasource.com",
-      "sprintPoints": 3,
-      "swimmingPoints": 3,
-      "totalPoints": 6
-    },
-    {
-      "position": 22,
-      "name": "Vane",
-      "email": "vanessa.lopez@nicasource.com",
-      "sprintPoints": 3,
-      "swimmingPoints": 3,
-      "totalPoints": 6
-    },
-    {
-      "position": 23,
-      "name": "Hndz",
-      "email": "tadeoh@nicasource.com",
-      "sprintPoints": 0,
-      "swimmingPoints": 6,
-      "totalPoints": 6
-    },
-    {
-      "position": 24,
-      "name": "Facundo Prieto",
-      "email": "facundo.prieto321@gmail.com",
-      "sprintPoints": 3,
-      "swimmingPoints": 5,
-      "totalPoints": 8
-    },
-    {
-      "position": 25,
-      "name": "Carlos Vaca",
-      "email": "carlosv@nicasource.com",
-      "sprintPoints": 4,
-      "swimmingPoints": 0,
-      "totalPoints": 4
-    },
-    {
-      "position": 26,
-      "name": "Hezel",
-      "email": "hezelfg@gmail.com",
-      "sprintPoints": 4,
-      "swimmingPoints": 0,
-      "totalPoints": 4
-    },
-    {
-      "position": 27,
-      "name": "Boyo",
-      "email": "bayardom@nicasource.com",
-      "sprintPoints": 0,
-      "swimmingPoints": 4,
-      "totalPoints": 4
-    },
-    {
-      "position": 28,
-      "name": "Jose Luis",
-      "email": "josem@nicasource.com",
-      "sprintPoints": 0,
-      "swimmingPoints": 4,
-      "totalPoints": 4
-    },
-    {
-      "position": 29,
-      "name": "Adri",
-      "email": "adrianam@nicasource.com",
-      "sprintPoints": 0,
-      "swimmingPoints": 4,
-      "totalPoints": 4
-    },
-    {
-      "position": 30,
+      "position": 14,
       "name": "Maria Guerra",
       "email": "maria.guerra@nicasource.com",
       "sprintPoints": 0,
@@ -241,7 +113,127 @@
       "totalPoints": 4
     },
     {
-      "position": 31,
+      "position": 15,
+      "name": "LuisLopezPeralta",
+      "email": "luis.lopez@nicasource.com",
+      "sprintPoints": 4,
+      "swimmingPoints": 4,
+      "totalPoints": 8
+    },
+    {
+      "position": 16,
+      "name": "Fidel",
+      "email": "fidelg@nicasource.com",
+      "sprintPoints": 4,
+      "swimmingPoints": 3,
+      "totalPoints": 7
+    },
+    {
+      "position": 17,
+      "name": "Bismarck",
+      "email": "bismarcks@nicasource.com",
+      "sprintPoints": 4,
+      "swimmingPoints": 3,
+      "totalPoints": 7
+    },
+    {
+      "position": 18,
+      "name": "Carlos Vaca",
+      "email": "carlosv@nicasource.com",
+      "sprintPoints": 4,
+      "swimmingPoints": 0,
+      "totalPoints": 4
+    },
+    {
+      "position": 19,
+      "name": "Hezel",
+      "email": "hezelfg@gmail.com",
+      "sprintPoints": 4,
+      "swimmingPoints": 0,
+      "totalPoints": 4
+    },
+    {
+      "position": 20,
+      "name": "Boyo",
+      "email": "bayardom@nicasource.com",
+      "sprintPoints": 0,
+      "swimmingPoints": 4,
+      "totalPoints": 4
+    },
+    {
+      "position": 21,
+      "name": "Adri",
+      "email": "adrianam@nicasource.com",
+      "sprintPoints": 0,
+      "swimmingPoints": 4,
+      "totalPoints": 4
+    },
+    {
+      "position": 22,
+      "name": "Roberto Gonzalez",
+      "email": "robertog@nicasource.com",
+      "sprintPoints": 4,
+      "swimmingPoints": 3,
+      "totalPoints": 7
+    },
+    {
+      "position": 23,
+      "name": "Orlando Cuadra",
+      "email": "orlando.cuadra@nicasource.com",
+      "sprintPoints": 3,
+      "swimmingPoints": 4,
+      "totalPoints": 7
+    },
+    {
+      "position": 24,
+      "name": "Marvin Obando",
+      "email": "marvino@nicasource.com",
+      "sprintPoints": 3,
+      "swimmingPoints": 3,
+      "totalPoints": 6
+    },
+    {
+      "position": 25,
+      "name": "Fabricio",
+      "email": "fabricios@nicasource.com",
+      "sprintPoints": 3,
+      "swimmingPoints": 3,
+      "totalPoints": 6
+    },
+    {
+      "position": 26,
+      "name": "Lavi",
+      "email": "laviniam@nicasource.com",
+      "sprintPoints": 3,
+      "swimmingPoints": 3,
+      "totalPoints": 6
+    },
+    {
+      "position": 27,
+      "name": "Josimar",
+      "email": "josimar.bellorin@nicasource.com",
+      "sprintPoints": 3,
+      "swimmingPoints": 3,
+      "totalPoints": 6
+    },
+    {
+      "position": 28,
+      "name": "Isabel",
+      "email": "isabelm@nicasource.com",
+      "sprintPoints": 3,
+      "swimmingPoints": 3,
+      "totalPoints": 6
+    },
+    {
+      "position": 29,
+      "name": "Vane",
+      "email": "vanessa.lopez@nicasource.com",
+      "sprintPoints": 3,
+      "swimmingPoints": 3,
+      "totalPoints": 6
+    },
+    {
+      "position": 30,
       "name": "Roger",
       "email": "rogers@nicasource.com",
       "sprintPoints": 3,
@@ -249,7 +241,7 @@
       "totalPoints": 3
     },
     {
-      "position": 32,
+      "position": 31,
       "name": "Jonathan Guadamuz",
       "email": "jonathang@nicasource.com",
       "sprintPoints": 0,
@@ -257,7 +249,7 @@
       "totalPoints": 3
     },
     {
-      "position": 33,
+      "position": 32,
       "name": "Christian",
       "email": "ctorres@cmnhospitals.org",
       "sprintPoints": 0,
@@ -265,7 +257,7 @@
       "totalPoints": 3
     },
     {
-      "position": 34,
+      "position": 33,
       "name": "Byron",
       "email": "byrond@nicasource.com",
       "sprintPoints": 0,
