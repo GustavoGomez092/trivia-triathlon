@@ -9,14 +9,16 @@ export const swimmingGames = [
   'patternRecognition',
   'sequenceMemoryGame',
   'iconMemory',
-  'cupGame',
+
+  'findTheBall',
+  'dontClickBomb',
 ] as const;
 export const sprintGames = [
   'whackAKey',
   'targetShooting',
   'triviaGame',
 ] as const;
-export const cyclingGames = ['cupGame'] as const;
+export const cyclingGames = ['findTheBall', 'dontClickBomb'] as const;
 
 export type SprintGameType = (typeof sprintGames)[number];
 export type SwimmingGameType = (typeof swimmingGames)[number];
