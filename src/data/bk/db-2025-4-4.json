@@ -1,0 +1,449 @@
+{
+  "currentValidCode": {
+    "active": false,
+    "code": "NSSWIM"
+  },
+  "events": {
+    "swimming": {
+      "scores": {
+        "2jDfudwY8zSmKvIv60l10f42UI83": {
+          "distanceTraveled": 1000,
+          "email": "bayardom@nicasource.com",
+          "finishTime": 1713,
+          "uid": "2jDfudwY8zSmKvIv60l10f42UI83",
+          "userName": "Boyo"
+        },
+        "4J1co9QCZGOwsj7Xj21KzYCEo5Y2": {
+          "distanceTraveled": 1000,
+          "email": "jonathang@nicasource.com",
+          "finishTime": 2532,
+          "uid": "4J1co9QCZGOwsj7Xj21KzYCEo5Y2",
+          "userName": "Jonathan Guadamuz"
+        },
+        "7ZYE1rLeQWf5fJWOUCnYciNeCip1": {
+          "distanceTraveled": 1000,
+          "email": "tadeoh@nicasource.com",
+          "finishTime": 1069,
+          "uid": "7ZYE1rLeQWf5fJWOUCnYciNeCip1",
+          "userName": "Hndz"
+        },
+        "A7g8vrYhRBZbvPoQLwVXogfBA2v1": {
+          "distanceTraveled": 1000,
+          "email": "josimar.bellorin@nicasource.com",
+          "finishTime": 2230,
+          "uid": "A7g8vrYhRBZbvPoQLwVXogfBA2v1",
+          "userName": "Josimar"
+        },
+        "ALZCfWgeKWU97kM4Mh0NZMUUj782": {
+          "distanceTraveled": 1000,
+          "email": "ignaciop@nicasource.com",
+          "finishTime": 1161,
+          "uid": "ALZCfWgeKWU97kM4Mh0NZMUUj782",
+          "userName": "Ignacio Padilla"
+        },
+        "DozzubxSG2ZcR7JUyxU5Vkyigtu2": {
+          "distanceTraveled": 1000,
+          "email": "marvino@nicasource.com",
+          "finishTime": 2221,
+          "uid": "DozzubxSG2ZcR7JUyxU5Vkyigtu2",
+          "userName": "Marvin Obando"
+        },
+        "G1pj6Jns66NXClcbDEXvxJA43RO2": {
+          "distanceTraveled": 1000,
+          "email": "facundo.prieto321@gmail.com",
+          "finishTime": 1101,
+          "uid": "G1pj6Jns66NXClcbDEXvxJA43RO2",
+          "userName": "Facundo Prieto"
+        },
+        "GmCl0zCymGTs53rL0LWwLVPgm9N2": {
+          "distanceTraveled": 1000,
+          "email": "kathyas@nicasource.com",
+          "finishTime": 1625,
+          "uid": "GmCl0zCymGTs53rL0LWwLVPgm9N2",
+          "userName": "Kathya"
+        },
+        "Kmyy4Fz8yma5XAT5wav7WF4hQmv1": {
+          "distanceTraveled": 1000,
+          "email": "luis.lopez@nicasource.com",
+          "finishTime": 1614,
+          "uid": "Kmyy4Fz8yma5XAT5wav7WF4hQmv1",
+          "userName": "LuisLopezPeralta"
+        },
+        "LnnBS1nxakacKTkxuh4tzAs28zP2": {
+          "distanceTraveled": 1000,
+          "email": "isabelm@nicasource.com",
+          "finishTime": 2133,
+          "uid": "LnnBS1nxakacKTkxuh4tzAs28zP2",
+          "userName": "Isabel"
+        },
+        "PpxuTcpwOEXDekjZ2y4u7aykAEV2": {
+          "distanceTraveled": 1000,
+          "email": "ctorres@cmnhospitals.org",
+          "finishTime": 2910,
+          "uid": "PpxuTcpwOEXDekjZ2y4u7aykAEV2",
+          "userName": "Christian"
+        },
+        "QQEjYP1sMxW9tF4xeNt5m6QpdUi2": {
+          "distanceTraveled": 1000,
+          "email": "orlando.cuadra@nicasource.com",
+          "finishTime": 1771,
+          "uid": "QQEjYP1sMxW9tF4xeNt5m6QpdUi2",
+          "userName": "Orlando Cuadra"
+        },
+        "TGdmShVhI4WoLJAMjS5KcgnC5y83": {
+          "distanceTraveled": 1000,
+          "email": "renec@nicasource.com",
+          "finishTime": 1686,
+          "uid": "TGdmShVhI4WoLJAMjS5KcgnC5y83",
+          "userName": "René Cortez"
+        },
+        "TKni39mxB5cBUbCf4WjRKX7YLDt1": {
+          "distanceTraveled": 1000,
+          "email": "alvaroc@nicasource.com",
+          "finishTime": 1948,
+          "uid": "TKni39mxB5cBUbCf4WjRKX7YLDt1",
+          "userName": "Alvaro"
+        },
+        "UlI1jXqkyCYg6qgRpYxwyxSSfG73": {
+          "distanceTraveled": 1000,
+          "email": "fabricios@nicasource.com",
+          "finishTime": 2349,
+          "uid": "UlI1jXqkyCYg6qgRpYxwyxSSfG73",
+          "userName": "Fabricio"
+        },
+        "alI40apa7gVwoMxNRzTZlO314412": {
+          "distanceTraveled": 1000,
+          "email": "fidelg@nicasource.com",
+          "finishTime": 2448,
+          "uid": "alI40apa7gVwoMxNRzTZlO314412",
+          "userName": "Fidel"
+        },
+        "hIJJGfMjCYUkdrLCcw5u9FisydK2": {
+          "distanceTraveled": 1000,
+          "email": "josem@nicasource.com",
+          "finishTime": 1244,
+          "uid": "hIJJGfMjCYUkdrLCcw5u9FisydK2",
+          "userName": "Jose Luis"
+        },
+        "j4kyETxWOuXuuvyqceKHAhXm2zx2": {
+          "distanceTraveled": 1000,
+          "email": "bismarcks@nicasource.com",
+          "finishTime": 3733,
+          "uid": "j4kyETxWOuXuuvyqceKHAhXm2zx2",
+          "userName": "bismarck"
+        },
+        "j9oyLz7C2cgbCUtsQTH4nQGLVnJ3": {
+          "distanceTraveled": 1000,
+          "email": "alis@nicasource.com",
+          "finishTime": 1370,
+          "uid": "j9oyLz7C2cgbCUtsQTH4nQGLVnJ3",
+          "userName": "Ali"
+        },
+        "jPl52dAxmnXHGC9OtoKl6m1yMVg1": {
+          "distanceTraveled": 1000,
+          "email": "vanessa.lopez@nicasource.com",
+          "finishTime": 1884,
+          "uid": "jPl52dAxmnXHGC9OtoKl6m1yMVg1",
+          "userName": "Vane"
+        },
+        "kUjtiChAlIcwbhvVXKXuP0743S13": {
+          "distanceTraveled": 1000,
+          "email": "carlos.cruz@nicasource.com",
+          "finishTime": 1280,
+          "uid": "kUjtiChAlIcwbhvVXKXuP0743S13",
+          "userName": "Carlos Cruz"
+        },
+        "lSS35uDQU4avZM5t8fukXHGzHYq1": {
+          "distanceTraveled": 1000,
+          "email": "byrond@nicasource.com",
+          "finishTime": 2108,
+          "uid": "lSS35uDQU4avZM5t8fukXHGzHYq1",
+          "userName": "Byron"
+        },
+        "mIMXDTcyoYUn8pS59FzKjxCUk8X2": {
+          "distanceTraveled": 1000,
+          "email": "eduardoe@nicasource.com",
+          "finishTime": 1936,
+          "uid": "mIMXDTcyoYUn8pS59FzKjxCUk8X2",
+          "userName": "eduardo encina"
+        },
+        "nlg35355mUfGQY3gC7RqQJrF6CN2": {
+          "distanceTraveled": 1000,
+          "email": "lucas.agostini@nicasource.com",
+          "finishTime": 1332,
+          "uid": "nlg35355mUfGQY3gC7RqQJrF6CN2",
+          "userName": "Lucas Agostini"
+        },
+        "o6LKiLGf14ad6Yoi2JjXVTMC2qz2": {
+          "distanceTraveled": 1000,
+          "email": "adrianam@nicasource.com",
+          "finishTime": 1766,
+          "uid": "o6LKiLGf14ad6Yoi2JjXVTMC2qz2",
+          "userName": "Adri"
+        },
+        "ox4T1X5PnBcCugaGPUWN5L3BD2N2": {
+          "distanceTraveled": 1000,
+          "email": "laviniam@nicasource.com",
+          "finishTime": 1966,
+          "uid": "ox4T1X5PnBcCugaGPUWN5L3BD2N2",
+          "userName": "Lavi"
+        },
+        "q06QIC7ZNEP3Z0QofrxFAWJe9fW2": {
+          "distanceTraveled": 1000,
+          "email": "maria.guerra@nicasource.com",
+          "finishTime": 1471,
+          "uid": "q06QIC7ZNEP3Z0QofrxFAWJe9fW2",
+          "userName": "Maria Guerra"
+        },
+        "qlzsT5S9R5eZLJKNQoByaLMQv333": {
+          "distanceTraveled": 1000,
+          "email": "robertog@nicasource.com",
+          "finishTime": 2214,
+          "uid": "qlzsT5S9R5eZLJKNQoByaLMQv333",
+          "userName": "Roberto Gonzalez"
+        },
+        "s6QYPnNDCNYkYJuZKU48wu4KRRi1": {
+          "distanceTraveled": 1000,
+          "email": "alondra.tellez@nicasource.com",
+          "finishTime": 2450,
+          "uid": "s6QYPnNDCNYkYJuZKU48wu4KRRi1",
+          "userName": "Alondra Tellez"
+        },
+        "skh4v2BMlGVNHXLcEQziXc7tybH2": {
+          "distanceTraveled": 1000,
+          "email": "jackzeel.garcia@jolt.com",
+          "finishTime": 1665,
+          "uid": "skh4v2BMlGVNHXLcEQziXc7tybH2",
+          "userName": "Jack"
+        },
+        "zgJjwWCDs4N7G4E5AElKfqejTsl1": {
+          "distanceTraveled": 1000,
+          "email": "ximenas@nicasource.com",
+          "finishTime": 1175,
+          "uid": "zgJjwWCDs4N7G4E5AElKfqejTsl1",
+          "userName": "Ximena Silva"
+        }
+      },
+      "started": false
+    }
+  },
+  "users": {
+    "2jDfudwY8zSmKvIv60l10f42UI83": {
+      "email": "bayardom@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:28.426Z",
+      "name": "Boyo",
+      "uid": "2jDfudwY8zSmKvIv60l10f42UI83"
+    },
+    "4J1co9QCZGOwsj7Xj21KzYCEo5Y2": {
+      "email": "jonathang@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:33.239Z",
+      "name": "Jonathan Guadamuz",
+      "uid": "4J1co9QCZGOwsj7Xj21KzYCEo5Y2"
+    },
+    "7ZYE1rLeQWf5fJWOUCnYciNeCip1": {
+      "email": "tadeoh@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:33.080Z",
+      "name": "Hndz",
+      "uid": "7ZYE1rLeQWf5fJWOUCnYciNeCip1"
+    },
+    "A7g8vrYhRBZbvPoQLwVXogfBA2v1": {
+      "email": "josimar.bellorin@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:53:17.304Z",
+      "name": "Josimar",
+      "uid": "A7g8vrYhRBZbvPoQLwVXogfBA2v1"
+    },
+    "ALZCfWgeKWU97kM4Mh0NZMUUj782": {
+      "email": "ignaciop@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:31.689Z",
+      "name": "Ignacio Padilla",
+      "uid": "ALZCfWgeKWU97kM4Mh0NZMUUj782"
+    },
+    "DozzubxSG2ZcR7JUyxU5Vkyigtu2": {
+      "email": "marvino@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:29.054Z",
+      "name": "Marvin Obando",
+      "uid": "DozzubxSG2ZcR7JUyxU5Vkyigtu2"
+    },
+    "G1pj6Jns66NXClcbDEXvxJA43RO2": {
+      "email": "facundo.prieto321@gmail.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:31.928Z",
+      "name": "Facundo Prieto",
+      "uid": "G1pj6Jns66NXClcbDEXvxJA43RO2"
+    },
+    "GmCl0zCymGTs53rL0LWwLVPgm9N2": {
+      "email": "kathyas@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:53:04.205Z",
+      "name": "Kathya",
+      "uid": "GmCl0zCymGTs53rL0LWwLVPgm9N2"
+    },
+    "Kmyy4Fz8yma5XAT5wav7WF4hQmv1": {
+      "email": "luis.lopez@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:30.902Z",
+      "name": "LuisLopezPeralta",
+      "uid": "Kmyy4Fz8yma5XAT5wav7WF4hQmv1"
+    },
+    "LnnBS1nxakacKTkxuh4tzAs28zP2": {
+      "email": "isabelm@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:34.228Z",
+      "name": "Isabel",
+      "uid": "LnnBS1nxakacKTkxuh4tzAs28zP2"
+    },
+    "PpxuTcpwOEXDekjZ2y4u7aykAEV2": {
+      "email": "ctorres@cmnhospitals.org",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:30.539Z",
+      "name": "Christian",
+      "uid": "PpxuTcpwOEXDekjZ2y4u7aykAEV2"
+    },
+    "QQEjYP1sMxW9tF4xeNt5m6QpdUi2": {
+      "email": "orlando.cuadra@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:27.267Z",
+      "name": "Orlando Cuadra",
+      "uid": "QQEjYP1sMxW9tF4xeNt5m6QpdUi2"
+    },
+    "TGdmShVhI4WoLJAMjS5KcgnC5y83": {
+      "email": "renec@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:32.070Z",
+      "name": "René Cortez",
+      "uid": "TGdmShVhI4WoLJAMjS5KcgnC5y83"
+    },
+    "TKni39mxB5cBUbCf4WjRKX7YLDt1": {
+      "email": "alvaroc@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:42.801Z",
+      "name": "Alvaro",
+      "uid": "TKni39mxB5cBUbCf4WjRKX7YLDt1"
+    },
+    "UlI1jXqkyCYg6qgRpYxwyxSSfG73": {
+      "email": "fabricios@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:38.549Z",
+      "name": "Fabricio",
+      "uid": "UlI1jXqkyCYg6qgRpYxwyxSSfG73"
+    },
+    "alI40apa7gVwoMxNRzTZlO314412": {
+      "email": "fidelg@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:30.552Z",
+      "name": "Fidel",
+      "uid": "alI40apa7gVwoMxNRzTZlO314412"
+    },
+    "hIJJGfMjCYUkdrLCcw5u9FisydK2": {
+      "email": "josem@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:29.177Z",
+      "name": "Jose Luis",
+      "uid": "hIJJGfMjCYUkdrLCcw5u9FisydK2"
+    },
+    "j4kyETxWOuXuuvyqceKHAhXm2zx2": {
+      "email": "bismarcks@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:44.983Z",
+      "name": "bismarck",
+      "uid": "j4kyETxWOuXuuvyqceKHAhXm2zx2"
+    },
+    "j9oyLz7C2cgbCUtsQTH4nQGLVnJ3": {
+      "email": "alis@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:58.382Z",
+      "name": "Ali",
+      "uid": "j9oyLz7C2cgbCUtsQTH4nQGLVnJ3"
+    },
+    "jPl52dAxmnXHGC9OtoKl6m1yMVg1": {
+      "email": "vanessa.lopez@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:37.769Z",
+      "name": "Vane",
+      "uid": "jPl52dAxmnXHGC9OtoKl6m1yMVg1"
+    },
+    "kUjtiChAlIcwbhvVXKXuP0743S13": {
+      "email": "carlos.cruz@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:37.636Z",
+      "name": "Carlos Cruz",
+      "uid": "kUjtiChAlIcwbhvVXKXuP0743S13"
+    },
+    "lSS35uDQU4avZM5t8fukXHGzHYq1": {
+      "email": "byrond@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:27.367Z",
+      "name": "Byron",
+      "uid": "lSS35uDQU4avZM5t8fukXHGzHYq1"
+    },
+    "mIMXDTcyoYUn8pS59FzKjxCUk8X2": {
+      "email": "eduardoe@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:30.090Z",
+      "name": "eduardo encina",
+      "uid": "mIMXDTcyoYUn8pS59FzKjxCUk8X2"
+    },
+    "nlg35355mUfGQY3gC7RqQJrF6CN2": {
+      "email": "lucas.agostini@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:26.378Z",
+      "name": "Lucas Agostini",
+      "uid": "nlg35355mUfGQY3gC7RqQJrF6CN2"
+    },
+    "o6LKiLGf14ad6Yoi2JjXVTMC2qz2": {
+      "email": "adrianam@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:42.947Z",
+      "name": "Adri",
+      "uid": "o6LKiLGf14ad6Yoi2JjXVTMC2qz2"
+    },
+    "ox4T1X5PnBcCugaGPUWN5L3BD2N2": {
+      "email": "laviniam@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:41.960Z",
+      "name": "Lavi",
+      "uid": "ox4T1X5PnBcCugaGPUWN5L3BD2N2"
+    },
+    "q06QIC7ZNEP3Z0QofrxFAWJe9fW2": {
+      "email": "maria.guerra@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:14.927Z",
+      "name": "Maria Guerra",
+      "uid": "q06QIC7ZNEP3Z0QofrxFAWJe9fW2"
+    },
+    "qlzsT5S9R5eZLJKNQoByaLMQv333": {
+      "email": "robertog@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:33.762Z",
+      "name": "Roberto Gonzalez",
+      "uid": "qlzsT5S9R5eZLJKNQoByaLMQv333"
+    },
+    "s6QYPnNDCNYkYJuZKU48wu4KRRi1": {
+      "email": "alondra.tellez@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:31.130Z",
+      "name": "Alondra Tellez",
+      "uid": "s6QYPnNDCNYkYJuZKU48wu4KRRi1"
+    },
+    "skh4v2BMlGVNHXLcEQziXc7tybH2": {
+      "email": "jackzeel.garcia@jolt.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:52.250Z",
+      "name": "Jack",
+      "uid": "skh4v2BMlGVNHXLcEQziXc7tybH2"
+    },
+    "zgJjwWCDs4N7G4E5AElKfqejTsl1": {
+      "email": "ximenas@nicasource.com",
+      "inviteCode": "NSSWIM",
+      "loggedInAt": "2025-04-04T17:52:32.056Z",
+      "name": "Ximena Silva",
+      "uid": "zgJjwWCDs4N7G4E5AElKfqejTsl1"
+    }
+  }
+}
