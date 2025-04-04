@@ -37,13 +37,13 @@ const Spectator = () => {
         />
       </div>
 
-      <Button
+      {/* <Button
         variant="default"
         className="!fixed bottom-6 right-6 z-20"
         onClick={handleReturnToLogin}
       >
         Back to login
-      </Button>
+      </Button> */}
     </div>
   );
 };
