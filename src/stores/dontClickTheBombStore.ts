@@ -4,7 +4,7 @@ import useEventStore from './eventStore';
 const { setTrigger, setPassed: setPassedGlobal } = useEventStore.getState();
 
 const NUM_ITEMS = 12;
-const BOMB_PROBABILITY = 0.25;
+const BOMB_PROBABILITY = 0.5;
 
 interface DontClickBombState {
   items: string[];

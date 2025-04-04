@@ -11,10 +11,6 @@ export const swimmingGames = [
   'iconMemory',
   'colorMatch',
   'wordPairs',
-
-  // 'findTheBall',
-  // 'dontClickBomb',
-  // 'quickMathReflex',
 ] as const;
 export const sprintGames = [
   'whackAKey',
@@ -22,6 +18,14 @@ export const sprintGames = [
   'triviaGame',
 ] as const;
 export const cyclingGames = [
+  'whackAKey',
+  'targetShooting',
+  'triviaGame',
+  'patternRecognition',
+  'sequenceMemoryGame',
+  'iconMemory',
+  'colorMatch',
+  'wordPairs',
   'findTheBall',
   'dontClickBomb',
   'quickMathReflex',
@@ -41,4 +45,4 @@ export const eventGamesMap: Record<EventType, readonly string[]> = {
   cycling: cyclingGames,
 } as const;
 
-export const CURRENT_EVENT = 'swimming';
+export const CURRENT_EVENT = 'cycling';

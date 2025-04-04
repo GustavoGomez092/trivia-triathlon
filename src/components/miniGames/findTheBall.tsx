@@ -196,7 +196,7 @@ const FindTheBall: FC = () => {
                 isShuffling
                   ? 'pointer-events-none cursor-default'
                   : 'pointer-events-auto',
-                disableCups && isShuffling && 'opacity-80',
+                disableCups && isShuffling && 'opacity-100',
               )}
             >
               {((showBall && isCorrect) || (finished && isCorrect)) && (
