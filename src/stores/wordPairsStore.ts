@@ -4,20 +4,34 @@ import useEventStore from './eventStore';
 const { setTrigger, setPassed: setPassedWordPairs, speedIncrease, speedDecrease } = useEventStore.getState();
 
 // Swimming-related words for the game
-// Similar word pairs to make the game more challenging
-const words = [
-    'BACKSTROKE', 'BACKSSTROKE',  // Common double-s mistake
-    'BUTTERFLY', 'BUTTERFLIE',    // Common ie/y confusion
-    'FREESTYLE', 'FREESTILE',     // Style/stile confusion
-    'BREASTSTROKE', 'BREATHSTROKE', // Common confusion with 'breath'
-    'PULLOUT', 'PULL-OUT',        // Hyphenation difference
-    'STREAMLINE', 'STREAMLINED',  // Base vs modified form
-    'KICKBOARD', 'KICKBORD',      // Common misspelling
-    'DOLPHIN', 'DOLFIN',          // Ph vs f confusion
-    'PROPULSION', 'PROPULTION',   // Missing 's'
-    'BILATERAL', 'BILATTERAL',    // Common double-t mistake
-    'ROTATION', 'ROTASION',       // Common 't' vs 's' confusion
-    'RECOVERY', 'RECOVARY'        // Common a/e confusion
+// Correct spellings and their common mistakes
+const correctWords = [
+    'BACKSTROKE',
+    'BUTTERFLY',
+    'FREESTYLE',
+    'BREASTSTROKE',
+    'PULLOUT',
+    'STREAMLINE',
+    'KICKBOARD',
+    'DOLPHIN',
+    'PROPULSION',
+    'BILATERAL',
+    'ROTATION',
+    'RECOVERY'
+];
+
+const incorrectWords = [
+    'BACKSSTROKE',   // Common double-s mistake
+    'BUTTERFLIE',    // Common ie/y confusion
+    'FREESTILE',     // Style/stile confusion
+    'BREATHSTROKE',  // Common confusion with 'breath'
+    'PULL-OUT',      // Hyphenation difference
+    'KICKBORD',      // Common misspelling
+    'DOLFIN',        // Ph vs f confusion
+    'PROPULTION',    // Missing 's'
+    'BILATTERAL',    // Common double-t mistake
+    'ROTASION',      // Common 't' vs 's' confusion
+    'RECOVARY'       // Common a/e confusion
 ];
 
 interface WordPairsState {
@@ -50,8 +64,8 @@ const useWordPairsStore = create<WordPairsState>((set, get) => ({
     passed: false,
     score: 0,
     timeLeft: 25,
-    leftWord: '',
-    rightWord: '',
+    leftWord: correctWords[0],  // Initialize with first word
+    rightWord: correctWords[0],  // Initialize as a match
     gameTime: 25,
     targetScore: 5,
     lives: 3,
@@ -95,22 +109,27 @@ const useWordPairsStore = create<WordPairsState>((set, get) => ({
                 speedDecrease();
             }
 
+            // Show game result for 2 seconds, then reset and trigger next game
             setTimeout(() => {
+                get().reset();
+                get().generateNewPair();
                 setTrigger(Math.floor(Math.random() * 1000) + 1000);
             }, 1000);
         }
     },
 
     reset: () => {
-        setTrigger(Math.floor(Math.random() * 1000) + 1000);
+        // Generate a new pair first
+        const correctWord = correctWords[Math.floor(Math.random() * correctWords.length)];
+
         set({
             started: false,
             finished: false,
             passed: false,
             score: 0,
             timeLeft: 25,
-            leftWord: '',
-            rightWord: '',
+            leftWord: correctWord,
+            rightWord: correctWord, // Start with a matching pair
             lives: 3,
         });
     },
@@ -158,13 +177,27 @@ const useWordPairsStore = create<WordPairsState>((set, get) => ({
     },
 
     generateNewPair: () => {
-        const word1 = words[Math.floor(Math.random() * words.length)];
-        // 50% chance of matching pair
-        const word2 = Math.random() < 0.5
-            ? word1
-            : words[Math.floor(Math.random() * words.length)];
+        // First, decide if we want a matching pair (50% chance)
+        const isMatch = Math.random() < 0.5;
 
-        set({ leftWord: word1, rightWord: word2 });
+        // Pick a random correct word
+        const correctWord = correctWords[Math.floor(Math.random() * correctWords.length)];
+
+        if (isMatch) {
+            // For matches, use the same correct word twice
+            set({ leftWord: correctWord, rightWord: correctWord });
+        } else {
+            // For non-matches, use a correct word and its corresponding incorrect version
+            const correctIndex = correctWords.indexOf(correctWord);
+            const incorrectWord = incorrectWords[correctIndex];
+
+            // Randomly decide which side gets the correct word
+            const leftFirst = Math.random() < 0.5;
+            set({
+                leftWord: leftFirst ? correctWord : incorrectWord,
+                rightWord: leftFirst ? incorrectWord : correctWord
+            });
+        }
     },
 }));
 
