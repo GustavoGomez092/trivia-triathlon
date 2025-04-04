@@ -2,15 +2,15 @@ import { Button } from '@/components/ui/button';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import './index.css';
 import { Table } from '@/components/ui/table';
-import results from '@/data/sprintResults.json';
+import data from '@/data/results.json';
 import { cn } from '@/lib/utils';
 
 const TABLE_HEADERS = Object.freeze([
   { title: 'Pos', key: 'position' },
   { title: 'Player', key: 'name' },
-  { title: 'Dist', key: 'distance' },
-  { title: 'Time', key: 'time' },
-  { title: 'Points', key: 'points' },
+  { title: 'Sprint', key: 'sprintPoints' },
+  { title: 'Swimming', key: 'swimmingPoints' },
+  { title: 'Total', key: 'totalPoints' },
 ]);
 
 const Podium = () => {
@@ -35,7 +35,7 @@ const Podium = () => {
           </thead>
 
           <tbody>
-            {results?.map((score, index) => (
+            {data.results?.sort((a, b) => b.totalPoints - a.totalPoints).map((score, index) => (
               <tr
                 key={index}
                 className={cn(
@@ -48,9 +48,9 @@ const Podium = () => {
               >
                 <td>{score.position}</td>
                 <td>{score.name}</td>
-                <td>{score.distance}</td>
-                <td>{score.time}</td>
-                <td>{score.points}</td>
+                <td>{score.sprintPoints}</td>
+                <td>{score.swimmingPoints}</td>
+                <td>{score.totalPoints}</td>
               </tr>
             ))}
           </tbody>
