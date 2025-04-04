@@ -180,6 +180,7 @@
       "position": 23,
       "name": "Hndz",
       "email": "tadeoh@nicasource.com",
+      "sprintPoints": 0,
       "swimmingPoints": 6,
       "totalPoints": 6
     },
@@ -187,14 +188,16 @@
       "position": 24,
       "name": "Facundo Prieto",
       "email": "facundo.prieto321@gmail.com",
+      "sprintPoints": 3,
       "swimmingPoints": 5,
-      "totalPoints": 5
+      "totalPoints": 8
     },
     {
       "position": 25,
       "name": "Carlos Vaca",
       "email": "carlosv@nicasource.com",
       "sprintPoints": 4,
+      "swimmingPoints": 0,
       "totalPoints": 4
     },
     {
@@ -202,12 +205,14 @@
       "name": "Hezel",
       "email": "hezelfg@gmail.com",
       "sprintPoints": 4,
+      "swimmingPoints": 0,
       "totalPoints": 4
     },
     {
       "position": 27,
       "name": "Boyo",
       "email": "bayardom@nicasource.com",
+      "sprintPoints": 0,
       "swimmingPoints": 4,
       "totalPoints": 4
     },
@@ -215,6 +220,7 @@
       "position": 28,
       "name": "Jose Luis",
       "email": "josem@nicasource.com",
+      "sprintPoints": 0,
       "swimmingPoints": 4,
       "totalPoints": 4
     },
@@ -222,6 +228,7 @@
       "position": 29,
       "name": "Adri",
       "email": "adrianam@nicasource.com",
+      "sprintPoints": 0,
       "swimmingPoints": 4,
       "totalPoints": 4
     },
@@ -229,6 +236,7 @@
       "position": 30,
       "name": "Maria Guerra",
       "email": "maria.guerra@nicasource.com",
+      "sprintPoints": 0,
       "swimmingPoints": 4,
       "totalPoints": 4
     },
@@ -237,33 +245,30 @@
       "name": "Roger",
       "email": "rogers@nicasource.com",
       "sprintPoints": 3,
+      "swimmingPoints": 0,
       "totalPoints": 3
     },
     {
       "position": 32,
-      "name": "Facundo Prieto",
-      "email": "facundo.prieto@nicasource.com",
-      "sprintPoints": 3,
+      "name": "Jonathan Guadamuz",
+      "email": "jonathang@nicasource.com",
+      "sprintPoints": 0,
+      "swimmingPoints": 3,
       "totalPoints": 3
     },
     {
       "position": 33,
-      "name": "Jonathan Guadamuz",
-      "email": "jonathang@nicasource.com",
+      "name": "Christian",
+      "email": "ctorres@cmnhospitals.org",
+      "sprintPoints": 0,
       "swimmingPoints": 3,
       "totalPoints": 3
     },
     {
       "position": 34,
-      "name": "Christian",
-      "email": "ctorres@cmnhospitals.org",
-      "swimmingPoints": 3,
-      "totalPoints": 3
-    },
-    {
-      "position": 35,
       "name": "Byron",
       "email": "byrond@nicasource.com",
+      "sprintPoints": 0,
       "swimmingPoints": 3,
       "totalPoints": 3
     }
