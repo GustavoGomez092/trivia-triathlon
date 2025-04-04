@@ -12,13 +12,18 @@ export const swimmingGames = [
 
   'findTheBall',
   'dontClickBomb',
+  'quickMathReflex',
 ] as const;
 export const sprintGames = [
   'whackAKey',
   'targetShooting',
   'triviaGame',
 ] as const;
-export const cyclingGames = ['findTheBall', 'dontClickBomb'] as const;
+export const cyclingGames = [
+  'findTheBall',
+  'dontClickBomb',
+  'quickMathReflex',
+] as const;
 
 export type SprintGameType = (typeof sprintGames)[number];
 export type SwimmingGameType = (typeof swimmingGames)[number];
