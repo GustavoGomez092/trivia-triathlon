@@ -18,7 +18,7 @@ interface CupGameState {
   reset: () => void;
 }
 
-const useCupGameStore = create<CupGameState>((set) => ({
+const useFindTheBallStore = create<CupGameState>((set) => ({
   ballPosition: Math.floor(Math.random() * 3),
   selectedCup: null,
   gameActive: false,
@@ -53,4 +53,4 @@ const useCupGameStore = create<CupGameState>((set) => ({
   },
 }));
 
-export default useCupGameStore;
+export default useFindTheBallStore;

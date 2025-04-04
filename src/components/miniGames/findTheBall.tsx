@@ -1,14 +1,14 @@
 import { FC, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import useCupGameStore from '@/stores/cupGameStore';
+import useFindTheBallStore from '@/stores/findTheBallStore';
 import useEventStore from '@/stores/eventStore';
 import { cn } from '@/lib/utils';
 
 const SHUFFLE_BASE_SPEED = 500; // Shuffle base speed in ms. Lower = faster shuffle.
-const SHOW_BALL_DURATION = 2000; // Duration to show the ball before shuffling
+const SHOW_BALL_DURATION = 1500; // Duration to show the ball before shuffling
 const TIME_LIMIT = 5; // Time limit in seconds
 
-const CupGame: FC = () => {
+const FindTheBall: FC = () => {
   const {
     ballPosition,
     finished,
@@ -20,7 +20,7 @@ const CupGame: FC = () => {
     setPassed,
     reset,
     shuffleCups,
-  } = useCupGameStore();
+  } = useFindTheBallStore();
 
   const { speedIncrease, speedDecrease } = useEventStore();
 
@@ -145,7 +145,7 @@ const CupGame: FC = () => {
   if (finished && showFeedback) {
     return (
       <div className="nes-container is-rounded flex min-h-full w-full flex-col items-center justify-center bg-gray-200 p-8">
-        <h1 className="mb-4 text-2xl font-bold">Cup Game</h1>
+        <h1 className="mb-4 text-2xl font-bold">Find the ball</h1>
         <div className="flex flex-col items-center justify-center">
           <h1
             className={cn(
@@ -162,7 +162,7 @@ const CupGame: FC = () => {
 
   return (
     <div className="nes-container is-rounded relative z-50 min-h-full w-full bg-gray-200 p-6">
-      <h1 className="mb-4 text-center text-2xl font-bold">Cup Game</h1>
+      <h1 className="mb-4 text-center text-2xl font-bold">Find the ball</h1>
 
       <div className="mb-4 text-center">
         <span className={cn('font-semibold', timeLeft <= 3 && 'text-red-500')}>
@@ -204,4 +204,4 @@ const CupGame: FC = () => {
   );
 };
 
-export default CupGame;
+export default FindTheBall;

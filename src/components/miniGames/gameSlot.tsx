@@ -1,11 +1,12 @@
 import { GameType, EventType } from '@/types/Game';
-import CupGame from './CupGame';
+import FindTheBall from './findTheBall';
 import IconMemory from './iconMemory';
 import PatternRecognition from './patternRecognition';
 import SequenceMemoryGame from './sequenceMemoryGame';
 import TargetShooting from './targetShooting';
 import TriviaGame from './triviaGame';
 import WhackAKey from './whackAKey';
+import DontClickTheBomb from './dontClickTheBomb';
 
 export interface GameComponentProps {
   seed: number;
@@ -26,15 +27,16 @@ const gameComponentMap: Record<
   // patternRecognition: PatternRecognition,
   // sequenceMemoryGame: SequenceMemoryGame,
   // iconMemory: IconMemory,
-  // cupGame: CupGame,
+  // findTheBall: FindTheBall,
 
-  whackAKey: CupGame,
-  targetShooting: CupGame,
-  triviaGame: CupGame,
-  patternRecognition: CupGame,
-  sequenceMemoryGame: CupGame,
-  iconMemory: CupGame,
-  cupGame: CupGame,
+  whackAKey: DontClickTheBomb,
+  targetShooting: DontClickTheBomb,
+  triviaGame: DontClickTheBomb,
+  patternRecognition: DontClickTheBomb,
+  sequenceMemoryGame: DontClickTheBomb,
+  iconMemory: DontClickTheBomb,
+  findTheBall: FindTheBall,
+  dontClickBomb: DontClickTheBomb,
 };
 
 export function GameSlot({
