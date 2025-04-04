@@ -82,7 +82,7 @@ const ColorMatch: FC = () => {
     if (finished) {
         return (
             <div className="nes-container is-rounded flex min-h-full w-full flex-col items-center justify-center bg-slate-800 p-8">
-                <h1 className="mb-4 text-2xl font-bold text-white">Color Match</h1>
+                <h1 className="mb-4 text-2xl font-bold text-white">Color Word Match</h1>
                 <div className="flex flex-col items-center justify-center gap-4">
                     <h2 className={cn(
                         'text-center text-4xl font-bold',
