@@ -7,6 +7,7 @@ import TargetShooting from './targetShooting';
 import TriviaGame from './triviaGame';
 import WhackAKey from './whackAKey';
 import DontClickTheBomb from './dontClickTheBomb';
+import QuickMathReflex from './quickMathReflex';
 
 export interface GameComponentProps {
   seed: number;
@@ -21,22 +22,16 @@ const gameComponentMap: Record<
   GameType,
   React.ComponentType<GameComponentProps> | undefined | null
 > = {
-  // whackAKey: WhackAKey,
-  // targetShooting: TargetShooting,
-  // triviaGame: TriviaGame,
-  // patternRecognition: PatternRecognition,
-  // sequenceMemoryGame: SequenceMemoryGame,
-  // iconMemory: IconMemory,
-  // findTheBall: FindTheBall,
+  whackAKey: WhackAKey,
+  targetShooting: TargetShooting,
+  triviaGame: TriviaGame,
+  patternRecognition: PatternRecognition,
+  sequenceMemoryGame: SequenceMemoryGame,
+  iconMemory: IconMemory,
 
-  whackAKey: DontClickTheBomb,
-  targetShooting: DontClickTheBomb,
-  triviaGame: DontClickTheBomb,
-  patternRecognition: DontClickTheBomb,
-  sequenceMemoryGame: DontClickTheBomb,
-  iconMemory: DontClickTheBomb,
   findTheBall: FindTheBall,
   dontClickBomb: DontClickTheBomb,
+  quickMathReflex: QuickMathReflex,
 };
 
 export function GameSlot({

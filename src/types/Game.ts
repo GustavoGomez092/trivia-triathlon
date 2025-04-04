@@ -10,9 +10,9 @@ export const swimmingGames = [
   'sequenceMemoryGame',
   'iconMemory',
 
-  'findTheBall',
-  'dontClickBomb',
-  'quickMathReflex',
+  // 'findTheBall',
+  // 'dontClickBomb',
+  // 'quickMathReflex',
 ] as const;
 export const sprintGames = [
   'whackAKey',
