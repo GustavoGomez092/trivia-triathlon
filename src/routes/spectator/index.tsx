@@ -1,5 +1,4 @@
-import { Button } from '@/components/ui/button';
-import { createFileRoute, useRouter } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
 import { PositionTable } from '@/components/PositionTable';
 import { SwimmingPool } from '@/components/SwimmingPool';
@@ -10,12 +9,12 @@ import { CURRENT_EVENT } from '@/types/Game';
 const Spectator = () => {
   const { scores, loading } = useTopUsersForEvent(CURRENT_EVENT);
 
-  const router = useRouter();
+  // const router = useRouter();
   const [selectedEmail, setSelectedEmail] = useState<string | null>(null);
 
-  const handleReturnToLogin = () => {
-    router.navigate({ to: '/login' });
-  };
+  // const handleReturnToLogin = () => {
+  //   router.navigate({ to: '/login' });
+  // };
 
   return (
     <div className="spectator-page h-svh w-svw flex gap-2 p-4">
