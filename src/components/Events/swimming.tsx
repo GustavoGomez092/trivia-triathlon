@@ -13,6 +13,7 @@ import { addScoreToEvent, getEventScore } from '@/firebase/database/games';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
 import { CURRENT_EVENT } from '@/types/Game';
 import './swimming.css';
+import { useRouter } from '@tanstack/react-router';
 
 export default function SwimmingScreen() {
   gsap.registerPlugin(useGSAP);
@@ -55,15 +56,23 @@ export default function SwimmingScreen() {
 
   const { View: SwimmerTwoView, setSpeed: setSpeedTwo } = useLottie(swimmerTwo);
 
+  const router = useRouter();
+
   // Load saved progress when component mounts
   useEffect(() => {
-    if (!user || started || finished) return; // Don't load if game is in progress
+    if (!user || started) return; // Don't load if game is in progress
 
     const loadSavedProgress = async () => {
       try {
         const savedScore = await getEventScore(CURRENT_EVENT, user.uid);
         if (savedScore && savedScore.distanceTraveled > 0) {
-          // Restore distance and update swimmer position
+          // If they've completed the distance, redirect to spectator
+          if (savedScore.distanceTraveled >= TOTAL_DISTANCE) {
+            router.navigate({ to: '/spectator' });
+            return;
+          }
+
+          // Otherwise restore their progress
           setDistanceTraveled(savedScore.distanceTraveled);
           // Restore time if it exists
           if (savedScore.finishTime > 0) {
@@ -79,7 +88,7 @@ export default function SwimmingScreen() {
     };
 
     loadSavedProgress();
-  }, [user, started, finished]);
+  }, [user, started, router]);
 
   // Timer effect
   useEffect(() => {
