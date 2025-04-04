@@ -45,7 +45,7 @@ const useColorMatchStore = create<ColorMatchState>((set, get) => ({
     started: false,
     finished: false,
     passed: false,
-    timeLeft: 30,
+    timeLeft: 25,
     combo: 0,
     mistakes: 0,
     correctMatches: 0,
@@ -55,7 +55,7 @@ const useColorMatchStore = create<ColorMatchState>((set, get) => ({
 
     targetMatches: 15,
 
-    gameTime: 30,
+    gameTime: 25,
 
     start: () => {
         const state = get();

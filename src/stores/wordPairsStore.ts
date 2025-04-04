@@ -6,15 +6,18 @@ const { setTrigger, setPassed: setPassedWordPairs, speedIncrease, speedDecrease 
 // Swimming-related words for the game
 // Similar word pairs to make the game more challenging
 const words = [
-    'FREESTYLE', 'FRONTCRAWL',   // Same stroke, different names
-    'BUTTERFLY', 'FLYSTROKE',     // Similar names
-    'BREASTSTROKE', 'BREASTROKE', // Common misspelling
-    'MEDLEY', 'MELODY',           // Look similar
-    'SPRINT', 'SPIRIT',           // One letter difference
-    'DOLPHIN', 'DOLPHINE',        // Tricky ending
-    'TRIATHLON', 'TETRATHLON',    // Similar concept
-    'ENDURANCE', 'ENDURANSE',     // Common misspelling
-    'TECHNIQUE', 'TECNIQUE'       // Missing 'h'
+    'BACKSTROKE', 'BACKSSTROKE',  // Common double-s mistake
+    'BUTTERFLY', 'BUTTERFLIE',    // Common ie/y confusion
+    'FREESTYLE', 'FREESTILE',     // Style/stile confusion
+    'BREASTSTROKE', 'BREATHSTROKE', // Common confusion with 'breath'
+    'PULLOUT', 'PULL-OUT',        // Hyphenation difference
+    'STREAMLINE', 'STREAMLINED',  // Base vs modified form
+    'KICKBOARD', 'KICKBORD',      // Common misspelling
+    'DOLPHIN', 'DOLFIN',          // Ph vs f confusion
+    'PROPULSION', 'PROPULTION',   // Missing 's'
+    'BILATERAL', 'BILATTERAL',    // Common double-t mistake
+    'ROTATION', 'ROTASION',       // Common 't' vs 's' confusion
+    'RECOVERY', 'RECOVARY'        // Common a/e confusion
 ];
 
 interface WordPairsState {
@@ -77,11 +80,21 @@ const useWordPairsStore = create<WordPairsState>((set, get) => ({
         if (state.started && !state.finished) {
             set({ finished: true, passed });
             setPassedWordPairs(passed);
-            if (passed) {
+
+            // If passed with all 3 lives, increase speed twice
+            if (passed && state.lives === 3) {
                 speedIncrease();
-            } else {
+                speedIncrease();
+            }
+            // If passed with some lives lost, increase speed once
+            else if (passed) {
+                speedIncrease();
+            }
+            // If failed, decrease speed
+            else {
                 speedDecrease();
             }
+
             setTimeout(() => {
                 setTrigger(Math.floor(Math.random() * 1000) + 1000);
             }, 1000);
@@ -120,28 +133,18 @@ const useWordPairsStore = create<WordPairsState>((set, get) => ({
         const correct = isMatch === actualMatch;
 
         if (correct) {
-            // Update score and occasionally increase speed on correct answer
+            // Update score on correct answer
             const newScore = state.score + 1;
             set({ score: newScore });
-
-            // Increase speed every 2 correct answers
-            if (newScore % 2 === 0) {
-                speedIncrease();
-            }
 
             if (newScore >= state.targetScore) {
                 get().finish(true);
                 return;
             }
         } else {
-            // Wrong answer loses a life and occasionally decreases speed
+            // Wrong answer loses a life
             const newLives = state.lives - 1;
             set({ lives: newLives });
-
-            // Only decrease speed on first and second mistakes
-            if (newLives >= 1) {
-                speedDecrease();
-            }
 
             // Game over if no lives left
             if (newLives <= 0) {
