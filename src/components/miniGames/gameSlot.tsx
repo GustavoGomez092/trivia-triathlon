@@ -6,6 +6,7 @@ import PatternRecognition from './patternRecognition';
 import SequenceMemoryGame from './sequenceMemoryGame';
 import IconMemory from './iconMemory';
 import ColorMatch from './colorMatch';
+import WordPairs from './wordPairs';
 
 export interface GameComponentProps {
   seed: number;
@@ -27,6 +28,7 @@ const gameComponentMap: Record<
   sequenceMemoryGame: SequenceMemoryGame,
   iconMemory: IconMemory,
   colorMatch: ColorMatch,
+  wordPairs: WordPairs,
 };
 
 export function GameSlot({
