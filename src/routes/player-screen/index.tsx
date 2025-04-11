@@ -9,12 +9,13 @@ import nsLogo from '@/assets/images/NS-logo-cropped.png';
 import useIsEventStarted from '@/firebase/hooks/useIsEventStarted.ts';
 import { CURRENT_EVENT, EventType } from '@/types/Game';
 import SprintScreen from '@/components/Events/sprint';
+import CyclingScreen from '@/components/Events/Cycling';
 import { ReactNode } from 'react';
 
 const SCREEN: Record<EventType, ReactNode> = {
   sprint: <SprintScreen />,
   swimming: <SwimmingScreen />,
-  cycling: <SwimmingScreen />,
+  cycling: <CyclingScreen />,
 };
 
 export const Route = createFileRoute('/player-screen/')({
