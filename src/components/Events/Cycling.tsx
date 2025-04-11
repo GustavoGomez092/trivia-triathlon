@@ -251,7 +251,7 @@ export default function CyclingScreen() {
       <div className="track absolute bottom-0 left-0 z-20 h-36 w-full bg-[#CD6342]">
         <div className="track-line relative top-1.5 h-1 w-full bg-[#fff]"></div>
       </div>
-      <div className="player absolute bottom-10 left-[calc(50%-160px)] z-20">
+      <div className="player absolute bottom-16 left-[calc(50%-160px)] z-20">
         <div ref={sprinterContainer} className="sprinter h-80 w-80">
           <>{SprinterOneView}</>
         </div>
