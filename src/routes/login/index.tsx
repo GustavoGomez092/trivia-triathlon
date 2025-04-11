@@ -55,6 +55,10 @@ export default function LoginPage() {
     router.navigate({ to: '/podium' });
   };
 
+  const handleNavigateToWinners = () => {
+    router.navigate({ to: '/winners' });
+  };
+
   return (
     <div className="min-h-svh login-page flex w-full items-center justify-center p-6 md:p-10">
       <div className="z-30 w-full max-w-md">
@@ -67,6 +71,15 @@ export default function LoginPage() {
       >
         Podium
       </Button>
+
+      {/* <Button
+        variant="secondary"
+        className="!fixed bottom-6 left-52 z-40"
+        onClick={handleNavigateToWinners}
+      >
+        Winners
+      </Button> */}
+
       <Button
         variant="secondary"
         className="!fixed bottom-6 right-6 z-40"

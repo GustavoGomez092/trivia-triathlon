@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as WinnersIndexImport } from './routes/winners/index'
 import { Route as WaitingRoomIndexImport } from './routes/waiting-room/index'
 import { Route as SpectatorIndexImport } from './routes/spectator/index'
 import { Route as PodiumIndexImport } from './routes/podium/index'
@@ -23,6 +24,12 @@ import { Route as LoginIndexImport } from './routes/login/index'
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const WinnersIndexRoute = WinnersIndexImport.update({
+  id: '/winners/',
+  path: '/winners/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -102,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WaitingRoomIndexImport
       parentRoute: typeof rootRoute
     }
+    '/winners/': {
+      id: '/winners/'
+      path: '/winners'
+      fullPath: '/winners'
+      preLoaderRoute: typeof WinnersIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -114,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/podium': typeof PodiumIndexRoute
   '/spectator': typeof SpectatorIndexRoute
   '/waiting-room': typeof WaitingRoomIndexRoute
+  '/winners': typeof WinnersIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -123,6 +138,7 @@ export interface FileRoutesByTo {
   '/podium': typeof PodiumIndexRoute
   '/spectator': typeof SpectatorIndexRoute
   '/waiting-room': typeof WaitingRoomIndexRoute
+  '/winners': typeof WinnersIndexRoute
 }
 
 export interface FileRoutesById {
@@ -133,6 +149,7 @@ export interface FileRoutesById {
   '/podium/': typeof PodiumIndexRoute
   '/spectator/': typeof SpectatorIndexRoute
   '/waiting-room/': typeof WaitingRoomIndexRoute
+  '/winners/': typeof WinnersIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -144,6 +161,7 @@ export interface FileRouteTypes {
     | '/podium'
     | '/spectator'
     | '/waiting-room'
+    | '/winners'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -152,6 +170,7 @@ export interface FileRouteTypes {
     | '/podium'
     | '/spectator'
     | '/waiting-room'
+    | '/winners'
   id:
     | '__root__'
     | '/'
@@ -160,6 +179,7 @@ export interface FileRouteTypes {
     | '/podium/'
     | '/spectator/'
     | '/waiting-room/'
+    | '/winners/'
   fileRoutesById: FileRoutesById
 }
 
@@ -170,6 +190,7 @@ export interface RootRouteChildren {
   PodiumIndexRoute: typeof PodiumIndexRoute
   SpectatorIndexRoute: typeof SpectatorIndexRoute
   WaitingRoomIndexRoute: typeof WaitingRoomIndexRoute
+  WinnersIndexRoute: typeof WinnersIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -179,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   PodiumIndexRoute: PodiumIndexRoute,
   SpectatorIndexRoute: SpectatorIndexRoute,
   WaitingRoomIndexRoute: WaitingRoomIndexRoute,
+  WinnersIndexRoute: WinnersIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -196,7 +218,8 @@ export const routeTree = rootRoute
         "/player-screen/",
         "/podium/",
         "/spectator/",
-        "/waiting-room/"
+        "/waiting-room/",
+        "/winners/"
       ]
     },
     "/": {
@@ -216,6 +239,9 @@ export const routeTree = rootRoute
     },
     "/waiting-room/": {
       "filePath": "waiting-room/index.tsx"
+    },
+    "/winners/": {
+      "filePath": "winners/index.tsx"
     }
   }
 }
