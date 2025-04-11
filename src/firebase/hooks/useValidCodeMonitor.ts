@@ -12,8 +12,11 @@ export default function useValidCodeMonitor() {
     const unsubscribe = onValue(validCodeRef, async (snapshot) => {
       const validCodeData = snapshot.val();
       if (!validCodeData || !validCodeData.active) {
-        await signOut(auth);
-        navigate({ to: '/login' });
+        const currentPath = window.location.pathname;
+        if (currentPath !== '/winners' && currentPath !== '/podium') {
+          await signOut(auth);
+          navigate({ to: '/login' });
+        }
       }
     });
 
