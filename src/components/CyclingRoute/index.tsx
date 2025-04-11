@@ -44,6 +44,7 @@ const CyclingRoute: React.FC<CyclingRouteProps> = ({
     name: '',
     distance: 0,
   });
+  const hasCelebrated = useRef(false);
 
   useEffect(() => {
     const newPlayers: Player[] = scores.map((score, index) => ({
@@ -75,14 +76,11 @@ const CyclingRoute: React.FC<CyclingRouteProps> = ({
           duration: 5,
           ease: 'none',
           onUpdate: () => {
-            if (
-              player.distance >= TOTAL_DISTANCE &&
-              !timeline.vars.data?.celebrated
-            ) {
-              timeline.vars.data = { celebrated: true };
+            if (player.distance >= TOTAL_DISTANCE && !hasCelebrated.current) {
+              hasCelebrated.current = true;
               confetti({
-                particleCount: 100,
-                spread: 70,
+                particleCount: 150,
+                spread: 100,
                 origin: { y: 0.7, x: 0.3 },
               });
             }
@@ -205,7 +203,7 @@ const CyclingRoute: React.FC<CyclingRouteProps> = ({
 
   return (
     <div className="player-game nes-container is-rounded flex h-[740px] max-h-[740px] max-w-[1024px] items-center justify-start gap-8 self-start overflow-visible bg-[#61696B] lg:self-center">
-      <div className="interface nes-container is-rounded relative top-2 h-[660px] w-[800px] overflow-visible bg-green-900 !p-0">
+      <div className="interface nes-container is-rounded relative top-2 h-[660px] w-[800px] overflow-visible bg-[#101e2b] !p-0">
         {loading ? (
           <Label className="text-white" htmlFor="loading">
             Loading...

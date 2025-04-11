@@ -8,9 +8,10 @@ import useEventStore from '@/stores/eventStore';
 import { Timer } from '@/components/ui/timer';
 import { cn, getDistance, TOTAL_DISTANCE, useThrottle } from '@/lib/utils';
 import confetti from 'canvas-confetti';
-import { addScoreToEvent } from '@/firebase/database/games';
+import { addScoreToEvent, getEventScore } from '@/firebase/database/games';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
 import { CURRENT_EVENT } from '@/types/Game';
+import { useRouter } from '@tanstack/react-router';
 
 export default function CyclingScreen() {
   gsap.registerPlugin(useGSAP);
@@ -45,6 +46,47 @@ export default function CyclingScreen() {
     playSegments,
     setSpeed,
   } = useLottie(sprinterOne);
+
+  const router = useRouter();
+
+  // Check progress in real-time
+  useEffect(() => {
+    if (!user) return;
+
+    const checkProgress = async () => {
+      try {
+        const savedScore = await getEventScore(CURRENT_EVENT, user.uid);
+
+        const distance = savedScore?.distanceTraveled ?? 0;
+        if (distance >= TOTAL_DISTANCE) {
+          console.log('Distance reached, redirecting...');
+          router.navigate({ to: '/spectator' });
+          return;
+        }
+
+        // Only restore progress if we haven't started yet
+        if (!started && savedScore && savedScore.distanceTraveled > 0) {
+          setDistanceTraveled(savedScore.distanceTraveled);
+          if (savedScore.finishTime > 0) {
+            setTime(savedScore.finishTime);
+          }
+        }
+      } catch (error) {
+        console.error('Error checking progress:', error);
+        if (!started) {
+          setDistanceTraveled(0);
+          setTime(0);
+        }
+      }
+    };
+
+    // Check immediately and then every 2 seconds
+    checkProgress();
+    const interval = setInterval(checkProgress, 2000);
+
+    return () => clearInterval(interval);
+  }, [user, started, router]);
+
   useEffect(() => {
     if (!started) return;
     const timer = setInterval(() => {

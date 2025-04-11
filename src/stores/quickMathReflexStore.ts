@@ -28,16 +28,13 @@ const generateRandomExpression = (
 ): { expr: string; correct: boolean } => {
   let expectedResult: number;
   const useMult = level >= 2;
-  const useDiv = level >= 3;
-  const ops = ['+', '-']
-    .concat(useMult ? ['*'] : [])
-    .concat(useDiv ? ['/'] : []);
+  const ops = ['+', '-'].concat(useMult ? ['*'] : []);
 
   const getOperand = () => Math.floor(Math.random() * 20 + 1); // 1–20
   const getRandomOp = () => ops[Math.floor(Math.random() * ops.length)];
 
   const parts: (number | string)[] = [];
-  const steps = level < 3 ? 1 : 2;
+  const steps = 1; // Always 2 numbers, 1 operator
 
   for (let i = 0; i <= steps; i++) {
     parts.push(getOperand());
@@ -53,22 +50,11 @@ const generateRandomExpression = (
     console.log('[QuickMath] Evaluated:', expressionStr, '=', expectedResult);
     result = expectedResult;
 
-    if (!isFinite(result)) {
-      console.error('[QuickMath] Invalid result from:', expressionStr);
-      throw new Error('Invalid result');
-    }
+    if (!isFinite(result)) throw new Error('Invalid result');
+    if (!Number.isInteger(result)) return generateRandomExpression(level);
+    if (result > 100) return generateRandomExpression(level);
 
-    if (!Number.isInteger(result)) {
-      console.warn('[QuickMath] Skipping non-integer result:', expressionStr);
-      return generateRandomExpression(level);
-    }
-
-    if (result > 100) {
-      console.warn('[QuickMath] Skipping result > 100:', expressionStr);
-      return generateRandomExpression(level);
-    }
-
-    // Introduce incorrect answer 40% of the time
+    // 40% chance to tweak the result
     if (Math.random() < 0.4) {
       const tweak = Math.random() < 0.5 ? 1 : -1;
       const newResult = result + tweak;
@@ -110,11 +96,11 @@ const useQuickMathReflexStore = create<QuickMathReflexState>((set, get) => ({
   generateExpression: () => {
     const { level } = get();
     const { expr, correct } = generateRandomExpression(level);
-    const levelLabel = level === 1 ? 'Easy' : level === 2 ? 'Medium' : 'Hard';
+    const levelLabel = level === 1 ? 'Easy' : 'Medium';
     set({ expression: expr, isCorrect: correct, levelLabel });
   },
 
-  validateAnswer: (answer: boolean | null) => {
+  validateAnswer: (answer) => {
     const { isCorrect, level, targetLevel, lives } = get();
 
     const passed = answer !== null && answer === isCorrect;
