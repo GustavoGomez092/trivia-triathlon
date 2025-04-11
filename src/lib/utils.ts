@@ -2,7 +2,7 @@ import { clsx, type ClassValue } from 'clsx';
 import { useRef, useCallback } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-export const TOTAL_DISTANCE = 1000;
+export const TOTAL_DISTANCE = 3000;
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -45,7 +45,7 @@ export const useThrottle = (callback: Function, limit: number) => {
 export const getDistance = (distanceTraveled: number) => {
   return `${
     distanceTraveled < TOTAL_DISTANCE ? distanceTraveled : TOTAL_DISTANCE
-  } mts`;
+  } kms`;
 };
 
 export const getSanitizedEmail = (email?: string) => {
