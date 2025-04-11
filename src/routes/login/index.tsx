@@ -8,6 +8,8 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { loginLoader } from '@/firebase/database/loginLoader';
+import { CURRENT_EVENT } from '@/types/Game';
+import useIsEventIsFinished from '@/firebase/hooks/useIsEventFinished';
 
 export const Route = createFileRoute('/login/')({
   component: LoginPage,
@@ -33,6 +35,7 @@ export default function LoginPage() {
 
   const { View: SprinterOneView } = useLottie(sprinterOne);
   const { View: SprinterTwoView } = useLottie(sprinterTwo);
+  const isEventFinished = useIsEventIsFinished(CURRENT_EVENT);
 
   gsap.registerPlugin(useGSAP);
 
@@ -72,13 +75,15 @@ export default function LoginPage() {
         Podium
       </Button>
 
-      <Button
-        variant="secondary"
-        className="!fixed bottom-6 left-52 z-40"
-        onClick={handleNavigateToWinners}
-      >
-        Winners
-      </Button>
+      {isEventFinished && (
+        <Button
+          variant="secondary"
+          className="!fixed bottom-6 left-52 z-40"
+          onClick={handleNavigateToWinners}
+        >
+          Winners
+        </Button>
+      )}
 
       <Button
         variant="secondary"
