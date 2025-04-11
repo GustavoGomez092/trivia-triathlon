@@ -1,13 +1,14 @@
-import { FC } from 'react';
-import { createFileRoute } from '@tanstack/react-router';
+import { FC, useEffect } from 'react';
+import { createFileRoute, useRouter } from '@tanstack/react-router';
 import { useTopUsersForEvent } from '@/firebase/hooks/useTopUsersForEvent';
 import { requireAuthLoader } from '@/firebase/database/requireAuthLoader.ts';
 import { useCurrentUser } from '@/firebase/hooks/useCurrentUser';
 import { Label } from '@/components/ui/label';
-import { getSanitizedEmail, getUsername } from '@/lib/utils';
+import { getSanitizedEmail, getUsername, TOTAL_DISTANCE } from '@/lib/utils';
 import useEventCountdownNavigation from '@/firebase/hooks/useEventCountdownNavigation';
 import './index.css';
 import { CURRENT_EVENT } from '@/types/Game';
+import { getEventScore } from '@/firebase/database/games';
 
 interface PlayerBadgeProps {
   currentUserEmail: string;
@@ -37,6 +38,27 @@ const waitingRoom = () => {
   const { user } = useCurrentUser();
   const { email: currentUserEmail } = user || {};
   const { scores, loading } = useTopUsersForEvent(CURRENT_EVENT);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) return;
+
+    const checkProgress = async () => {
+      try {
+        const savedScore = await getEventScore(CURRENT_EVENT, user.uid);
+
+        const distance = savedScore?.distanceTraveled ?? 0;
+        if (distance >= TOTAL_DISTANCE) {
+          router.navigate({ to: '/spectator' });
+          console.log('Distance reached, redirecting to spectator...');
+        }
+      } catch (error) {
+        console.error('Error checking progress:', error);
+      }
+    };
+
+    checkProgress();
+  }, [user, router]);
 
   const countdown = useEventCountdownNavigation({
     event: CURRENT_EVENT,
