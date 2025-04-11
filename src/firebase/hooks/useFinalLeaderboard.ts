@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 export interface Player {
   name: string;
   place: 1 | 2 | 3;
+  totalPoints: number;
 }
 
 function getPointsForPlace(place: number): number {
@@ -45,6 +46,7 @@ export const useFinalLeaderboard = () => {
           ({
             name: user.name,
             place: index + 1,
+            totalPoints: user.totalPoints,
           }) as Player,
       );
   }, [scores, loading]);

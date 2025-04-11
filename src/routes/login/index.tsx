@@ -72,13 +72,13 @@ export default function LoginPage() {
         Podium
       </Button>
 
-      {/* <Button
+      <Button
         variant="secondary"
         className="!fixed bottom-6 left-52 z-40"
         onClick={handleNavigateToWinners}
       >
         Winners
-      </Button> */}
+      </Button>
 
       <Button
         variant="secondary"

@@ -73,7 +73,7 @@ const WinnersPodium = () => {
           const player = topPlayers.find((p) => p.place === order);
           if (!player) return null;
 
-          const { name, place } = player;
+          const { name, place, totalPoints } = player;
           const icon = iconsByPlayer[name];
           const height = heightByPlace[place];
 
@@ -123,12 +123,14 @@ const WinnersPodium = () => {
                   duration: 1.2,
                   ease: 'easeOut',
                 }}
-                className={`absolute bottom-0 w-48 ${podiumColors[place]} nes-container is-rounded flex items-end justify-center overflow-hidden border border-black text-sm text-black`}
+                className={`absolute bottom-0 w-48 ${podiumColors[place]} nes-container is-rounded flex flex-col flex-nowrap items-center justify-end overflow-hidden border border-black text-sm text-black`}
               >
                 <span className="text-lg font-bold">
                   {place}
                   <sup className="align-super text-xs">o</sup>
                 </span>
+
+                <span className="text-lg font-bold">{totalPoints} pts</span>
               </motion.div>
             </div>
           );
