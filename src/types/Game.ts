@@ -5,6 +5,11 @@ export interface Game {
   currentEvent: Event;
 }
 
+export const sprintGames = [
+  'whackAKey',
+  'targetShooting',
+  'triviaGame',
+] as const;
 export const swimmingGames = [
   'patternRecognition',
   'sequenceMemoryGame',
@@ -12,20 +17,9 @@ export const swimmingGames = [
   'colorMatch',
   'wordPairs',
 ] as const;
-export const sprintGames = [
-  'whackAKey',
-  'targetShooting',
-  'triviaGame',
-] as const;
 export const cyclingGames = [
-  'whackAKey',
-  'targetShooting',
-  'triviaGame',
-  'patternRecognition',
-  'sequenceMemoryGame',
-  'iconMemory',
-  'colorMatch',
-  'wordPairs',
+  ...sprintGames,
+  ...swimmingGames,
   'findTheBall',
   'dontClickBomb',
   'quickMathReflex',
